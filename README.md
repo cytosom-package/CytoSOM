@@ -7,5 +7,6 @@ CytoSOM helps to apply [FlowSOM](https://github.com/SofieVG/FlowSOM) to cytometr
 ## Installation
 
 ```R
+library(devtools)
 devtools::install_github(repo ="gautierstoll/CytoSOM")
 ```
