@@ -7,14 +7,14 @@
 DataFromMetaClust(FSOMData, TreeMetaCl, MetaClusters)
 }
 \arguments{
-\item{FSOMData}{FlowSOM data object, created from DownLoadCytoData}
+\item{FSOMData}{FlowSOM datobject, created from DownLoadCytoData}
 
-\item{TreeMetaCl}{tree construct within buildFSOMTree}
+\item{TreeMetaCl}{FlowSOM tree, constructed within buildFSOMTree}
 
 \item{MetaClusters}{vector of metaclusters numbers of names}
 }
 \value{
-a FlowSOM data object
+FlowSOM data object
 }
 \description{
 Construct a sub-dataset from dataset and a list of metaclusters

@@ -4,8 +4,8 @@
 #' @param dirFCS sub-directory of working directory, where fcs files are
 #' @param gatingName name of FlowJo gating to be applied
 #' @param fcsPattern pattern of all fcs file names
-#' @param compensate Does the data need to be compensated?
-#' @return A FlowSOM data object
+#' @param compensate TRUE if data needs to be compensated?
+#' @return FlowSOM data object
 #' @export
 DownLoadCytoData <- function(dirFCS="",gatingName,fcsPattern = "Tube",compensate=FALSE ){
     flowJoWS=list.files(pattern=".wsp")

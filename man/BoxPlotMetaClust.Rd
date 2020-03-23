@@ -17,9 +17,9 @@ BoxPlotMetaClust(
 )
 }
 \arguments{
-\item{TreeMetaCl}{a FlowSOM tree}
+\item{TreeMetaCl}{FlowSOM tree}
 
-\item{Title}{Prefix of the pdf file name}
+\item{Title}{prefix of the pdf file name}
 
 \item{treatmentTable}{data frame containing a column 'files' and a column 'Treatment' (case sensitive)}
 
@@ -31,12 +31,12 @@ BoxPlotMetaClust(
 
 \item{ClustHeat}{if TRUE, heatmaps are clustered}
 
-\item{Controltreatment}{the name of the control treatment used for statistics}
+\item{Controltreatment}{name of the control treatment used for statistics}
 
 \item{ylab}{name of y-axis of boxplots (eg 'population size')}
 }
 \value{
-a list containing sizes, pairwise comparison p-values, controle vs treatment p-values
+list containing sizes, pairwise comparison p-values, controle vs treatment p-values
 }
 \description{
 Box plot of maker sizes, for the different meta-cluster with statical analysis, output in a PDF file.

@@ -1,5 +1,5 @@
 #' Naming of meta-cluster from median and quartiles
-#' @param TreeMetaCl FlowSOM tree contructed for buildFSOMTree
+#' @param TreeMetaCl FlowSOM tree, contructed for buildFSOMTree
 #' @param Markers vector of markers used for naming
 #' @return data frame with cluster number, non-robust name, robust name and short robust names
 #' @export

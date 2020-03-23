@@ -7,18 +7,18 @@
 buildFSOMTree(fSOMDloaded, prettyNames, clustDim, metaClNb, fSOMSeed)
 }
 \arguments{
-\item{prettyNames}{List of pretty names needed for building the tree}
+\item{prettyNames}{list of pretty names needed for building the tree}
 
-\item{clustDim}{Dimension of the 2D cluster grid}
+\item{clustDim}{dimension of the 2D cluster grid}
 
-\item{fSOMSeed}{Seed of the random generator used for building the tree}
+\item{fSOMSeed}{seed of the random generator used for building the tree}
 
 \item{fSOMloaded}{FlowSOM data dowloaded with DowLoadCytoData}
 
-\item{metaClNg}{Number of meta-clusters}
+\item{metaClNg}{number of meta-clusters}
 }
 \value{
-A FlowSOM tree
+FlowSOM tree
 }
 \description{
 build FSOM tree with the metacluster and plot the tree

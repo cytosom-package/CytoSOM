@@ -18,10 +18,10 @@ DownLoadCytoData(
 
 \item{fcsPattern}{pattern of all fcs file names}
 
-\item{compensate}{Does the data need to be compensated?}
+\item{compensate}{TRUE if data needs to be compensated?}
 }
 \value{
-A FlowSOM data object
+FlowSOM data object
 }
 \description{
 Download data, given fcs and FlowJo workspace
