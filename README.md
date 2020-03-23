@@ -4,8 +4,7 @@ Introduction
 ==============
 CytoSOM helps to apply [FlowSOM](https://github.com/SofieVG/FlowSOM) to cytometry data, and perform statistical analysis
 
-Installation
-==============
+## Installation
 
 ```R
 devtools::install_github(repo ="gautierstoll/CytoSOM")
