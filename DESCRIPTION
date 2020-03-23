@@ -1,9 +1,11 @@
 Package: CytoSOM
-Title: What the Package Does (one line, title case)
+Title: Easy use of FlowSOM
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Date: 2020-3-23
+Authors@R: c(person("Gautier", "Stoll", email = "gautier.stoll@upmc.fr", role = "cre"),person("Sarah","Levesque",role="aut"))
+Description: CytoSOM allows toe easily applied FlowSOM to cytomrty data. It produces statistics in pdf figures.
 Depends: R (>= 3.6.0)
-License: What license is it under?
+License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.1.0
