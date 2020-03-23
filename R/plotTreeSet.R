@@ -1,5 +1,13 @@
 ## User tool: plot figures, use the object created by buildFSOMTree
 ## the treatmentTable should be a dataframe with two column: "Treatment", "files"
+#' Plot a set of trees, in a pdf file, for metaclusters and markers
+#' @param TreeMetacl FlowSOM tree with meta-clusters, constructed by buildFSOMTree
+#' @param markers vector of markers
+#' @param Title title
+#' @param rmClNb number of smallest clusters to remove
+#' @param treatmentTable data frame containing a column 'files' and a column 'Treatment' (case sensitive)
+#' @param globalScale TRUE if color scale for markers is the same for each treatments
+#' @export
 plotTreeSet <- function(TreeMetacl,markers,Title,rmClNb=0,treatmentTable,globalScale=T){
     if (rmClNb>0) {
         indexKeep =  which(TreeMetacl$fSOMTree$MST$size > sort(TreeMetacl$fSOMTree$MST$size)[rmClNb])} else {indexKeep = 1:length(TreeMetacl$fSOMTree$MST$size)}
