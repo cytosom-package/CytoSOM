@@ -2,5 +2,6 @@
 
 export(BoxPlotMarkerMetaClust)
 export(BoxPlotMetaClust)
+export(DataFromMetaClust)
 export(DownLoadCytoData)
 export(buildFSOMTree)
