@@ -1,4 +1,13 @@
 ## User tool: marker level represented on metacluster tree, on a subset of samples given by an list of index, removing a given number of smallest metacluster
+#' Modified PlotMarkerMST function of FlowSOM, with removal of smallest clusters, over a subset of data
+#' @param fSOMObject FlowSOM tree
+#' @param markerName name of marker
+#' @param condIndex index of data events
+#' @param mainTitle title
+#' @param nbRm  number of smallest cluster to remove
+#' @param globalMinMax min and max value of markers, used for color scale
+#' @export
+#'
 PlotMarkerMSTCondRm <- function(fSOMObject,markerName,condIndex,mainTitle,nbRm=0,globalMinMax=c()){
     fSOM4Plot=list(
         map=fSOMObject$map,

@@ -1,4 +1,12 @@
-## User tool: tree representaton of metacluster, given size and marker representation on a subset of samples given by an list of index, removing a given number of smallest metacluster
+## User tool: tree representaton of metacluster, given size and marker representation on a subset of samples given by an list of index, removing a given number of smallest cluster
+#' Modified PlotStarsMST function of FlowSOM, with removal of smallest clusters, over a subset of data
+#' @param fSOMObject FlowSOM tree
+#' @param metaClustFactors meta-clusters (numbers or names)
+#' @param condIndex index of data events
+#' @param mainTitle title
+#' @param nbRm  number of smallest cluster to remove
+#' @export
+#'
 PlotStarsMSTCondRm <- function(fSOMObject,metaClustFactors,condIndex,mainTitle,nbRm=0)
 {
     fSOM4Plot=list(

@@ -1,5 +1,10 @@
 ## User tool: Plot Meta clusters labels
-
+#' Modified PlotLabels function of FlowSOM, with removal of smallest clusters
+#' @param fSOMObject FlowSOM tree
+#' @param metaClustFactors meta-clusters (numbers or names)
+#' @param nbRm  number of smallest cluster to remove
+#' @export
+#'
 PlotLabelsRm <- function(fSOMObject,metaClustFactors,mainTitle,nbRm=0)
 {
      fSOM4Plot=list(
