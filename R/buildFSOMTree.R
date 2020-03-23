@@ -1,4 +1,12 @@
-## User tool: build FSOM tree with the metacluster, plot the tree
+
+#' build FSOM tree with the metacluster and plot the tree
+#' @param fSOMloaded FlowSOM data dowloaded with DowLoadCytoData
+#' @param prettyNames List of pretty names needed for building the tree
+#' @param clustDim Dimension of the 2D cluster grid
+#' @param metaClNg Number of meta-clusters
+#' @param fSOMSeed Seed of the random generator used for building the tree
+#' @return A FlowSOM tree
+#' @export
 buildFSOMTree <- function(fSOMDloaded,prettyNames,clustDim,metaClNb,fSOMSeed)
 {
   set.seed(fSOMSeed)
