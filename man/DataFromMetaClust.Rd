@@ -9,7 +9,7 @@ DataFromMetaClust(FSOMData, TreeMetaCl, MetaClusters)
 \arguments{
 \item{FSOMData}{FlowSOM datobject, created from DownLoadCytoData}
 
-\item{TreeMetaCl}{FlowSOM tree, constructed within buildFSOMTree}
+\item{TreeMetaCl}{FlowSOM tree with meta-clusters, constructed within buildFSOMTree}
 
 \item{MetaClusters}{vector of metaclusters numbers of names}
 }

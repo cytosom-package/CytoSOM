@@ -1,6 +1,6 @@
 #' Construct a sub-dataset from dataset and a list of metaclusters
 #' @param FSOMData FlowSOM datobject, created from DownLoadCytoData
-#' @param TreeMetaCl FlowSOM tree, constructed within buildFSOMTree
+#' @param TreeMetaCl FlowSOM tree with meta-clusters, constructed within buildFSOMTree
 #' @param MetaClusters vector of metaclusters numbers of names
 #' @return FlowSOM data object
 #' @export

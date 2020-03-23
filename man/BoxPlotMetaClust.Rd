@@ -17,7 +17,7 @@ BoxPlotMetaClust(
 )
 }
 \arguments{
-\item{TreeMetaCl}{FlowSOM tree}
+\item{TreeMetaCl}{FlowSOM tree with meta-clusters, constructed by buildFSOMTree}
 
 \item{Title}{prefix of the pdf file name}
 

@@ -18,7 +18,7 @@ buildFSOMTree(fSOMDloaded, prettyNames, clustDim, metaClNb, fSOMSeed)
 \item{metaClNg}{number of meta-clusters}
 }
 \value{
-FlowSOM tree
+FlowSOM tree with meta-clusters
 }
 \description{
 build FSOM tree with the metacluster and plot the tree

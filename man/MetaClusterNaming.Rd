@@ -7,7 +7,7 @@
 MetaClusterNaming(TreeMetaCl, Markers)
 }
 \arguments{
-\item{TreeMetaCl}{FlowSOM tree, contructed for buildFSOMTree}
+\item{TreeMetaCl}{FlowSOM tree with meta-clusters, contructed for buildFSOMTree}
 
 \item{Markers}{vector of markers used for naming}
 }

@@ -1,5 +1,5 @@
 #' Box plot of maker MFI, for the different meta-cluster with statical analysis, output in a PDF file.
-#' @param TreeMetaCl FlowSOM tree
+#' @param TreeMetaCl FlowSOM tree with meta-clusters, constructed by buildFSOMTree
 #' @param Title prefix of the pdf file name
 #' @param treatmentTable  data frame containing a column 'files' and a column 'Treatment' (case sensitive)
 #' @param Controltreatment name of the control treatment used for statistics

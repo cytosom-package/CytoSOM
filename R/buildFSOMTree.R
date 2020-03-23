@@ -5,7 +5,7 @@
 #' @param clustDim dimension of the 2D cluster grid
 #' @param metaClNg number of meta-clusters
 #' @param fSOMSeed seed of the random generator used for building the tree
-#' @return FlowSOM tree
+#' @return FlowSOM tree with meta-clusters
 #' @export
 buildFSOMTree <- function(fSOMDloaded,prettyNames,clustDim,metaClNb,fSOMSeed)
 {
