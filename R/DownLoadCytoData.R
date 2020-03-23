@@ -1,4 +1,12 @@
+
 ## User tool: Download data, given fcs files, FlowJo workspace should in in current environment, FCS directory is inside wd, given with no "/"
+#' Download data, given fcs and FlowJo workspace
+#' @param dirFCS sub-directory of working directory, where fcs files are
+#' @param gatingName name fo FlowJo gating to be applied
+#' @param fcsPattern pattern of all fcs file names
+#' @param compensate Does the data need to be compensated?
+#' @return A FlowSOM data object
+#' @export
 DownLoadCytoData <- function(dirFCS="",gatingName,fcsPattern = "Tube",compensate=FALSE ){
     flowJoWS=list.files(pattern=".wsp")
     if (length(flowJoWS) > 1)
