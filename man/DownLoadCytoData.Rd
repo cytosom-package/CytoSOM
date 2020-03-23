@@ -14,7 +14,7 @@ DownLoadCytoData(
 \arguments{
 \item{dirFCS}{sub-directory of working directory, where fcs files are}
 
-\item{gatingName}{name fo FlowJo gating to be applied}
+\item{gatingName}{name of FlowJo gating to be applied}
 
 \item{fcsPattern}{pattern of all fcs file names}
 
