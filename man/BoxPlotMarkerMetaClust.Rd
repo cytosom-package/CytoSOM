@@ -2,7 +2,7 @@
 % Please edit documentation in R/BoxPlotMarkerMetaClust.R
 \name{BoxPlotMarkerMetaClust}
 \alias{BoxPlotMarkerMetaClust}
-\title{Box plot of maker MFI, for the different meta-cluster, in a PDF file.}
+\title{Box plot of maker MFI, for the different meta-cluster with statical analysis, output in a PDF file.}
 \usage{
 BoxPlotMarkerMetaClust(
   TreeMetaCl,
@@ -36,5 +36,5 @@ BoxPlotMarkerMetaClust(
 a list containing MFI, pairwise comparison p-values, controle vs treatment p-values
 }
 \description{
-Box plot of maker MFI, for the different meta-cluster, in a PDF file.
+Box plot of maker MFI, for the different meta-cluster with statical analysis, output in a PDF file.
 }

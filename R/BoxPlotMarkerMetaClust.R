@@ -1,4 +1,4 @@
-#' Box plot of maker MFI, for the different meta-cluster, in a PDF file.
+#' Box plot of maker MFI, for the different meta-cluster with statical analysis, output in a PDF file.
 #' @param TreeMetaCl a FlowSOM tree
 #' @param Title Prefix of the pdf file name
 #' @param treatmentTable  data frame containing a column 'files' and a column 'Treatment' (case sensitive)
