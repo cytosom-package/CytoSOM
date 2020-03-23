@@ -2,7 +2,7 @@
 ## TreatmentTable should be a dataframe with two column: "Treatment", "files" (a third one with column "NormalizationFactor" if Norm=T).
 ## Robust specifies either Tukey/lm or Dunn (non adjusted p-values).
 ## ClustHeat=FALSE for no clustering on heatmap.
-#' Box plot of maker MFI, for the different meta-cluster with statical analysis, output in a PDF file.
+#' Box plot of maker sizes, for the different meta-cluster with statical analysis, output in a PDF file.
 #' @param TreeMetaCl a FlowSOM tree
 #' @param Title Prefix of the pdf file name
 #' @param treatmentTable  data frame containing a column 'files' and a column 'Treatment' (case sensitive)
