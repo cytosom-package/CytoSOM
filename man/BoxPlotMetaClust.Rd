@@ -2,7 +2,7 @@
 % Please edit documentation in R/BoxPlotMetaClust.R
 \name{BoxPlotMetaClust}
 \alias{BoxPlotMetaClust}
-\title{Box plot of maker MFI, for the different meta-cluster with statical analysis, output in a PDF file.}
+\title{Box plot of maker sizes, for the different meta-cluster with statical analysis, output in a PDF file.}
 \usage{
 BoxPlotMetaClust(
   TreeMetaCl,
@@ -39,5 +39,5 @@ BoxPlotMetaClust(
 a list containing sizes, pairwise comparison p-values, controle vs treatment p-values
 }
 \description{
-Box plot of maker MFI, for the different meta-cluster with statical analysis, output in a PDF file.
+Box plot of maker sizes, for the different meta-cluster with statical analysis, output in a PDF file.
 }
