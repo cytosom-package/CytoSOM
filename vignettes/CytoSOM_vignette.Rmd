@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-
+CytoSOM is an R-package that helps to apply [FlowSOM](https://github.com/SofieVG/FlowSOM) algorithm to cytometry data. It can be install from GitHub, within [devtools](https://cran.r-project.org/web/packages/devtools/index.html) package
 ```{r setup}
-library(CytoSOM)
+devtools::install_github(repo ="gautierstoll/CytoSOM")
 ```
