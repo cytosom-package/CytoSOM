@@ -1,10 +1,30 @@
 Package: CytoSOM
 Title: Easy use of FlowSOM
-Version: 0.0.0.9000
+Version: 0.1.0
 Date: 2020-3-23
-Authors@R: c(person("Gautier", "Stoll", email = "gautier.stoll@upmc.fr", role = "cre"),person("Sarah","Levesque",role="aut"))
+Authors@R: c(
+  person("Gautier", "Stoll", email = "gautier.stoll@upmc.fr", role = "cre"),
+  person("Sarah","Lévesque",role="aut"),
+  person("Hélène","Fohrer-Ting",role="aut"),
+  person("Estelle","Devêvre",role="aut"),
+  person("Julie","Le Naour",role="aut"),
+  person("Juliette","Paillet",role="aut"),
+  person("Jonathan","Pol",role="ctb")
+  )
 Description: CytoSOM allows toe easily applied FlowSOM to cytomrty data. It produces statistics in pdf figures.
 Depends: R (>= 3.6.0)
+Imports:
+  grDevices,
+  igraph,
+  graphics,
+  flowCore,
+  CytoML,
+  flowWorkspace,
+  magrittr,
+  beeswarm,
+  dunn.test,
+  gplots,
+  FlowSOM,
 License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true
