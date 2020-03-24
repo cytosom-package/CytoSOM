@@ -1,4 +1,5 @@
-## User tool: plot figures, use the object created by buildFSOMTree
+##PlotTreeSet with PlotLabels included 
+#User tool: plot figures, use the object created by buildFSOMTree
 ## the treatmentTable should be a dataframe with two column: "Treatment", "files"
 #' Plot a set of trees, in a pdf file, for metaclusters and markers
 #' @param TreeMetacl FlowSOM tree with meta-clusters, constructed by buildFSOMTree
@@ -8,23 +9,25 @@
 #' @param treatmentTable data frame containing a column 'files' and a column 'Treatment' (case sensitive)
 #' @param globalScale TRUE if color scale for markers is the same for each treatments
 #' @export
-plotTreeSet <- function(TreeMetacl,markers,Title,rmClNb=0,treatmentTable,globalScale=T){
+plotTreeSet <- function(TreeMetacl,markers,Title,rmClNb,treatmentTable,globalScale=T){
     if (rmClNb>0) {
         indexKeep =  which(TreeMetacl$fSOMTree$MST$size > sort(TreeMetacl$fSOMTree$MST$size)[rmClNb])} else {indexKeep = 1:length(TreeMetacl$fSOMTree$MST$size)}
     pdf(file=paste(Title,"_TreatmentTree.pdf",sep=""))
     ## plot tree of pooled data
-    PlotStarsMSTRm(TreeMetacl$fSOMTree,TreeMetacl$metaCl,paste(Title," MainTree",sep=""),rmClNb)
-
+    PlotStarsMSTRm(TreeMetacl,Title,rmClNb)
+    PlotLabelsRm(TreeMetacl$fSOMTree,TreeMetacl$metaCl,paste(Title,"_MetaclusterTree",sep=""),rmClNb)
+    
     Treatments=unique(treatmentTable$Treatment[which(sapply(tableTreatmentFCS$files,function(files){length(grep(files,names(TreeMetacl$fSOMTree$metaData),fixed=T))>0}))])
     print("Treatments:")
     print(Treatments)
+    
     ## plot tree of subdata for each treatments
     for (treatName in Treatments) {
         fcsFiles=treatmentTable$files[which(treatmentTable$Treatment == treatName)]
         treatIndex = unlist(sapply(fcsFiles,function(file){grep(file,names(TreeMetacl$fSOMTree$metaData),fixed=T)}))
         print(paste("Plot tree for treatment",treatName))
         PlotStarsMSTCondRm(TreeMetacl$fSOMTree,TreeMetacl$metaCl,treatIndex,paste(Title," Treat: ",treatName,sep=""),rmClNb)
-        }
+    }
     dev.off()
     pdf(file=paste(Title,"_MarkerTree.pdf",sep=""))
     markersInData = intersect(markers,TreeMetacl$fSOMTree$prettyColnames)
@@ -57,7 +60,7 @@ plotTreeSet <- function(TreeMetacl,markers,Title,rmClNb=0,treatmentTable,globalS
         PlotMarkerMSTRm(TreeMetacl$fSOMTree,uglyName,paste(Title," Marker: ",marker,sep=""),rmClNb,globMinMax)
     }
     for (marker in markersInData){ ## plot tree for each marher and each treatment
-         uglyName = names(which(TreeMetacl$fSOMTree$prettyColnames == marker))
+        uglyName = names(which(TreeMetacl$fSOMTree$prettyColnames == marker))
         if (globalScale) ## construct the global scale for color scale of markers
         {
             listTreatmentIndices = lapply(unique(treatmentTable$Treatment),function(treatName){
@@ -76,7 +79,7 @@ plotTreeSet <- function(TreeMetacl,markers,Title,rmClNb=0,treatmentTable,globalS
             ##print(paste("Treatment: ",treatName,sep=""))
             fcsFiles=treatmentTable$files[which(treatmentTable$Treatment == treatName)]
             treatIndex = unlist(sapply(fcsFiles,function(file){grep(file,names(TreeMetacl$fSOMTree$metaData),fixed=T)}))
-             print(paste("Plot tree for marker",marker," -- ",uglyName,"and treatment",treatName))
+            print(paste("Plot tree for marker",marker," -- ",uglyName,"and treatment",treatName))
             PlotMarkerMSTCondRm(TreeMetacl$fSOMTree,uglyName,treatIndex,paste(Title," Marker: ",marker," Treat: ",treatName,sep=""),rmClNb,globMinMax)
         }
     }
