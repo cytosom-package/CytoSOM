@@ -588,7 +588,7 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
           pairwisePval=TukeyHSD(aov(noData ~ TreatmentFSOM,data=plotDf))$TreatmentFSOM[,4]
           pairwisePval[]=1
           names(pairwisePval)=row.names(TukeyHSD(aov(noData ~ TreatmentFSOM,data=plotDf))$TreatmentFSOM) ##create template
-          if (length(unique(plotDf$TreatmentFSOM[which(is.finite(plotDf$PP))])) > 2 ){
+          if (length(unique(plotDf$TreatmentFSOM[which(is.finite(plotDf$PP))])) > 1 ){
           pairwiseSignPval=TukeyHSD(aov(PP ~ TreatmentFSOM,data=plotDf))$TreatmentFSOM[,4]
           names(pairwiseSignPval)=row.names(TukeyHSD(aov(PP ~ TreatmentFSOM,data=plotDf))$TreatmentFSOM)
           for(name in names(pairwiseSignPval)){
@@ -696,8 +696,8 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
     if (length(MarkerIndex) == 1) {
         colMarginSize=20-18*exp(-max(sapply(colnames(meanMatrix),nchar))/10)
         rowMarginSize=20-18*exp(-max(sapply(row.names(meanMatrix),nchar))/10)
-        colCex4Plot=exp(-max(sapply(colnames(meanMatrix),nchar))/70)
-        rowCex4Plot=exp(-max(sapply(row.names(meanMatrix),nchar))/70)
+        colCex4Plot=exp(-max(sapply(colnames(meanMatrix),nchar))/70)*exp(-length(colnames(meanMatrix))/50)
+        rowCex4Plot=exp(-max(sapply(row.names(meanMatrix),nchar))/70)*exp(-length(row.names(meanMatrix))/50)
 
         if (Robust) {heatTitle = paste("Median MFI of ",PlotLab,sep="")} else {heatTitle = paste("Mean MFI of ",PlotLab,sep="")}
         par(cex.main=exp(-nchar(heatTitle)/70))
@@ -725,8 +725,8 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
           pvalAnnotationMatrix = pvalAnnotationMatrix[-1,,drop=F]}
         colMarginSize=20-18*exp(-max(sapply(colnames(meanMatrix),nchar))/10)
         rowMarginSize=20-18*exp(-max(sapply(row.names(meanMatrix),nchar))/10)
-        colCex4Plot=exp(-max(sapply(colnames(meanMatrix),nchar))/70)*exp(-length(colnames(meanMatrix))/70)
-        rowCex4Plot=exp(-max(sapply(row.names(meanMatrix),nchar))/70)*exp(-length(row.names(meanMatrix))/70)
+        colCex4Plot=exp(-max(sapply(colnames(meanMatrix),nchar))/70)*exp(-length(colnames(meanMatrix))/50)
+        rowCex4Plot=exp(-max(sapply(row.names(meanMatrix),nchar))/70)*exp(-length(row.names(meanMatrix))/50)
         if (ClustHeat) {
           par(cex.main=.5)
             gplots::heatmap.2(meanMatrix,Rowv=F,Colv=T,dendrogram = "column",scale="none",col = gplots::bluered(100),cellnote = pvalAnnotationMatrix,
@@ -785,20 +785,20 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
     if (Robust) {
         if (ClustHeat) {
             gplots::heatmap.2(matrixPval4Heat,Rowv=T,Colv=T,dendrogram = "both",scale="none",col = gray(1-((0:100)/100*maxLogPval/(-log10(0.0001)))),
-                      trace="none",main="log10(Dunn p-values)",cexRow = rowCex4Plot,cexCol=colCex4Plot,margins=c(colMarginSize,rowMarginSize),density.info="none",
+                      trace="none",main=" log10(Dunn p-values)",cexRow = rowCex4Plot,cexCol=colCex4Plot,margins=c(colMarginSize,rowMarginSize),density.info="none",
                       cellnote = matrixAnnot4Heat,notecol = "blue",notecex = .5,key.xlab = "",key.title="")
         }
             gplots::heatmap.2(matrixPval4Heat,Rowv=F,Colv=F,dendrogram = "none",scale="none",col = gray(1-((0:100)/100*maxLogPval/(-log10(0.0001)))),
-                      trace="none",cexRow = rowCex4Plot,cexCol=colCex4Plot,main="log10(Dunn p-values)",margins=c(colMarginSize,rowMarginSize),density.info="none",
+                      trace="none",cexRow = rowCex4Plot,cexCol=colCex4Plot,main=" log10(Dunn p-values)",margins=c(colMarginSize,rowMarginSize),density.info="none",
                       cellnote = matrixAnnot4Heat,notecol = "blue",notecex = .5,key.xlab = "",key.title="")
     } else {
              if (ClustHeat) {
                  gplots::heatmap.2(matrixPval4Heat,Rowv=T,Colv=T,dendrogram = "both",scale="none",col = gray(1-((0:100)/100*maxLogPval/(-log10(0.0001)))),
-                           trace="none",cexRow = rowCex4Plot,cexCol=colCex4Plot,main="log10(Tukey p-values)",margins=c(colMarginSize,rowMarginSize),density.info="none",
+                           trace="none",cexRow = rowCex4Plot,cexCol=colCex4Plot,main=" log10(Tukey p-values)",margins=c(colMarginSize,rowMarginSize),density.info="none",
                            cellnote = matrixAnnot4Heat,notecol = "blue",notecex = .5,key.xlab = "",key.title="")
              }
              gplots::heatmap.2(matrixPval4Heat,Rowv=F,Colv=F,dendrogram = "none",scale="none",col = gray(1-((0:100)/100*maxLogPval/(-log10(0.0001)))),
-                       trace="none",cexRow = rowCex4Plot,cexCol=colCex4Plot,main="log10(Tukey p-values)",margins=c(colMarginSize,rowMarginSize),density.info="none",
+                       trace="none",cexRow = rowCex4Plot,cexCol=colCex4Plot,main=" log10(Tukey p-values)",margins=c(colMarginSize,rowMarginSize),density.info="none",
                        cellnote = matrixAnnot4Heat,notecol = "blue",notecex = .5,key.xlab = "",key.title="") }
     dev.off()
 
