@@ -23,5 +23,5 @@ buildFSOMTree <- function(fSOMDloaded,prettyNames,clustDim,metaClNb,fSOMSeed)
     fSOM$prettyColnames =  fSOMNicePrettyColNames
     metacl<-FlowSOM::metaClustering_consensus(fSOM$map$codes,k=metaClNb,seed=fSOMSeed)
     PlotStarsBigLeg(fSOM,backgroundValues = as.factor(metacl))
-    return(list(fSOMTree = fSOM,metaCl = metacl))
+    return(list(fSOMTree = fSOM,metaCl = metacl,gatingName=fSOMDloaded$gatingName))
 }
