@@ -12,9 +12,11 @@ PlotTreeMSTRm <- function(fSOM,mainTitle,nbRm)
     fSOM4Plot$map$medianValues=fSOM$fSOMTree$map$medianValues[indexKeep,]
     fSOM4Plot$MST$graph=igraph::induced_subgraph(fSOM$fSOMTree$MST$graph,indexKeep)
     fSOM4Plot$MST$l = fSOM$fSOMTree$MST$l[indexKeep,]
-    PlotStarsBigLeg(fSOM4Plot,backgroundValues = as.factor(fSOM$metaCl[indexKeep]), main=paste(mainTitle,"_",fSOM$gatedPopulation,"_Clusters=",fSOM$fSOMTree$map$nNodes,"_Metaclusters=",fSOM$NumberOfMetacl))
+    PlotStarsBigLeg(fSOM4Plot,backgroundValues = as.factor(fSOM$metaCl[indexKeep]), 
+                    main=paste(mainTitle,"_",fSOM$gatingName,"_Clusters=",fSOM$fSOMTree$map$nNodes,"_Metaclusters=",length(unique(fSOM$metaCl))))
   }
   else
-  {PlotStarsBigLeg(fSOM4Plot,backgroundValues = as.factor(fSOM$metaCl), main=paste(mainTitle,"_",fSOM$fSOMTree$gatedPopulation))}
+  {PlotStarsBigLeg(fSOM4Plot,backgroundValues = as.factor(fSOM$metaCl), 
+                   main=paste(mainTitle,"_",fSOM$gatingName,"_Clusters=",fSOM$fSOMTree$map$nNodes,"_Metaclusters=",length(unique(fSOM$metaCl))))}
   
 }
