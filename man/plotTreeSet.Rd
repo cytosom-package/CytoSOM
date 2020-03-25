@@ -8,7 +8,7 @@ plotTreeSet(
   TreeMetacl,
   markers,
   Title,
-  rmClNb = 0,
+  rmClNb,
   treatmentTable,
   globalScale = T
 )

@@ -5,7 +5,7 @@
 #' @param clustDim dimension of the 2D cluster grid
 #' @param metaClNg number of meta-clusters
 #' @param fSOMSeed seed of the random generator used for building the tree
-#' @return FlowSOM tree with meta-clusters
+#' @return FlowSOM tree with meta-clusters and gating name
 #' @export
 buildFSOMTree <- function(fSOMDloaded,prettyNames,clustDim,metaClNb,fSOMSeed)
 {
@@ -23,5 +23,6 @@ buildFSOMTree <- function(fSOMDloaded,prettyNames,clustDim,metaClNb,fSOMSeed)
     fSOM$prettyColnames =  fSOMNicePrettyColNames
     metacl<-FlowSOM::metaClustering_consensus(fSOM$map$codes,k=metaClNb,seed=fSOMSeed)
     PlotStarsBigLeg(fSOM,backgroundValues = as.factor(metacl))
-    return(list(fSOMTree = fSOM,metaCl = metacl,gatingName=fSOMDloaded$gatingName))
+    if (is.null(fSOMDloaded$gatingName)){gName = ""} else {gName = fSOMDloaded$gatingName}
+    return(list(fSOMTree = fSOM,metaCl = metacl,gatingName=gName))
 }
