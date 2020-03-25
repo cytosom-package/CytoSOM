@@ -26,5 +26,5 @@ DownLoadCytoData <- function(dirFCS="",gatingName,fcsPattern = "Tube",compensate
         }
     dataGated<-gating_subset_toolBox(data,gatingName)
     fSOM<-FlowSOM::ReadInput(dataGated$flowSet,compensate = compensate,transform = FALSE,scale = FALSE,scaled.center = TRUE,scaled.scale = TRUE,silent = FALSE)
-    return(list(fSOMData=fSOM,flJoDataGated=dataGated))
+    return(list(fSOMData=fSOM,flJoDataGated=dataGated,gatingName=gatingName))
 }
