@@ -1,4 +1,4 @@
-##PlotTreeSet with PlotLabels included 
+##PlotTreeSet with PlotLabels included
 #User tool: plot figures, use the object created by buildFSOMTree
 ## the treatmentTable should be a dataframe with two column: "Treatment", "files"
 #' Plot a set of trees, in a pdf file, for metaclusters and markers
@@ -12,15 +12,15 @@
 plotTreeSet <- function(TreeMetacl,markers,Title,rmClNb,treatmentTable,globalScale=T){
     if (rmClNb>0) {
         indexKeep =  which(TreeMetacl$fSOMTree$MST$size > sort(TreeMetacl$fSOMTree$MST$size)[rmClNb])} else {indexKeep = 1:length(TreeMetacl$fSOMTree$MST$size)}
-    pdf(file=paste(Title,"_TreatmentTree.pdf",sep=""))
+    pdf(file=paste(Title,"_ClusterTree.pdf",sep=""))
     ## plot tree of pooled data
-    PlotStarsMSTRm(TreeMetacl,Title,rmClNb)
+    PlotStarsMSTRm(TreeMetacl$fSOMTree,TreeMetacl$metaCl,Title,rmClNb)
     PlotLabelsRm(TreeMetacl$fSOMTree,TreeMetacl$metaCl,paste(Title,"_MetaclusterTree",sep=""),rmClNb)
-    
+
     Treatments=unique(treatmentTable$Treatment[which(sapply(tableTreatmentFCS$files,function(files){length(grep(files,names(TreeMetacl$fSOMTree$metaData),fixed=T))>0}))])
     print("Treatments:")
     print(Treatments)
-    
+
     ## plot tree of subdata for each treatments
     for (treatName in Treatments) {
         fcsFiles=treatmentTable$files[which(treatmentTable$Treatment == treatName)]

@@ -21,7 +21,7 @@ DownLoadCytoData(
 \item{compensate}{TRUE if data needs to be compensated?}
 }
 \value{
-FlowSOM data object
+FlowSOM data object, with gating and gating name
 }
 \description{
 Download data, given fcs and FlowJo workspace
