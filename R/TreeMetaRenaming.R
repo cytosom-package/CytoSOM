@@ -20,7 +20,3 @@ TreeMetaRenaming<-function(TreeMetaCl,Markers,NameType){
               metaCl=TreeMetaCl4Rename$metaCl,
               gatingName=TreeMetaCl4Rename$gatingName))
   }
-
-
-
-devtools::document()
