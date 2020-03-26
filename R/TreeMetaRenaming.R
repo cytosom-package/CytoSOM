@@ -18,7 +18,7 @@ TreeMetaRenaming<-function(TreeMetaCl,Markers,NameType){
   return(list(fSOMTree=TreeMetaCl4Rename$fSOMTree,
               metaClNumber=metaClNumber,
               metaCl=TreeMetaCl4Rename$metaCl,
-              gatingName=TreeMetaCl4Rename$gatingName)
+              gatingName=TreeMetaCl4Rename$gatingName))
   }
 
 
