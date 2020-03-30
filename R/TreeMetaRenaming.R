@@ -9,7 +9,7 @@
 
 TreeMetaRenaming<-function(TreeMetaCl,Markers,NameType="shortRobustName"){
   if (is.null(TreeMetaCl$gatingName)) {gName = ""} else
-  {gName=TreeMetaCl4Rename$gatingName}
+  {gName=TreeMetaCl$gatingName}
   Namings=MetaClusterNaming(TreeMetaCl,Markers)
   return(list(fSOMTree=TreeMetaCl$fSOMTree,
               metaClNumber=TreeMetaCl$metaCl,
