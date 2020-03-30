@@ -7,7 +7,7 @@
 #' @export
 
 
-TreeMetaRenaming<-function(TreeMetaCl,Markers,NameType){
+TreeMetaRenaming<-function(TreeMetaCl,Markers,NameType="shortRobustName"){
   if (is.null(TreeMetaCl$gatingName)) {gName = ""} else
   {gName=TreeMetaCl4Rename$gatingName}
   Namings=MetaClusterNaming(TreeMetaCl,Markers)
@@ -15,6 +15,6 @@ TreeMetaRenaming<-function(TreeMetaCl,Markers,NameType){
               metaClNumber=TreeMetaCl$metaCl,
               metaCl=
                 sapply(TreeMetaCl$metaCl,function(x){paste(Namings$number[which(Namings$number == x)],
-                                                                       Namings$option[which(Namings$number == x)],sep="_")}),
+                                                                       Namings[[NameType]][which(Namings$number == x)],sep="_")}),
               gatingName=gName))
   }
