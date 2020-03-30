@@ -8,7 +8,7 @@
 #' @param globalMinMax min and max value of markers, used for color scale
 #' @export
 #'
-PlotMarkerMSTCondRm <- function(fSOMObject,markerName,condIndex,mainTitle,nbRm=0,globalMinMax=c()){
+PlotMarkerMSTCondRm <- function(fSOMObject,markerName,condIndex,mainTitle,nbRm,globalMinMax=c()){
     fSOM4Plot=list(
         map=fSOMObject$map,
         prettyColnames=fSOMObject$prettyColnames,
