@@ -6,7 +6,7 @@
 #' @param nbRm  number of smallest cluster to remove
 #' @export
 #'
-PlotStarsMSTRm <- function(fSOMObject,metaClustFactors,mainTitle,nbRm=0)
+PlotStarsMSTRm <- function(fSOMObject,metaClustFactors,mainTitle,nbRm)
 {
    fSOM4Plot=list(
         map=fSOMObject$map,
