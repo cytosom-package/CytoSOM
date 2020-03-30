@@ -20,9 +20,11 @@ PlotStarsMSTRm <- function(fSOMObject,metaClustFactors,mainTitle,nbRm)
        fSOM4Plot$map$medianValues=fSOMObject$map$medianValues[indexKeep,]
        fSOM4Plot$MST$graph=igraph::induced_subgraph(fSOMObject$MST$graph,indexKeep)
        fSOM4Plot$MST$l = fSOMObject$MST$l[indexKeep,]
-       PlotStarsBigLeg(fSOM4Plot,backgroundValues = as.factor(metaClustFactors[indexKeep]), main=mainTitle)
+       PlotStarsBigLeg(fSOM4Plot,backgroundValues = as.factor(metaClustFactors[indexKeep]),
+                       main=paste(mainTitle,"_Clusters=",fSOMObject$map$nNodes,"_Metaclusters=",length(unique(metaClustFactors))))
     }
     else
-        {PlotStarsBigLeg(fSOM4Plot,backgroundValues = as.factor(metaClustFactors), main=mainTitle)}
+    {PlotStarsBigLeg(fSOM4Plot,backgroundValues = as.factor(metaClustFactors),
+                    main=paste(mainTitle,"_Clusters=",fSOMObject$map$nNodes,"_Metaclusters=",length(unique(metaClustFactors))))}
 
 }
