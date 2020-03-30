@@ -14,7 +14,7 @@ TreeMetaRenaming(TreeMetaCl, Markers, NameType)
 \item{NameType}{Type of name applied}
 }
 \value{
-BuildFSOMTree object with the metaclusters renamed with the choosen name type
+BuildFSOMTree object with the metaclusters renamed with the choosen name type, keeping the metacluster numbers
 }
 \description{
 Selective naming of metaclustesters according to specific markers expression
