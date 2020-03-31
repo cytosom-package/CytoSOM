@@ -7,6 +7,8 @@
 buildFSOMTree(fSOMDloaded, prettyNames, clustDim, metaClNb, fSOMSeed)
 }
 \arguments{
+\item{fSOMDloaded}{FlowSOM data dowloaded with DowLoadCytoData}
+
 \item{prettyNames}{list of markers names to include to build the tree}
 
 \item{clustDim}{dimension of the 2D cluster grid}
@@ -14,8 +16,6 @@ buildFSOMTree(fSOMDloaded, prettyNames, clustDim, metaClNb, fSOMSeed)
 \item{metaClNb}{number of metaclusters}
 
 \item{fSOMSeed}{seed of the random generator used for building the tree}
-
-\item{fSOMloaded}{FlowSOM data dowloaded with DowLoadCytoData}
 }
 \value{
 FlowSOM object that includes the correspondance between the clusters and the metaclusters and the name of the population of interest.
