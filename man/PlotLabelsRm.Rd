@@ -4,7 +4,7 @@
 \alias{PlotLabelsRm}
 \title{Modified PlotLabels function of FlowSOM, with removal of smallest clusters}
 \usage{
-PlotLabelsRm(fSOMObject, metaClustFactors, mainTitle, nbRm = 0)
+PlotLabelsRm(fSOMObject, metaClustFactors, mainTitle, nbRm)
 }
 \arguments{
 \item{fSOMObject}{FlowSOM tree}

@@ -2,19 +2,23 @@
 % Please edit documentation in R/PlotStarsMSTRm.R
 \name{PlotStarsMSTRm}
 \alias{PlotStarsMSTRm}
-\title{Modified PlotStarsMST function of FlowSOM, with removal of smallest clusters}
+\title{Plot FlowSOM tree with the capacity to remove the smalles clusters that prevent adequate visualization}
 \usage{
-PlotStarsMSTRm(fSOMObject, metaClustFactors, mainTitle, nbRm = 0)
+PlotStarsMSTRm(fSOMObject, metaClustFactors, mainTitle, nbRm)
 }
 \arguments{
 \item{fSOMObject}{FlowSOM tree}
 
-\item{metaClustFactors}{meta-clusters (numbers or names)}
+\item{metaClustFactors}{meta-clusters}
 
-\item{mainTitle}{title}
+\item{mainTitle}{title of the plot}
 
-\item{nbRm}{number of smallest cluster to remove}
+\item{nbRm}{number of the smallest clusters to remove}
 }
 \description{
+PlotStarsMSTRm is a modified version of the FlowSOM function PlotStars, that plot the tree build through buildFSOMTree function and allows the removal of a given number of the smallest clusters that could prevent the spatial visualization of the tree.
 Modified PlotStarsMST function of FlowSOM, with removal of smallest clusters
+}
+\examples{
+PlotStarsMSTRm(fSOMObject=CytoTree$fSOMTree, metaClustFactors=CytoTree$metaCl,mainTitle="Experiment 1",nbRm=2)
 }

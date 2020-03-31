@@ -4,13 +4,7 @@
 \alias{PlotMarkerMSTRm}
 \title{Modified PlotMarkerMST function of FlowSOM, with removal of smallest clusters}
 \usage{
-PlotMarkerMSTRm(
-  fSOMObject,
-  markerName,
-  mainTitle,
-  nbRm = 0,
-  globalMinMax = c()
-)
+PlotMarkerMSTRm(fSOMObject, markerName, mainTitle, nbRm, globalMinMax = c())
 }
 \arguments{
 \item{fSOMObject}{FlowSOM tree}

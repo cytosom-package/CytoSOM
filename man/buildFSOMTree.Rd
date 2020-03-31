@@ -2,24 +2,27 @@
 % Please edit documentation in R/buildFSOMTree.R
 \name{buildFSOMTree}
 \alias{buildFSOMTree}
-\title{build FSOM tree with the metacluster and plot the tree}
+\title{Build and plot FlowSOM tree}
 \usage{
 buildFSOMTree(fSOMDloaded, prettyNames, clustDim, metaClNb, fSOMSeed)
 }
 \arguments{
-\item{prettyNames}{list of pretty names needed for building the tree}
+\item{prettyNames}{list of markers names to include to build the tree}
 
 \item{clustDim}{dimension of the 2D cluster grid}
+
+\item{metaClNb}{number of metaclusters}
 
 \item{fSOMSeed}{seed of the random generator used for building the tree}
 
 \item{fSOMloaded}{FlowSOM data dowloaded with DowLoadCytoData}
-
-\item{metaClNg}{number of meta-clusters}
 }
 \value{
-FlowSOM tree with meta-clusters and gating name
+FlowSOM object that includes the correspondance between the clusters and the metaclusters and the name of the population of interest.
 }
 \description{
-build FSOM tree with the metacluster and plot the tree
+BuildFSOMTree is a function that plot a tree based on the FlowSOM clusterization and metaclusterization algorithm. From data of interest contained in the DownLoadCytoData object, buildFSOMTree applies FlowSOM algorithm to cluster and metacluster data thanks to the markers of interest.
+}
+\examples{
+CytoTree=buildFSOMTree(fSOMloaded=CytoData,prettyNames=c("CD4","CD8","FoxP3"),ClustDim=4,metaClNb=6,fSOMSeed=1)
 }

@@ -4,13 +4,7 @@
 \alias{PlotStarsMSTCondRm}
 \title{Modified PlotStarsMST function of FlowSOM, with removal of smallest clusters, over a subset of data}
 \usage{
-PlotStarsMSTCondRm(
-  fSOMObject,
-  metaClustFactors,
-  condIndex,
-  mainTitle,
-  nbRm = 0
-)
+PlotStarsMSTCondRm(fSOMObject, metaClustFactors, condIndex, mainTitle, nbRm)
 }
 \arguments{
 \item{fSOMObject}{FlowSOM tree}

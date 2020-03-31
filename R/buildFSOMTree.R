@@ -1,11 +1,13 @@
-
-#' build FSOM tree with the metacluster and plot the tree
+#' Build and plot FlowSOM tree 
+#' 
+#' BuildFSOMTree is a function that plot a tree based on the FlowSOM clusterization and metaclusterization algorithm. From data of interest contained in the DownLoadCytoData object, buildFSOMTree applies FlowSOM algorithm to cluster and metacluster data thanks to the markers of interest.   
 #' @param fSOMloaded FlowSOM data dowloaded with DowLoadCytoData
-#' @param prettyNames list of pretty names needed for building the tree
+#' @param prettyNames list of markers names to include to build the tree
 #' @param clustDim dimension of the 2D cluster grid
-#' @param metaClNg number of meta-clusters
+#' @param metaClNb number of metaclusters
 #' @param fSOMSeed seed of the random generator used for building the tree
-#' @return FlowSOM tree with meta-clusters and gating name
+#' @return FlowSOM object that includes the correspondance between the clusters and the metaclusters and the name of the population of interest.
+#' @examples CytoTree=buildFSOMTree(fSOMloaded=CytoData,prettyNames=c("CD4","CD8","FoxP3"),ClustDim=4,metaClNb=6,fSOMSeed=1)
 #' @export
 buildFSOMTree <- function(fSOMDloaded,prettyNames,clustDim,metaClNb,fSOMSeed)
 {

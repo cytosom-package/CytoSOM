@@ -2,7 +2,7 @@
 % Please edit documentation in R/DownLoadCytoData.R
 \name{DownLoadCytoData}
 \alias{DownLoadCytoData}
-\title{Download data, given fcs and FlowJo workspace}
+\title{Download fcs files and select the population of interest in FlowJo workspace}
 \usage{
 DownLoadCytoData(
   dirFCS = "",
@@ -12,17 +12,20 @@ DownLoadCytoData(
 )
 }
 \arguments{
-\item{dirFCS}{sub-directory of working directory, where fcs files are}
+\item{dirFCS}{sub-directory of working directory, where fcs files are located}
 
-\item{gatingName}{name of FlowJo gating to be applied}
+\item{gatingName}{name of the population of interest selected through a FlowJo gating}
 
-\item{fcsPattern}{pattern of all fcs file names}
+\item{fcsPattern}{name of a pattern common to the fcs files (optional but useful to select only a selection of FCS files contained in a same folder)}
 
-\item{compensate}{TRUE if data needs to be compensated?}
+\item{compensate}{TRUE if data needs to be compensated}
 }
 \value{
-FlowSOM data object, with gating and gating name
+FlowSOM data object that includes the data contained in the FlowJo gating and the name of the population of interest.
 }
 \description{
-Download data, given fcs and FlowJo workspace
+DownLoadCytoData is a tool to download data contained in fcs files and select the ones that have been gated as the population of interest in FlowJo. Folder where FCS files are localised and FlowJo workspace should be in current environment.
+}
+\examples{
+CytoData=DownLoadCytoData(dirFCS="Experiment1", gatingName="CD3+", fcsPattern="exp1", Compensate=FALSE)
 }
