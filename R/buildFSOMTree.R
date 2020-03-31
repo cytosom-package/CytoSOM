@@ -1,7 +1,7 @@
 #' Build and plot FlowSOM tree 
 #' 
 #' BuildFSOMTree is a function that plot a tree based on the FlowSOM clusterization and metaclusterization algorithm. From data of interest contained in the DownLoadCytoData object, buildFSOMTree applies FlowSOM algorithm to cluster and metacluster data thanks to the markers of interest.   
-#' @param fSOMloaded FlowSOM data dowloaded with DowLoadCytoData
+#' @param fSOMDloaded FlowSOM data dowloaded with DowLoadCytoData
 #' @param prettyNames list of markers names to include to build the tree
 #' @param clustDim dimension of the 2D cluster grid
 #' @param metaClNb number of metaclusters
