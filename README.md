@@ -47,7 +47,7 @@ If the tree look staitfactory, you can do the statsistical analysis. Otherwise, 
 
 6. Rename the meta-cluster names, using a set of markers (eg `c("CD4","CD8","CD11b","FOXP3", "CD19")`)
 ```R
-CytoTree <- TreeMetaRenaming(CytoTree,c("CD4","CD8","CD11b","FOXP3", "CD19"),"shortRobustName")
+CytoTree <- CytoSOM::TreeMetaRenaming(CytoTree,c("CD4","CD8","CD11b","FOXP3", "CD19"),"shortRobustName")
 ```
 
 7. Download an annotation table in `.csv` format (eg `AnnotationTable.csv`), that contains a column 'files', a column 'Treatment' and an optinal column 'Normalization factor', indiacting the separator (eg `;`):
@@ -58,18 +58,18 @@ tableTreatmentFCS <- read.csv("AnnotationTable.csv")
 
 8. Plot trees in `.pdf` file, for different population sizes and different markers (eg `c("MHCII","PD1","PDL1","PDL2")`):
 ```R
-plotTreeSet(CytoTree ,c("MHCII","PD1","PDL1","PDL2"),"TitleTrees",rmClNb=0,tableTreatmentFCS,globalScale=T)
+CytoSOM::plotTreeSet(CytoTree ,c("MHCII","PD1","PDL1","PDL2"),"TitleTrees",rmClNb=0,tableTreatmentFCS,globalScale=T)
 ```
 This produces two pdf in the working directory: `TitleTrees_ClusterTree.pdf` and `TitleTrees_MarkerTree.pdf`.
 
 9. Perform statistical analysis of meta-cluster sizes:
 ```R
-StatAnalysisSizes <- BoxPlotMetaClust (CytoTree,Title = "MyTitle",tableTreatmentFCS,ControlTreatmen="PBS",BottomMargin=3,yLab="CD45",Norm=FALSE,Robust = TRUE,ClustHeat=TRUE)
+StatAnalysisSizes <-CytoSOM:: BoxPlotMetaClust (CytoTree,Title = "MyTitle",tableTreatmentFCS,ControlTreatmen="PBS",BottomMargin=3,yLab="CD45",Norm=FALSE,Robust = TRUE,ClustHeat=TRUE)
 ```
 If `Norm` is set to `TRUE`, the column 'NormalizationFactor' is used to normalize the meta-cluster sizes. Otherwise, the analisis is perfomed on relative size (precentage). A file `MyTitle_BoxPlotPercentMetaClust.pdf` is produced. Two files containing p-values are also produced: `MyTitle_LmPvalPercentMetacl.csv` and `MyTitle_PairwisePvalPercentMetacl.csv`
 
 10. Perform statistical analysis of a given marker (eg PD1) MFI, for the different meta-clusters:
 ```R
-StatAnalysisPD1 <- BoxPlotMarkerMetaClust (CytoTree,Title = "MyTitle",tableTreatmentFCS,ControlTreatmen="PBS",BottomMargin=3,"PD1",Robust = TRUE,ClustHeat=TRUE)
+StatAnalysisPD1 <- CytoSOM::BoxPlotMarkerMetaClust (CytoTree,Title = "MyTitle",tableTreatmentFCS,ControlTreatmen="PBS",BottomMargin=3,"PD1",Robust = TRUE,ClustHeat=TRUE)
 ```
 A file `MyTitle_BoxPlotPD1MetaClust.pdf` is produced. Two files containing p-values are also produced: `MyTitle_LmPvalPD1Metacl.csv` and `MyTitle_PairwisePvalPD1Metacl.csv`
