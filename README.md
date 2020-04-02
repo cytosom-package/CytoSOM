@@ -2,7 +2,7 @@ CytoSOM: a package for easy use of FlowSOM
 ==========================================
 Introduction
 ==============
-CytoSOM helps to apply [FlowSOM](https://github.com/SofieVG/FlowSOM) to flow cytometry data, and perform statistical analysis.
+CytoSOM helps to apply [FlowSOM](https://github.com/SofieVG/FlowSOM) to flow cytometry data, and perform statistical analysis. You can use the [userguide](https://github.com/gautierstoll/CytoSOM/blob/master/CytoSOM%20User%20Guide.pdf) or read the "HowTo" below.
 
 ## Installation
 
@@ -27,7 +27,7 @@ setwd("full_name_before_myData/MyData")
 ```R
 CytoData <- CytoSOM::DownLoadCytoData(dirFCS="FCSdata","CD45",fcsPattern = "Tube",compensate=FALSE)
 ```
-
+Note that is this case the data have been already compensated.
 4. Build a clustering tree (eg `CytoTree`), indicating the list of makers used for clustering (eg `c("CD4","CD8","CD11b","FOXP3")`), the size of the cluster grid (eg `7`), the number of meta-clusters (eg `10`), and the seed of the random generator (eg `0`):
 ```R
 CytoTree <- CytoSOM::buildFSOMTree(CytoData,c("CD3","CD4","CD8","CD11b","FOXP3", "CD19"),7,25,0)
