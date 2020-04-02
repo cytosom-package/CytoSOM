@@ -16,16 +16,24 @@ plotTreeSet(
 \arguments{
 \item{TreeMetacl}{FlowSOM tree with meta-clusters, constructed by buildFSOMTree}
 
-\item{markers}{vector of markers}
+\item{markers}{vector of markers for which PDF files of MFI will be generated}
 
 \item{Title}{title}
 
 \item{rmClNb}{number of smallest clusters to remove}
 
-\item{treatmentTable}{data frame containing a column 'files' and a column 'Treatment' (case sensitive)}
+\item{treatmentTable}{data frame containing a column 'files', a column 'Treatment' (case sensitive) and a column "NormaizationFactor"}
 
 \item{globalScale}{TRUE if color scale for markers is the same for each treatments}
 }
 \description{
-Plot a set of trees, in a pdf file, for metaclusters and markers
+plotTreeSet is a function that allows the automatic export of 
+\itemize{
+ \item{one PDF file containing the plot of the general tree and its representation according to each experimental condition} 
+ \item{one PDF file containing the representation on the general and treatment specific of the median fluorescent intensity of one choosen marker} 
+}
+the treatmentTable should be a dataframe with two column: "Treatment", "files"
+}
+\examples{
+plotTreeSet(TreeMetaCl=CytoTree,markers=c("PD-1","CTLA-4"),Title="Experiment1",rmClNb=0,treatmentTable="Experiment1Table.csv",globalScale=TRUE)
 }

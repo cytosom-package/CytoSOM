@@ -2,7 +2,7 @@
 % Please edit documentation in R/BoxPlotMetaClust.R
 \name{BoxPlotMetaClust}
 \alias{BoxPlotMetaClust}
-\title{Box plot of maker sizes, for the different meta-cluster with statical analysis, output in a PDF file.}
+\title{Statistical comparison of metacluster population between experimental condition}
 \usage{
 BoxPlotMetaClust(
   TreeMetaCl,
@@ -21,7 +21,7 @@ BoxPlotMetaClust(
 
 \item{Title}{prefix of the pdf file name}
 
-\item{treatmentTable}{data frame containing a column 'files' and a column 'Treatment' (case sensitive)}
+\item{treatmentTable}{data frame containing a column 'files',a column 'Treatment' (case sensitive) and a column "NormalizationFactor" for the optional normalization of the data}
 
 \item{BottomMargin}{size of the boxplots bottom margins, in order to be readable}
 
@@ -39,5 +39,9 @@ BoxPlotMetaClust(
 list containing sizes, pairwise comparison p-values, controle vs treatment p-values
 }
 \description{
+BoxPlotMetaClust is a function that allow the statistical analysis, either in percentage or with a normalization, of the impact of experimental condition on each metacluster population.
 Box plot of maker sizes, for the different meta-cluster with statical analysis, output in a PDF file.
+}
+\examples{
+BoxplotMetaClust(TreeMetaCl=CytoTree, Title="Experiment1",treatmentTable="ExperimentTable1.csv",ControlTreatment="control",BottomMargin=3,yLab="CD45+",Norm=FALSE,Robust=TRUE,ClustHeat=TRUE)
 }

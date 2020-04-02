@@ -2,7 +2,7 @@
 % Please edit documentation in R/BoxPlotMarkerMetaClust.R
 \name{BoxPlotMarkerMetaClust}
 \alias{BoxPlotMarkerMetaClust}
-\title{Box plot of maker MFI, for the different meta-cluster with statical analysis, output in a PDF file.}
+\title{Box plot of one marker MFI, for the different meta-cluster with statical analysis, output in a PDF file.}
 \usage{
 BoxPlotMarkerMetaClust(
   TreeMetaCl,
@@ -30,11 +30,14 @@ BoxPlotMarkerMetaClust(
 
 \item{ClustHeat}{if TRUE, heatmaps are clustered}
 
-\item{Controltreatment}{name of the control treatment used for statistics}
+\item{Controltreatment}{name of the experimental condition that you consider as your control treatment used for statistics}
 }
 \value{
 list containing MFI, pairwise comparison p-values, controle vs treatment p-values
 }
 \description{
-Box plot of maker MFI, for the different meta-cluster with statical analysis, output in a PDF file.
+BoxPlotMarkerMetaClust is a function that compares, inside each metacluster, the median fluorescence intensity of one given marker for each experimental condition.
+}
+\examples{
+BoxPlotMarkerMetaClust(TreeMetaCl=CytoTree, Title="Experiment1",treatmentTable=Experiment1table.csv,ControlTreatment="control",BottomMargin=3,Marker="PD-1",Robust=TRUE, ClustHeat=TRUE)
 }
