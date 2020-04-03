@@ -3,12 +3,12 @@
 #' @param marker1 x-axis
 #' @param marker2 y-axis
 #' @param fcsFiles list of file names or list of file indices to be used
-#' @param Xlim limits of x-axis, if NULL, limits set automatically
-#' @param Ylim lmiits of y-axis, if NULL, limits set automatically
+#' @param xlim limits of x-axis, if NULL, limits set automatically
+#' @param ylim lmiits of y-axis, if NULL, limits set automatically
 #' @return a polygon with the marker names
 #' @export
 
-Interactive2DGating <- function(RawData,marker1,marker2,fcsFiles,Xlim=NULL,Ylim=NULL)
+InteractivePolyGate <- function(RawData,marker1,marker2,fcsFiles,xlim=NULL,ylim=NULL)
 {
   if (typeof(fcsFiles) == "character")
   {
@@ -27,12 +27,12 @@ Interactive2DGating <- function(RawData,marker1,marker2,fcsFiles,Xlim=NULL,Ylim=
   myramp = colorRampPalette(c('white', 'red', 'yellow', 'blue', 'green'))
 
   x11()
-  if (is.null(Xlim)) {Xlim=c(min(data2D[,1]),max(data2D[,1]))}
-  if (is.null(Ylim)) {Ylim=c(min(data2D[,2]),max(data2D[,2]))}
+  if (is.null(xlim)) {xlim=c(min(data2D[,1]),max(data2D[,1]))}
+  if (is.null(ylim)) {ylim=c(min(data2D[,2]),max(data2D[,2]))}
 
   suppressWarnings(smoothScatter(data2D[,1],data2D[,2],
                 xlab = marker1, ylab = marker2, bandwidth = 0.01,
-                nbin=512,nrpoints = 0, colramp = myramp, useRaster = T,xlim=Xlim,ylim = Ylim ))
+                nbin=512,nrpoints = 0, colramp = myramp, useRaster = T,xlim=xlim,ylim = ylim ))
   CellGate = locator(n=512, type = 'o',col= 'blue')
 
   return(list(polygon = CellGate, marker1=marker1,marker2=marker2))
