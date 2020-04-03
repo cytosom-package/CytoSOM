@@ -10,17 +10,13 @@ PolygonGatingRawData <- function(RawData,Polygons,gatingName = "")
   tryCatch({sapply(Polygons,function(x){c(x[["polygon"]],x[["marker1"]],x[["marker2"]])})},
            error = function(e){stop("Not a list of polygons")} )
   IndexList=lapply(Polygons,function(poly){
-    print(poly)
     which(as.logical(sp::point.in.polygon(
       RawData$data[,names(which(gsub(" <.*","",RawData$prettyColnames) == poly$marker1))],
       RawData$data[,names(which(gsub(" <.*","",RawData$prettyColnames) == poly$marker2))],
       poly$polygon$x,poly$polygon$y)))})
-  print("Indices constructed")
 FullIndex=Reduce(intersect,IndexList)
-print("Full Index constructed")
 NewData=RawData
 NewData$data=RawData$data[FullIndex,]
-print("new data constructed")
 metaDataLengthKept=lapply(RawData$metaData,function(x){
   length(intersect((x[1]:x[2]),FullIndex))
 })
@@ -30,7 +26,6 @@ LastFilesIndex=cumsum(metaDataLengthKept[keepFilesIndices])
 FirstFilesIndex=c(1,LastFilesIndex[-length(LastFilesIndex)]+1)
 newMetaData=lapply(1:length(LastFilesIndex),function(x){unname(c(FirstFilesIndex[x],LastFilesIndex[x]))})
 names(newMetaData)=names(LastFilesIndex)
-print("new metadata constructed")
 NewData$metaData=newMetaData
 return(list(fSOMData=NewData,polygonGating=Polygons,gatingName = gatingName))
 }
