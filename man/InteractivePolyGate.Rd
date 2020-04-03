@@ -10,7 +10,8 @@ InteractivePolyGate(
   marker2,
   fcsFiles,
   xlim = NULL,
-  ylim = NULL
+  ylim = NULL,
+  log = ""
 )
 }
 \arguments{
@@ -24,7 +25,9 @@ InteractivePolyGate(
 
 \item{xlim}{limits of x-axis, if NULL, limits set automatically}
 
-\item{ylim}{lmiits of y-axis, if NULL, limits set automatically}
+\item{ylim}{limits of y-axis, if NULL, limits set automatically}
+
+\item{log}{axxis name to be plot in log scale}
 }
 \value{
 a polygon with the marker names

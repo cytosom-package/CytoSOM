@@ -4,11 +4,12 @@
 #' @param marker2 y-axis
 #' @param fcsFiles list of file names or list of file indices to be used
 #' @param xlim limits of x-axis, if NULL, limits set automatically
-#' @param ylim lmiits of y-axis, if NULL, limits set automatically
+#' @param ylim limits of y-axis, if NULL, limits set automatically
+#' @param log axxis name to be plot in log scale
 #' @return a polygon with the marker names
 #' @export
 
-InteractivePolyGate <- function(RawData,marker1,marker2,fcsFiles,xlim=NULL,ylim=NULL)
+InteractivePolyGate <- function(RawData,marker1,marker2,fcsFiles,xlim=NULL,ylim=NULL,log="")
 {
   if (typeof(fcsFiles) == "character")
   {
@@ -32,7 +33,7 @@ InteractivePolyGate <- function(RawData,marker1,marker2,fcsFiles,xlim=NULL,ylim=
 
   suppressWarnings(smoothScatter(data2D[,1],data2D[,2],
                 xlab = marker1, ylab = marker2, bandwidth = 0.01,
-                nbin=512,nrpoints = 0, colramp = myramp, useRaster = T,xlim=xlim,ylim = ylim ))
+                nbin=512,nrpoints = 0, colramp = myramp, useRaster = T,xlim=xlim,ylim = ylim ,log=log))
   CellGate = locator(n=512, type = 'o',col= 'blue')
 
   return(list(polygon = CellGate, marker1=marker1,marker2=marker2))
