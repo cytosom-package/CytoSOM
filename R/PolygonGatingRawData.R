@@ -7,6 +7,8 @@
 #'
 PolygonGatingRawData <- function(RawData,Polygons,gatingName = "")
 {
+  tryCatch({sapply(Polygons,function(x){c(x[["polygon"]],x[["marker1"]],x[["marker2"]])})},
+           error = function(e){stop("Not a list of polygons")} )
   IndexList=lapply(Polygons,function(poly){
     print(poly)
     which(as.logical(sp::point.in.polygon(
