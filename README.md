@@ -4,6 +4,9 @@ Introduction
 ==============
 CytoSOM helps to apply [FlowSOM](https://github.com/SofieVG/FlowSOM) to flow cytometry data, and perform statistical analysis. You can use the [userguide](https://github.com/gautierstoll/CytoSOM/blob/master/CytoSOM%20User%20Guide.pdf) or read the "HowTo" below.
 
+## Contact
+cytosom.package@gmail.com
+
 ## Installation
 
 ```R

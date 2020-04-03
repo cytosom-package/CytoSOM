@@ -10,6 +10,7 @@ Authors@R: c(
   person("Julie","Le Naour",role="aut"),
   person("Juliette","Paillet",role="aut"),
   person("Jonathan","Pol",role="ctb")
+  perons("Allan","Sauvat",role="ctb"")
   )
 Description: CytoSOM allows toe easily applied FlowSOM to cytomrty data. It produces statistics in pdf figures.
 Depends: R (>= 3.6.0)
