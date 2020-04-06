@@ -2,7 +2,10 @@ CytoSOM: a package for easy use of FlowSOM
 ==========================================
 Introduction
 ==============
-CytoSOM helps to apply [FlowSOM](https://github.com/SofieVG/FlowSOM) to flow cytometry data, and perform statistical analysis.
+CytoSOM helps to apply [FlowSOM](https://github.com/SofieVG/FlowSOM) to flow cytometry data, and perform statistical analysis. You can use the [userguide](https://github.com/gautierstoll/CytoSOM/blob/master/CytoSOM%20User%20Guide.pdf) or read the "HowTo" below.
+
+## Contact
+cytosom.package@gmail.com
 
 ## Installation
 
@@ -12,7 +15,7 @@ devtools::install_github(repo ="gautierstoll/CytoSOM")
 
 ## HowTo
 
-`CytoSOM` is applied when data has been gated within FlowJo software. A gating strategy without FlowJo is under construction. 
+`CytoSOM` is applied when data has been gated within FlowJo software. A gating can be construct manually, see below.
 
 `CytoSOM` needs to be installed. In a folder (eg `MyData`), put your FlowJo sesssion file (eg `file.wsp`) and a sub-folder (eg `FCSdata`) that contains the `.fcs` files (eg `Tube`...`.fcs`)
 
@@ -27,6 +30,7 @@ setwd("full_name_before_myData/MyData")
 ```R
 CytoData <- CytoSOM::DownLoadCytoData(dirFCS="FCSdata","CD45",fcsPattern = "Tube",compensate=FALSE)
 ```
+Note that in this case the data have been already compensated.
 
 4. Build a clustering tree (eg `CytoTree`), indicating the list of makers used for clustering (eg `c("CD4","CD8","CD11b","FOXP3")`), the size of the cluster grid (eg `7`), the number of meta-clusters (eg `10`), and the seed of the random generator (eg `0`):
 ```R
@@ -72,3 +76,34 @@ StatAnalysisPD1 <- CytoSOM::BoxPlotMarkerMetaClust(CytoTree,Title="MyTitle",tabl
 BottomMargin=3,"PD1",Robust = TRUE,ClustHeat=TRUE)
 ```
 A file `MyTitle_BoxPlotPD1MetaClust.pdf` is produced. Two files containing p-values are also produced: `MyTitle_LmPvalPD1Metacl.csv` and `MyTitle_PairwisePvalPD1Metacl.csv`
+
+### Gating witout FlowJo
+
+`CytoSOM` needs to be installed. In a folder (eg `MyData`), put a sub-folder (eg `FCSdata`) that contains the `.fcs` files (eg `Tube`...`.fcs`)
+
+1. Launch `RStudio`
+
+2. Set you working directory as the folder where you data are, using the full folder name:
+```R
+setwd("full_name_before_myData/MyData")
+```
+
+3. Download the data:
+
+```R
+RawData=FlowSOM::ReadInput(input = "FCSdata",pattern = "Tube",compensate = F)
+```
+Note that in this case the data have been already compensated.
+
+4. Create two polygon gates, eg the first one within the 2D plot "FSC-A" x "SSC-A" using `.fcs` files 1 and 3, the second one within the 2D plot "FSC-A" x "Livedead" (from 0 to 10000) using `.fcs` files 2 and 4:
+```R
+Poly1 <- CytoSOM::InteractivePolyGate(RawData,marker1 = "FSC-A",marker2 = "SSC-A",fcsFiles = c(1,3))
+Poly2 <- CytoSOM::InteractivePolyGate(RawData,marker1 = "FSC-A",marker2 = "Livedead",fcsFiles = c(2,4),ylim=c(0,10000))
+```
+
+5. Create a dataset with the instersection of the two gates above (named "CD45"):
+```R
+CytoData <- CytoSOM::PolygonGatingRawData(RawData,Polygons = list(Poly1,Poly2),gatingName = "CD45”)
+```
+
+Then the analysis can be continued at point 4 above.

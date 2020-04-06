@@ -11,7 +11,7 @@ DataFromMetaClust(FSOMData, TreeMetaCl, MetaClusters)
 
 \item{TreeMetaCl}{FlowSOM tree with meta-clusters, constructed within buildFSOMTree}
 
-\item{MetaClusters}{vector of metaclusters numbers of names}
+\item{MetaClusters}{vector of metaclusters numbers or names}
 }
 \value{
 FlowSOM data object

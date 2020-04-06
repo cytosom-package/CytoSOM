@@ -9,7 +9,8 @@ Authors@R: c(
   person("Estelle","Devêvre",role="aut"),
   person("Julie","Le Naour",role="aut"),
   person("Juliette","Paillet",role="aut"),
-  person("Jonathan","Pol",role="ctb")
+  person("Jonathan","Pol",role="ctb"),
+  person("Allan","Sauvat",role="ctb")
   )
 Description: CytoSOM allows toe easily applied FlowSOM to cytomrty data. It produces statistics in pdf figures.
 Depends: R (>= 3.6.0)
@@ -25,6 +26,7 @@ Imports:
   dunn.test,
   gplots,
   FlowSOM,
+  sp,
 License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true

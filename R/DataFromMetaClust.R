@@ -1,13 +1,13 @@
 #' Construct a sub-dataset from dataset and a list of metaclusters
 #' @param FSOMData FlowSOM datobject, created from DownLoadCytoData
 #' @param TreeMetaCl FlowSOM tree with meta-clusters, constructed within buildFSOMTree
-#' @param MetaClusters vector of metaclusters numbers of names
+#' @param MetaClusters vector of metaclusters numbers or names
 #' @return FlowSOM data object
 #' @export
 
 DataFromMetaClust <- function(FSOMData,TreeMetaCl,MetaClusters)
 {
-  newFSOMData=FSOMData[-2]
+  newFSOMData=FSOMData$fSOMData
   Clusters = unlist(lapply(MetaClusters,function(x){which(TreeMetaCl$metaCl == x)}))
   ClusterIndices = unlist(lapply(Clusters,function(x){which(TreeMetaCl$fSOMTree$map$mapping[,1] == x)}))
   newFSOMData$fSOMData$data=FSOMData$fSOMData$data[ClusterIndices,]

@@ -1,9 +1,9 @@
 #' Plot a set of trees, in a pdf file, for metaclusters and markers
-#' 
-#' plotTreeSet is a function that allows the automatic export of 
+#'
+#' plotTreeSet is a function that allows the automatic export of
 #' \itemize{
-#'  \item{one PDF file containing the plot of the general tree and its representation according to each experimental condition} 
-#'  \item{one PDF file containing the representation on the general and treatment specific of the median fluorescent intensity of one choosen marker} 
+#'  \item{one PDF file containing the plot of the general tree and its representation according to each experimental condition}
+#'  \item{one PDF file containing the representation on the general and treatment specific of the median fluorescent intensity of one choosen marker}
 #' }
 #' the treatmentTable should be a dataframe with two column: "Treatment", "files"
 #' @param TreeMetacl FlowSOM tree with meta-clusters, constructed by buildFSOMTree
@@ -20,7 +20,9 @@ plotTreeSet <- function(TreeMetacl,markers,Title,rmClNb,treatmentTable,globalSca
     pdf(file=paste(Title,"_ClusterTree.pdf",sep=""))
     ## plot tree of pooled data
     PlotStarsMSTRm(TreeMetacl$fSOMTree,TreeMetacl$metaCl,Title,rmClNb)
-    PlotLabelsRm(TreeMetacl$fSOMTree,TreeMetacl$metaClNumber,paste(Title,"_MetaclusterTree",sep=""),rmClNb)
+    if (is.null(TreeMetacl$metaClNumber)) {
+        PlotLabelsRm(TreeMetacl$fSOMTree,TreeMetacl$metaCl,paste(Title,"_MetaclusterTree",sep=""),rmClNb)}
+    else {PlotLabelsRm(TreeMetacl$fSOMTree,TreeMetacl$metaClNumber,paste(Title,"_MetaclusterTree",sep=""),rmClNb)}
 
     Treatments=unique(treatmentTable$Treatment[which(sapply(tableTreatmentFCS$files,function(files){length(grep(files,names(TreeMetacl$fSOMTree$metaData),fixed=T))>0}))])
     print("Treatments:")
