@@ -12,9 +12,8 @@
 #' @export
 
 
-Plot2DScatterPlot<-function(TreeMetaCl,Title,Marker1,Marker2,minct,style){
+Plot2DScatterPlot<-function(TreeMetaCl,Title,Marker1,Marker2,mincnt,style){
   library(hexbin)
-  
   ClustersData<-as.data.frame(TreeMetaCl$fSOMTree$map$mapping)
   MarkersData<-as.data.frame(TreeMetaCl$fSOMTree$data)
   PrettyNames<-as.data.frame(TreeMetaCl$fSOMTree$prettyColnames)
@@ -28,10 +27,10 @@ Plot2DScatterPlot<-function(TreeMetaCl,Title,Marker1,Marker2,minct,style){
   names(MetaclFrame)[1]<-"Metaclusters"
   FrameMarkers$Metaclusters<-MetaclFrame[match(x=FrameMarkers$Clusters, table = MetaclFrame$Clusters),"Metaclusters"]
   
-  x=FrameMarkers$`Marker1`
-  y=FrameMarkers$`Marker2`
+  x=FrameMarkers[[Marker1]]
+  y=FrameMarkers[[Marker2]]
   bin=hexbin(x,y)
-  pdf(file=paste(Title),"2D_Scatterplot.pdf")
+  pdf(file=paste(Title),"2D_Scatterplot.jpeg")
   gplot.hexbin(bin,style,xlab = Marker1 ,ylab = Marker2 ,legend = 0.7,lcex = 0.5,mincnt,
                clip = "on",minarea = 0.005,maxarea = 1)
   dev.off()
