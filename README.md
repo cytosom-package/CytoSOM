@@ -91,7 +91,7 @@ setwd("full_name_before_myData/MyData")
 3. Download the data:
 
 ```R
-RawData=FlowSOM::ReadInput(input = "FCSdata",pattern = "Tube",compensate = F)
+RawData <- FlowSOM::ReadInput(input = "FCSdata",pattern = "Tube",compensate = F)
 ```
 Note that in this case the data have been already compensated.
 
@@ -104,6 +104,13 @@ Poly2 <- CytoSOM::InteractivePolyGate(RawData,marker1 = "FSC-A",marker2 = "Lived
 5. Create a dataset with the instersection of the two gates above (named "CD45"):
 ```R
 CytoData <- CytoSOM::PolygonGatingRawData(RawData,Polygons = list(Poly1,Poly2),gatingName = "CD45”)
+```
+
+6. A new polygon can be applied to this gated dataset:
+
+```R
+Poly3 <- CytoSOM::InteractivePolyGate(CytoData$fSOMData,marker1 = "SSC-H",marker2 = "Livedead",fcsFiles = c(8,10))
+CytoData <- CytoSOM::PolygonGatingGatedData(CytoData,Polygons = list(Poly3),gatingName = "CD45”)
 ```
 
 Then the analysis can be continued at point 4 above.
