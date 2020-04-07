@@ -101,7 +101,7 @@ Poly1 <- CytoSOM::InteractivePolyGate(RawData,marker1 = "FSC-A",marker2 = "SSC-A
 Poly2 <- CytoSOM::InteractivePolyGate(RawData,marker1 = "FSC-A",marker2 = "Livedead",fcsFiles = c(2,4),ylim=c(0,10000))
 ```
 
-5. Create a dataset with the instersection of the two gates above (named "CD45"):
+5. Create a dataset with the intersection of the two gates above (named "CD45"):
 ```R
 CytoData <- CytoSOM::PolygonGatingRawData(RawData,Polygons = list(Poly1,Poly2),gatingName = "CD45”)
 ```
