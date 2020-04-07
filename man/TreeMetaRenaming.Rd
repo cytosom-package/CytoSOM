@@ -14,7 +14,7 @@ TreeMetaRenaming(TreeMetaCl, Markers, NameType = "shortRobustName")
 \item{NameType}{Type of name applied, that is ""nonRobustName","robustName" or "shortRobustName"}
 }
 \value{
-BuildFSOMTree object with the metaclusters renamed with the choosen name type, keeping the metacluster numbers
+BuildFSOMTree object with the metaclusters renamed with the choosen name type, keeping the metacluster numbers ($metaClNumber)
 }
 \description{
 TreeMetaRenaming is a function that allows the automatic renaming of the metaclusters according to their expression for specific markers. If this function is applied, the metaclusters will be renamed for the following commands of the script.

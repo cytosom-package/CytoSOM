@@ -27,10 +27,10 @@ plotTreeSet(
 \item{globalScale}{TRUE if color scale for markers is the same for each treatments}
 }
 \description{
-plotTreeSet is a function that allows the automatic export of 
+plotTreeSet is a function that allows the automatic export of
 \itemize{
- \item{one PDF file containing the plot of the general tree and its representation according to each experimental condition} 
- \item{one PDF file containing the representation on the general and treatment specific of the median fluorescent intensity of one choosen marker} 
+ \item{one PDF file containing the plot of the general tree and its representation according to each experimental condition}
+ \item{one PDF file containing the representation on the general and treatment specific of the median fluorescent intensity of one choosen marker}
 }
 the treatmentTable should be a dataframe with two column: "Treatment", "files"
 }
