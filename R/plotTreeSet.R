@@ -17,7 +17,7 @@
 plotTreeSet <- function(TreeMetacl,markers,Title,rmClNb,treatmentTable,globalScale=T){
     if (rmClNb>0) {
         indexKeep =  which(TreeMetacl$fSOMTree$MST$size > sort(TreeMetacl$fSOMTree$MST$size)[rmClNb])} else {indexKeep = 1:length(TreeMetacl$fSOMTree$MST$size)}
-    pdf(file=paste(Title,"_ClusterTree.pdf",sep=""))
+    pdf(file=NoSpCharForFile(paste(Title,"_ClusterTree.pdf",sep="")))
     ## plot tree of pooled data
     PlotStarsMSTRm(TreeMetacl$fSOMTree,TreeMetacl$metaCl,Title,rmClNb)
     if (is.null(TreeMetacl$metaClNumber)) {
@@ -36,7 +36,7 @@ plotTreeSet <- function(TreeMetacl,markers,Title,rmClNb,treatmentTable,globalSca
         PlotStarsMSTCondRm(TreeMetacl$fSOMTree,TreeMetacl$metaCl,treatIndex,paste(Title," Treat: ",treatName,sep=""),rmClNb)
     }
     dev.off()
-    pdf(file=paste(Title,"_MarkerTree.pdf",sep=""))
+    pdf(file=NoSpCharForFile(paste(Title,"_MarkerTree.pdf",sep="")))
     markersInData = intersect(markers,TreeMetacl$fSOMTree$prettyColnames)
     print("Markers:")
     print(markersInData)
