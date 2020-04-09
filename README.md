@@ -100,7 +100,7 @@ Note: in this case, data have already been compensated during acquisition on the
 Poly1 <- CytoSOM::InteractivePolyGate(RawData,marker1 = "FSC-A",marker2 = "SSC-A",fcsFiles = c(1,3))
 Poly2 <- CytoSOM::InteractivePolyGate(RawData,marker1 = "FSC-A",marker2 = "Livedead",fcsFiles = c(2,4),ylim=c(0,10000))
 ```
-Any list of files can be used to contruct a polygon gate. The order of files are the order that can be seen in `RawData$metaData`. Instead, file names can aslo be provided.
+Any list of files can be used to contruct a polygon gate. The order of files are the order that can be seen in `RawData$metaData`. Instead, file names can be provided.
 
 
 5. Create an R object (dataset) with the intersection of the two polygon gates above, with a chosen name (eg "myGate"):
