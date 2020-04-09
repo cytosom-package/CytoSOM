@@ -95,15 +95,17 @@ RawData <- FlowSOM::ReadInput(input = "FCSdata",pattern = "Tube",compensate = F)
 ```
 Note: in this case, data have already been compensated during acquisition on the flow cytometer.
 
-4. Create two polygon gates, eg the first one within the 2D plot "FSC-A" x "SSC-A" using `.fcs` files 1 and 3, the second one within the 2D plot "FSC-A" x "Livedead" (from 0 to 10000) using `.fcs` files 2 and 4:
+4. Create two polygon gates, eg the first one within the 2D plot "FSC-A" x "SSC-A" using `.fcs` files 1 and 3, the second one within the 2D plot "FSC-A" x "Livedead" (from 0 to 10000) using `.fcs` files 2 and 4 (order of files are the order that can be seen in `RawData$metaData`):
 ```R
 Poly1 <- CytoSOM::InteractivePolyGate(RawData,marker1 = "FSC-A",marker2 = "SSC-A",fcsFiles = c(1,3))
 Poly2 <- CytoSOM::InteractivePolyGate(RawData,marker1 = "FSC-A",marker2 = "Livedead",fcsFiles = c(2,4),ylim=c(0,10000))
 ```
+Any list of files can be used to contruct a polygon gate. The order of files are the order that can be seen in `RawData$metaData`. Instead, file names can aslo be provided.
 
-5. Create an R object (dataset) with the intersection of the two polygon gates above (named "CD45"):
+
+5. Create an R object (dataset) with the intersection of the two polygon gates above, with a chosen name (eg "myGate"):
 ```R
-CytoData <- CytoSOM::PolygonGatingRawData(RawData,Polygons = list(Poly1,Poly2),gatingName = "CD45”)
+CytoData <- CytoSOM::PolygonGatingRawData(RawData,Polygons = list(Poly1,Poly2),gatingName = "myGate”)
 ```
 
 6. A new polygon can be applied to this gated dataset:
