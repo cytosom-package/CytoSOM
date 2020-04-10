@@ -549,10 +549,10 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
     if(length(which(Treatments == ControlTreatment)) == 0) {stop(paste("No",ControlTreatment,"in annotation table"))}
     treatmentsFSOM=factor(treatmentsFSOM,levels=c(ControlTreatment,setdiff(Treatments,ControlTreatment))) # set control treatment at first
     if(length(MarkerIndex) == 1) {
-      pdf(file=gsub("/","_",paste(Title,"_BoxPlot",Marker,"Metacl.pdf",sep=""),fixed=T))
+      pdf(file=NoSpCharForFile(gsub("/","_",paste(Title,"_BoxPlot",Marker,"Metacl.pdf",sep=""),fixed=T)))
       } else {
-    if (Norm) {pdf(file=paste(Title,"_BoxPlotNormMetacl.pdf",sep=""))}
-    else {pdf(file=paste(Title,"_BoxPlotPercentMetacl.pdf",sep=""))}}
+    if (Norm) {pdf(file=NoSpCharForFile(paste(Title,"_BoxPlotNormMetacl.pdf",sep="")))}
+    else {pdf(file=NoSpCharForFile(paste(Title,"_BoxPlotPercentMetacl.pdf",sep="")))}}
     metaclNumber=length(fSOMnbrs[1,])
     par(mfrow=c(6,6),las=2,mar=c(BottomMargin,3,1,.5),mgp=c(1.8,.8,0)) ## page have 6x6 boxplots
     fSOMnbrs=fSOMnbrs[,unique(unique(TreeMetaCl$metaCl))]
@@ -649,9 +649,9 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
     names(PvalPairwiseTable)=paste("mtcl",colnames(fSOMnbrs)[1:metaclNumber],sep="_")
     par(mfrow=c(1,1),mar=c(3,2,3,1),cex=.5)
 
-    if(length(MarkerIndex) == 1) {write.table(PvalPairwiseTable,gsub("/","_",paste(Title,"_PairwisePval",Marker,"Metacl.csv",sep=""),fixed=T),sep=";",col.names = NA)} else {
-    if (Norm) {write.table(PvalPairwiseTable,paste(Title,"_PairwisePvalNormMetacl.csv",sep=""),sep=";",col.names = NA)}
-    else {write.table(PvalPairwiseTable,paste(Title,"_PairwisePvalPercentMetacl.csv",sep=""),sep=";",col.names = NA)}}
+    if(length(MarkerIndex) == 1) {write.table(PvalPairwiseTable,NoSpCharForFile(gsub("/","_",paste(Title,"_PairwisePval",Marker,"Metacl.csv",sep=""),fixed=T)),sep=";",col.names = NA)} else {
+    if (Norm) {write.table(PvalPairwiseTable,NoSpCharForFile(paste(Title,"_PairwisePvalNormMetacl.csv",sep="")),sep=";",col.names = NA)}
+    else {write.table(PvalPairwiseTable,NoSpCharForFile(paste(Title,"_PairwisePvalPercentMetacl.csv",sep="")),sep=";",col.names = NA)}}
 
     DF4lm = data.frame(y=c(fSOMnbrs),metaCl = c(sapply(colnames(fSOMnbrs),function(name){rep(name,length(fSOMnbrs[,1]))})),treat = rep(c(sapply(row.names(fSOMnbrs),function(name){as.character(treatmentTable$Treatment[which(treatmentTable$files == name)])})),length(fSOMnbrs[1,])))
     DF4lm$treat = factor(DF4lm$treat,levels=c(ControlTreatment,setdiff(unique(DF4lm$treat),ControlTreatment)))
@@ -810,10 +810,12 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
 
     retData=list(DFSizes,as.data.frame(PvalPairwiseTable),as.data.frame(pvalLmMatrix))
 
-    if(length(MarkerIndex) == 1) {write.table(pvalLmMatrix,gsub("/","_",paste(Title,"_LmPval",Marker,"Metacl.csv",sep=""),fixed=T),sep=";",col.names = NA)} else {
-    if (Norm) {write.table(pvalLmMatrix,paste(Title,"_LmPvalNormMetacl.csv",sep=""),sep=";",col.names = NA)}
-    else {write.table(pvalLmMatrix,paste(Title,"_LmPvalPercentMetacl.csv",sep=""),sep=";",col.names = NA)}}
+    if(length(MarkerIndex) == 1) {write.table(pvalLmMatrix,NoSpCharForFile(gsub("/","_",paste(Title,"_LmPval",Marker,"Metacl.csv",sep=""),fixed=T)),sep=";",col.names = NA)} else {
+    if (Norm) {write.table(pvalLmMatrix,NoSpCharForFile(paste(Title,"_LmPvalNormMetacl.csv",sep="")),sep=";",col.names = NA)}
+    else {write.table(pvalLmMatrix,NoSpCharForFile(paste(Title,"_LmPvalPercentMetacl.csv",sep="")),sep=";",col.names = NA)}}
 
     names(retData)=c("Sizes","PvalPairwise","PvalLm")
     return(retData)
 }
+## Internal tool: replace special characters by "_"
+NoSpCharForFile = function(char){return(gsub("[*()#$><%!&|{}\\[\\]?/:@]","_",char,perl=T))}

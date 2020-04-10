@@ -21,18 +21,18 @@ devtools::install_github(repo ="gautierstoll/CytoSOM")
 
 1. Launch `RStudio`
 
-2. Set you working direcory as the folder where your FlowJo session and you data are, using the full folder name:
+2. Set your working direcory as the folder where your FlowJo session and your data are stored, using the full folder name:
 ```R
 setwd("full_name_before_myData/MyData")
 ```
 
-3. Create an R object that collect your data (eg `CytoData`), indicating the name of the gating used in FlowJo (eg `CD45`):
+3. Create an R object that collect your data (eg `CytoData`), indicating the gate (i.e. cell population) of interest drawn in FlowJo (eg `CD45`):
 ```R
 CytoData <- CytoSOM::DownLoadCytoData(dirFCS="FCSdata","CD45",fcsPattern = "Tube",compensate=FALSE)
 ```
-Note that in this case the data have been already compensated.
+Note in this case, data have already been compensated during acquisition on the flow cytometer.
 
-4. Build a clustering tree (eg `CytoTree`), indicating the list of makers used for clustering (eg `c("CD4","CD8","CD11b","FOXP3")`), the size of the cluster grid (eg `7`), the number of meta-clusters (eg `10`), and the seed of the random generator (eg `0`):
+4. Build a clustering tree (eg `CytoTree`), indicating the list of makers used for clustering (eg `c("CD3","CD4","CD8","CD11b","FOXP3","CD19")`), the size of the cluster grid (eg `7`), the number of meta-clusters (eg `25`), and the seed of the random generator (eg `0`):
 ```R
 CytoTree <- CytoSOM::buildFSOMTree(CytoData,c("CD3","CD4","CD8","CD11b","FOXP3", "CD19"),7,25,0)
 ```
@@ -45,14 +45,14 @@ If the smallest clusters make the image diffcult to interpret, you can plot the 
 ```R
 CytoSOM::PlotStarsMSTRm(CytoTree$fSOMTree,CytoTree$metaCl,"Title Name",3)
 ```
-If the tree look staitfactory, you can do the statsistical analysis. Otherwise, try to rebuild the tree with other paramters (cluster grid size and/or meta-cluster number)
+If the tree looks satisfactory, you can move on to the next step. Otherwise, try to rebuild the tree with different parameters (ie size of the cluster grid and/or number of meta-clusters)
 
-6. Rename the meta-cluster names, using a set of markers (eg `c("CD4","CD8","CD11b","FOXP3", "CD19")`)
+6. Rename the meta-clusters, switching from a meta-cluster number to an explicit phenotype, by defining the set of markers to consider (eg `c("CD4","CD8","CD11b","FOXP3","CD19")`)
 ```R
 CytoTree <- CytoSOM::TreeMetaRenaming(CytoTree,c("CD4","CD8","CD11b","FOXP3", "CD19"),"shortRobustName")
 ```
 
-7. Download an annotation table in `.csv` format (eg `AnnotationTable.csv`), that contains a column 'files', a column 'Treatment' and an optinal column 'NormalizationFactor', indicating the separator (eg `;`):
+7. Download an annotation table in `.csv` format (eg `AnnotationTable.csv`), that contains a column 'files', a column 'Treatment' and an optional column 'NormalizationFactor', indicating the separator (eg `;`):
 ```R
 tableTreatmentFCS <- read.csv("AnnotationTable.csv",sep=";")
 ```
@@ -61,21 +61,21 @@ tableTreatmentFCS <- read.csv("AnnotationTable.csv",sep=";")
 ```R
 CytoSOM::plotTreeSet(CytoTree ,c("MHCII","PD1","PDL1","PDL2"),"TitleTrees",rmClNb=0,tableTreatmentFCS,globalScale=T)
 ```
-This produces two `.pdf` files in the working directory: `TitleTrees_ClusterTree.pdf` and `TitleTrees_MarkerTree.pdf`.
+This command generates two `.pdf` files for visual comparison of the clusters (i.e. cell subsets) based on their size and on the expression profile of markers to define (eg `c("MHCII","PD1","PDL1","PDL2")`): `TitleTrees_ClusterTree.pdf` and `TitleTrees_MarkerTree.pdf`.
 
 9. Perform statistical analysis of meta-cluster sizes:
 ```R
 StatAnalysisSizes <- CytoSOM::BoxPlotMetaClust(CytoTree,Title="MyTitle",tableTreatmentFCS,ControlTreatmen="PBS",
 BottomMargin=3,yLab="CD45",Norm=FALSE,Robust = TRUE,ClustHeat=TRUE)
 ```
-If `Norm` is set to `TRUE`, the column 'NormalizationFactor' is used to normalize the meta-cluster sizes. Otherwise, the analysis is perfomed on relative size (precentage). A file `MyTitle_BoxPlotPercentMetaClust.pdf` is produced. Two files containing p-values are also produced: `MyTitle_LmPvalPercentMetacl.csv` and `MyTitle_PairwisePvalPercentMetacl.csv`
+If `Norm` is set to `TRUE`, the column 'NormalizationFactor' of the `.csv` table is used to normalize the meta-cluster sizes. Otherwise, the analysis is perfomed on relative size (precentage). The control treatment is used for statistical annotation of population size heatmap. A file `MyTitle_BoxPlotPercentMetaClust.pdf` is produced. Two files containing p-values are also generated: `MyTitle_LmPvalPercentMetacl.csv` and `MyTitle_PairwisePvalPercentMetacl.csv`
 
-10. Perform statistical analysis of a given marker (eg PD1) MFI, for the different meta-clusters:
+10. Perform statistical analysis of a given marker (eg PD1) MFI, across the different meta-clusters:
 ```R
 StatAnalysisPD1 <- CytoSOM::BoxPlotMarkerMetaClust(CytoTree,Title="MyTitle",tableTreatmentFCS,ControlTreatmen="PBS",
 BottomMargin=3,"PD1",Robust = TRUE,ClustHeat=TRUE)
 ```
-A file `MyTitle_BoxPlotPD1MetaClust.pdf` is produced. Two files containing p-values are also produced: `MyTitle_LmPvalPD1Metacl.csv` and `MyTitle_PairwisePvalPD1Metacl.csv`
+A file `MyTitle_BoxPlotPD1MetaClust.pdf` is produced. Two files containing p-values are also generated: `MyTitle_LmPvalPD1Metacl.csv` and `MyTitle_PairwisePvalPD1Metacl.csv`
 
 ### Gating witout FlowJo
 
@@ -83,7 +83,7 @@ A file `MyTitle_BoxPlotPD1MetaClust.pdf` is produced. Two files containing p-val
 
 1. Launch `RStudio`
 
-2. Set you working directory as the folder where you data are, using the full folder name:
+2. Set your working directory as the folder where your data are stored, using the full folder name:
 ```R
 setwd("full_name_before_myData/MyData")
 ```
@@ -91,19 +91,28 @@ setwd("full_name_before_myData/MyData")
 3. Download the data:
 
 ```R
-RawData=FlowSOM::ReadInput(input = "FCSdata",pattern = "Tube",compensate = F)
+RawData <- FlowSOM::ReadInput(input = "FCSdata",pattern = "Tube",compensate = F)
 ```
-Note that in this case the data have been already compensated.
+Note: in this case, data have already been compensated during acquisition on the flow cytometer.
 
-4. Create two polygon gates, eg the first one within the 2D plot "FSC-A" x "SSC-A" using `.fcs` files 1 and 3, the second one within the 2D plot "FSC-A" x "Livedead" (from 0 to 10000) using `.fcs` files 2 and 4:
+4. Create two polygon gates, eg the first one within the 2D plot "FSC-A" x "SSC-A" using `.fcs` files 1 and 3, the second one within the 2D plot "FSC-A" x "Livedead" (from 0 to 10000) using `.fcs` files 2 and 4 (order of files are the order that can be seen in `RawData$metaData`):
 ```R
 Poly1 <- CytoSOM::InteractivePolyGate(RawData,marker1 = "FSC-A",marker2 = "SSC-A",fcsFiles = c(1,3))
 Poly2 <- CytoSOM::InteractivePolyGate(RawData,marker1 = "FSC-A",marker2 = "Livedead",fcsFiles = c(2,4),ylim=c(0,10000))
 ```
+Any list of files can be used to contruct a polygon gate. The order of files are the order that can be seen in `RawData$metaData`. Instead, file names can be provided.
 
-5. Create a dataset with the instersection of the two gates above (named "CD45"):
+
+5. Create an R object (dataset) with the intersection of the two polygon gates above, with a chosen name (eg "myGate"):
 ```R
-CytoData <- CytoSOM::PolygonGatingRawData(RawData,Polygons = list(Poly1,Poly2),gatingName = "CD45”)
+CytoData <- CytoSOM::PolygonGatingRawData(RawData,Polygons = list(Poly1,Poly2),gatingName = "myGate”)
+```
+
+6. A new polygon can be applied to this gated dataset:
+
+```R
+Poly3 <- CytoSOM::InteractivePolyGate(CytoData$fSOMData,marker1 = "SSC-H",marker2 = "Livedead",fcsFiles = c(8,10))
+CytoData <- CytoSOM::PolygonGatingGatedData(CytoData,Polygons = list(Poly3),gatingName = "CD45”)
 ```
 
 Then the analysis can be continued at point 4 above.
