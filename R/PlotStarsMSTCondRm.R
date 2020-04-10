@@ -5,9 +5,10 @@
 #' @param condIndex index of data events
 #' @param mainTitle title
 #' @param nbRm  number of smallest cluster to remove
+#' @param smallTree true if tree is small and meta-cluster legend is big
 #' @export
 #'
-PlotStarsMSTCondRm <- function(fSOMObject,metaClustFactors,condIndex,mainTitle,nbRm)
+PlotStarsMSTCondRm <- function(fSOMObject,metaClustFactors,condIndex,mainTitle,nbRm,smallTree=F)
 {
     fSOM4Plot=list(
         map=fSOMObject$map,
@@ -23,11 +24,11 @@ PlotStarsMSTCondRm <- function(fSOMObject,metaClustFactors,condIndex,mainTitle,n
         fSOM4Plot$map$medianValues = t(sapply(1:length(fSOMObject$map$medianValues[,1]),function(i){apply(fSOMObject$data[intersect(dataIndex,which(fSOMObject$map$mapping[,1] == i)),,drop=F],2,function(x){median(x)})}))[indexKeep,]
         fSOM4Plot$MST$graph=igraph::induced_subgraph(fSOMObject$MST$graph,indexKeep)
         fSOM4Plot$MST$l = fSOMObject$MST$l[indexKeep,]
-        PlotStarsBigLeg(fSOM4Plot,backgroundValues = as.factor(metaClustFactors[indexKeep]), main=mainTitle)
+        PlotStarsBigLeg(fSOM4Plot,backgroundValues = as.factor(metaClustFactors[indexKeep]), main=mainTitle,smallTree=smallTree)
     }
     else {
         fSOM4Plot$MST$size = sqrt(clSizes)/max(sqrt(clSizes))*15
         fSOM4Plot$map$medianValues = t(sapply(1:length(fSOMObject$map$medianValues[,1]),function(i){apply(fSOMObject$data[intersect(dataIndex,which(fSOMObject$map$mapping[,1] == i)),,drop=F],2,function(x){median(x)})}))
-         PlotStarsBigLeg(fSOM4Plot,backgroundValues = as.factor(metaClustFactors), main=mainTitle)
+         PlotStarsBigLeg(fSOM4Plot,backgroundValues = as.factor(metaClustFactors), main=mainTitle,,smallTree=smallTree)
         }
 }

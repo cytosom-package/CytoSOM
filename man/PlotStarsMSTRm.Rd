@@ -4,7 +4,7 @@
 \alias{PlotStarsMSTRm}
 \title{Plot FlowSOM tree with the capacity to remove the smalles clusters that prevent adequate visualization}
 \usage{
-PlotStarsMSTRm(fSOMObject, metaClustFactors, mainTitle, nbRm)
+PlotStarsMSTRm(fSOMObject, metaClustFactors, mainTitle, nbRm, smallTree = F)
 }
 \arguments{
 \item{fSOMObject}{FlowSOM tree}
@@ -14,6 +14,8 @@ PlotStarsMSTRm(fSOMObject, metaClustFactors, mainTitle, nbRm)
 \item{mainTitle}{title of the plot}
 
 \item{nbRm}{number of the smallest clusters to remove}
+
+\item{smallTree}{true if tree is small and meta-cluster legend is big}
 }
 \description{
 PlotStarsMSTRm is a modified version of the FlowSOM function PlotStars, that plot the tree build through buildFSOMTree function and allows the removal of a given number of the smallest clusters that could prevent the spatial visualization of the tree.

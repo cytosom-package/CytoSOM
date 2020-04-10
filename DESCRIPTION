@@ -27,6 +27,7 @@ Imports:
   gplots,
   FlowSOM,
   sp,
+  stringr,
 License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true

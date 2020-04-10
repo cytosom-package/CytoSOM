@@ -4,7 +4,14 @@
 \alias{PlotStarsMSTCondRm}
 \title{Modified PlotStarsMST function of FlowSOM, with removal of smallest clusters, over a subset of data}
 \usage{
-PlotStarsMSTCondRm(fSOMObject, metaClustFactors, condIndex, mainTitle, nbRm)
+PlotStarsMSTCondRm(
+  fSOMObject,
+  metaClustFactors,
+  condIndex,
+  mainTitle,
+  nbRm,
+  smallTree = F
+)
 }
 \arguments{
 \item{fSOMObject}{FlowSOM tree}
@@ -16,6 +23,8 @@ PlotStarsMSTCondRm(fSOMObject, metaClustFactors, condIndex, mainTitle, nbRm)
 \item{mainTitle}{title}
 
 \item{nbRm}{number of smallest cluster to remove}
+
+\item{smallTree}{true if tree is small and meta-cluster legend is big}
 }
 \description{
 Modified PlotStarsMST function of FlowSOM, with removal of smallest clusters, over a subset of data

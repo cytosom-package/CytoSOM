@@ -14,7 +14,8 @@ PlotStarsBigLeg <- function(fsom,
                       thresholds=NULL,
                       legend=TRUE,
                       query=NULL,
-                      main=""){
+                      main="",
+                      smallTree=F){
     # Add star chart option to iGraph
     igraph::add.vertex.shape("star", clip=igraph::igraph.shape.noclip, plot=mystarBL,
                     parameters=list(vertex.data=NULL,vertex.cP = colorPalette,
@@ -85,8 +86,11 @@ PlotStarsBigLeg <- function(fsom,
             # Make plot with folowing layout
             # 1 3
             # 2 3
+          if (smallTree) {graphics::layout(matrix(c(1,1,3,3,2,2), 3, 2, byrow = TRUE),
+                                           widths=c(1), heights=c(1,1,3))}
+          else {
             graphics::layout(matrix(c(1,1,3,3,2,2), 3, 2, byrow = TRUE),
-                    widths=c(1), heights=c(1,3,1))
+                    widths=c(1), heights=c(1,3,1))}
         } else {
             graphics::layout(matrix(c(1,2), 1, 2, byrow = TRUE),
                    widths=c(1,2), heights=c(1))
@@ -102,7 +106,9 @@ PlotStarsBigLeg <- function(fsom,
         }
 
         if(!is.null(backgroundValues)){
-            PlotBackgroundLegendBL(backgroundValues,background)
+            if (smallTree){PlotBackgroundLegendBL(backgroundValues,background,cexLegend=2)}
+          else
+            {PlotBackgroundLegendBL(backgroundValues,background)}
         }
     }
 
@@ -228,7 +234,7 @@ shiftFunctionBL <- function(x,n){
 }
 ##Internal tool, for Big Legend
 PlotBackgroundLegendBL <- function(backgroundValues, background,
-                                 main="Background"){
+                                 main="Background",cexLegend=1){
     graphics::plot.new()
     if(is.numeric(backgroundValues)) {
         legendContinuous(background$col,
@@ -236,10 +242,12 @@ PlotBackgroundLegendBL <- function(backgroundValues, background,
                                          gsub("].*","",
                                               levels(background$values)))))
     } else {
-        graphics::legend("center", legend=levels(background$values),
-               fill=background$col,
-               cex=0.7,
-               ncol =  ceiling(length(levels(background$values)) / 10),
+        relCex=exp(-(length(levels(background$values)))/96)*exp(-max(nchar(levels(background$values)))/92)
+        orderIndex = stringr::str_order(levels(background$values),numeric=T)
+        graphics::legend("center", legend=levels(background$values)[orderIndex],
+               fill=background$col[orderIndex],
+               cex=relCex*cexLegend,
+               ncol =  ceiling(length(levels(background$values)) / (10*cexLegend)),
                bty="n",
                title=main)
     }
