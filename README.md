@@ -15,7 +15,7 @@ devtools::install_github(repo ="gautierstoll/CytoSOM")
 
 ## HowTo
 
-`CytoSOM` is applied when data has been gated within FlowJo software. A gating can be construct manually, see below.
+`CytoSOM` is applied when data has been gated within FlowJo software. A gating can be construct manually, see below. The data can also be extracted from previously contructed meta-clusters, see below. 
 
 `CytoSOM` needs to be installed. In a folder (eg `MyData`), put your FlowJo sesssion file (eg `file.wsp`) and a sub-folder (eg `FCSdata`) that contains the `.fcs` files (eg `Tube`...`.fcs`)
 
@@ -116,3 +116,11 @@ CytoData <- CytoSOM::PolygonGatingGatedData(CytoData,Polygons = list(Poly3),gati
 ```
 
 Then the analysis can be continued at point 4 above.
+
+## Exctracting data from meta-clusters
+
+Suppose that data has been downloaded (eg `CytoData`), and a cluster tree has been constructed (eg `CytoTree`). A sub-dataset can be extracted from a liste of metaclusters (eg c(1,3)):
+```R
+SubCytoData <- CytoSOM::DataFromMetaClust(CytoData$fSOMData,CytoTree,c(1,3))
+```
+Then a new tree can be constructed, continuing at point 4 of HowTo above.
