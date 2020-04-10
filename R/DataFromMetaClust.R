@@ -1,6 +1,5 @@
 #' Construct a sub-dataset from dataset and a list of metaclusters
-#' @param FSOMData FlowSOM datobject, created from FlowSOM::ReadInput,
-#' DownloadCytoData ($fSOMData element), PolygonGatingRawData ($fSOMData element) or PolygonGatingGatedData ($fSOMData element)
+#' @param FSOMData FlowSOM datobject, created from FlowSOM::ReadInput, DownloadCytoData ($fSOMData element), PolygonGatingRawData ($fSOMData element) or PolygonGatingGatedData ($fSOMData element)
 #' @param TreeMetaCl FlowSOM tree with meta-clusters, constructed within buildFSOMTree (from the data of FSOMData)
 #' @param MetaClusters vector of metaclusters numbers or names
 #' @return FlowSOM data object
