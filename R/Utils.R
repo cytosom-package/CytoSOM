@@ -126,7 +126,8 @@ PlotStarsBigLeg <- function(fsom,
                         mark.col = background$col[background$values],
                         mark.border = background$col[background$values],
                         mark.expand	= backgroundSize,
-                        main=main
+                        main=main,
+                        margin=c(0,0,.3,0)
     )
     # Reset plot window
     graphics::par(oldpar)
