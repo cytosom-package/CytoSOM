@@ -12,6 +12,8 @@ cytosom.package@gmail.com
 ```R
 devtools::install_github(repo ="gautierstoll/CytoSOM")
 ```
+Some dependent package may not be available directly. They can be installed within bioconductor, eg [flowCore](https://www.bioconductor.org/packages/release/bioc/html/flowCore.html), [CytoML](https://www.bioconductor.org/packages/release/bioc/html/CytoML.html), [flowWorkspace](https://www.bioconductor.org/packages/release/bioc/html/flowWorkspace.html), [flowSOM](https://bioconductor.org/packages/release/bioc/html/FlowSOM.html).
+
 
 ## HowTo
 
