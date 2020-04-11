@@ -17,18 +17,18 @@ Some dependent packages may not be available directly. They can be installed wit
 
 ## HowTo
 
-`CytoSOM` is applied when data has been gated within FlowJo software. A gating can be construct manually, see below. The data can also be extracted from previously contructed meta-clusters, see below. 
+`CytoSOM` is applied when data has been gated within FlowJo software. A gating can be constructed manually, see below. The data can also be extracted from previously contructed meta-clusters, see below. 
 
 `CytoSOM` needs to be installed. In a folder (eg `MyData`), put your FlowJo sesssion file (eg `file.wsp`) and a sub-folder (eg `FCSdata`) that contains the `.fcs` files (eg `Tube`...`.fcs`)
 
 1. Launch `RStudio`
 
-2. Set your working direcory as the folder where your FlowJo session and your data are stored, using the full folder name:
+2. Set your working directory as the folder where your FlowJo session and your data are stored, using the full folder name:
 ```R
 setwd("full_name_before_myData/MyData")
 ```
 
-3. Create an R object that collect your data (eg `CytoData`), indicating the gate (i.e. cell population) of interest drawn in FlowJo (eg `CD45`):
+3. Create an R object that collects your data (eg `CytoData`), indicating the gate (i.e. cell population) of interest drawn in FlowJo (eg `CD45`):
 ```R
 CytoData <- CytoSOM::DownLoadCytoData(dirFCS="FCSdata","CD45",fcsPattern = "Tube",compensate=FALSE)
 ```
@@ -43,13 +43,13 @@ CytoTree <- CytoSOM::buildFSOMTree(CytoData,c("CD3","CD4","CD8","CD11b","FOXP3",
 ```R
 CytoSOM::PlotStarsMSTRm(CytoTree$fSOMTree,CytoTree$metaCl,"Title Name",0)
 ```
-If the smallest clusters make the image diffcult to interpret, you can plot the tree by removing the smallest clusters (eg remove the 3 smallest clusters)
+If the smallest clusters make the image diffcult to interpret, you can plot the tree by removing the smallest clusters (eg remove the 3 smallest clusters):
 ```R
 CytoSOM::PlotStarsMSTRm(CytoTree$fSOMTree,CytoTree$metaCl,"Title Name",3)
 ```
 If the tree looks satisfactory, you can move on to the next step. Otherwise, try to rebuild the tree with different parameters (ie size of the cluster grid and/or number of meta-clusters)
 
-6. Rename the meta-clusters, switching from a meta-cluster number to an explicit phenotype, by defining the set of markers to consider (eg `c("CD4","CD8","CD11b","FOXP3","CD19")`)
+6. Rename the meta-clusters, switching from a meta-cluster number to an explicit phenotype, by defining the set of markers to consider (eg `c("CD4","CD8","CD11b","FOXP3","CD19")`):
 ```R
 CytoTree <- CytoSOM::TreeMetaRenaming(CytoTree,c("CD4","CD8","CD11b","FOXP3", "CD19"),"shortRobustName")
 ```
@@ -70,7 +70,7 @@ This command generates two `.pdf` files for visual comparison of the clusters (i
 StatAnalysisSizes <- CytoSOM::BoxPlotMetaClust(CytoTree,Title="MyTitle",tableTreatmentFCS,ControlTreatmen="PBS",
 BottomMargin=3,yLab="CD45",Norm=FALSE,Robust = TRUE,ClustHeat=TRUE)
 ```
-If `Norm` is set to `TRUE`, the column 'NormalizationFactor' of the `.csv` table is used to normalize the meta-cluster sizes. Otherwise, the analysis is perfomed on relative size (precentage). The control treatment is used for statistical annotation of population size heatmap. A file `MyTitle_BoxPlotPercentMetaClust.pdf` is produced. Two files containing p-values are also generated: `MyTitle_LmPvalPercentMetacl.csv` and `MyTitle_PairwisePvalPercentMetacl.csv`
+If `Norm` is set to `TRUE`, the column 'NormalizationFactor' of the `.csv` table is used to normalize the meta-cluster sizes. Otherwise, the analysis is perfomed on relative size (percentage). The control treatment is used for statistical annotation of population size heatmap. A file `MyTitle_BoxPlotPercentMetaClust.pdf` is produced. Two files containing p-values are also generated: `MyTitle_LmPvalPercentMetacl.csv` and `MyTitle_PairwisePvalPercentMetacl.csv`
 
 10. Perform statistical analysis of a given marker (eg PD1) MFI, across the different meta-clusters:
 ```R
@@ -121,7 +121,7 @@ Then the analysis can be continued at point 4 above.
 
 ## Exctracting data from meta-clusters
 
-Suppose that data has been downloaded (eg `CytoData`), and a cluster tree has been constructed (eg `CytoTree`). A sub-dataset can be extracted from a liste of metaclusters (eg c(1,3)):
+Suppose that data has been downloaded (eg `CytoData`), and a cluster tree has been constructed (eg `CytoTree`). A sub-dataset can be extracted from a liste of metaclusters (eg `c(1,3)`):
 ```R
 SubCytoData <- CytoSOM::DataFromMetaClust(CytoData$fSOMData,CytoTree,c(1,3))
 ```
