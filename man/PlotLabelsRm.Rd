@@ -4,7 +4,7 @@
 \alias{PlotLabelsRm}
 \title{Modified PlotLabels function of FlowSOM, with removal of smallest clusters}
 \usage{
-PlotLabelsRm(fSOMObject, metaClustFactors, mainTitle, nbRm)
+PlotLabelsRm(fSOMObject, metaClustFactors, mainTitle, nbRm, equalSize = F)
 }
 \arguments{
 \item{fSOMObject}{FlowSOM tree}
@@ -12,6 +12,8 @@ PlotLabelsRm(fSOMObject, metaClustFactors, mainTitle, nbRm)
 \item{metaClustFactors}{meta-clusters (numbers or names)}
 
 \item{nbRm}{number of smallest cluster to remove}
+
+\item{equalSize}{true if clusters are represented with identical sizes}
 }
 \description{
 Modified PlotLabels function of FlowSOM, with removal of smallest clusters

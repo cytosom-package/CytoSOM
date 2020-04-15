@@ -3,9 +3,10 @@
 #' @param fSOMObject FlowSOM tree
 #' @param metaClustFactors meta-clusters (numbers or names)
 #' @param nbRm  number of smallest cluster to remove
+#' @param equalSize true if clusters are represented with identical sizes
 #' @export
 #'
-PlotLabelsRm <- function(fSOMObject,metaClustFactors,mainTitle,nbRm)
+PlotLabelsRm <- function(fSOMObject,metaClustFactors,mainTitle,nbRm,equalSize=F)
 {
      fSOM4Plot=list(
         map=fSOMObject$map,
@@ -19,8 +20,10 @@ PlotLabelsRm <- function(fSOMObject,metaClustFactors,mainTitle,nbRm)
        fSOM4Plot$map$medianValues=fSOMObject$map$medianValues[indexKeep,]
        fSOM4Plot$MST$graph=igraph::induced_subgraph(fSOMObject$MST$graph,indexKeep)
        fSOM4Plot$MST$l = fSOMObject$MST$l[indexKeep,]
+       if (equalSize) {fSOM4Plot$MST$size = rep(8,length(fSOM4Plot$MST$size))}
        PlotLabels(fSOM4Plot,as.factor(metaClustFactors[indexKeep]), main=mainTitle)
     }
     else
-        {PlotLabels(fSOM4Plot,as.factor(metaClustFactors), main=mainTitle)}
+    {if (equalSize) {fSOM4Plot$MST$size = rep(8,length(fSOM4Plot$MST$size))}
+            PlotLabels(fSOM4Plot,as.factor(metaClustFactors), main=mainTitle)}
 }

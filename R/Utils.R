@@ -16,7 +16,7 @@ PlotStarsBigLeg <- function(fsom,
                       query=NULL,
                       main="",
                       smallTree=F){
-    # Add star chart option to iGraph
+   # Add star chart option to iGraph
     igraph::add.vertex.shape("star", clip=igraph::igraph.shape.noclip, plot=mystarBL,
                     parameters=list(vertex.data=NULL,vertex.cP = colorPalette,
                                     vertex.scale=TRUE, vertex.bg = starBg))

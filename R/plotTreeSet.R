@@ -20,12 +20,11 @@ plotTreeSet <- function(TreeMetacl,markers,Title,rmClNb,treatmentTable,globalSca
     pdf(file=NoSpCharForFile(paste(Title,"_ClusterTree.pdf",sep="")))
     ## plot tree of pooled data
     PlotStarsMSTRm(TreeMetacl$fSOMTree,TreeMetacl$metaCl,Title,rmClNb)
-    sameSizeTree <- FlowSOM::UpdateNodeSize(TreeMetacl$fSOMTree, maxNodeSize = 8, reset=TRUE)
-    PlotStarsMSTRm(sameSizeTree,TreeMetacl$metaCl,paste(Title," (id. sizes)",sep=""),rmClNb)
+    PlotStarsMSTRm(TreeMetacl$fSOMTree,TreeMetacl$metaCl,paste(Title," (id. sizes)",sep=""),rmClNb,equalSize=T)
     PlotStarsMSTRm(TreeMetacl$fSOMTree,TreeMetacl$metaCl,paste(Title," (large legend)",sep=""),rmClNb,smallTree=T)
     if (is.null(TreeMetacl$metaClNumber)) {
-        PlotLabelsRm(sameSizeTree,TreeMetacl$metaCl,paste(Title,"\nMetaclusterTree",sep=""),rmClNb)}
-    else {PlotLabelsRm(sameSizeTree,TreeMetacl$metaClNumber,paste(Title,"\nMetaclusterTree",sep=""),rmClNb)}
+        PlotLabelsRm(TreeMetacl$fSOMTree,TreeMetacl$metaCl,paste(Title,"\nMetaclusterTree",sep=""),rmClNb,equalSize=T)}
+    else {PlotLabelsRm(TreeMetacl$fSOMTree,TreeMetacl$metaClNumber,paste(Title,"\nMetaclusterTree",sep=""),rmClNb,equalSize=T)}
 
     Treatments=unique(treatmentTable$Treatment[which(sapply(treatmentTable$files,function(files){length(grep(files,names(TreeMetacl$fSOMTree$metaData),fixed=T))>0}))])
     print("Treatments:")

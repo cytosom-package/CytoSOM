@@ -10,7 +10,8 @@ PlotStarsMSTCondRm(
   condIndex,
   mainTitle,
   nbRm,
-  smallTree = F
+  smallTree = F,
+  equalSize = F
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ PlotStarsMSTCondRm(
 \item{nbRm}{number of smallest cluster to remove}
 
 \item{smallTree}{true if tree is small and meta-cluster legend is big}
+
+\item{equalSize}{true if clusters are represented with identical sizes}
 }
 \description{
 Modified PlotStarsMST function of FlowSOM, with removal of smallest clusters, over a subset of data
