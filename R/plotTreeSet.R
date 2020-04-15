@@ -27,7 +27,7 @@ plotTreeSet <- function(TreeMetacl,markers,Title,rmClNb,treatmentTable,globalSca
         PlotLabelsRm(sameSizeTree,TreeMetacl$metaCl,paste(Title,"\nMetaclusterTree",sep=""),rmClNb)}
     else {PlotLabelsRm(sameSizeTree,TreeMetacl$metaClNumber,paste(Title,"\nMetaclusterTree",sep=""),rmClNb)}
 
-    Treatments=unique(treatmentTable$Treatment[which(sapply(tableTreatment$files,function(files){length(grep(files,names(TreeMetacl$fSOMTree$metaData),fixed=T))>0}))])
+    Treatments=unique(treatmentTable$Treatment[which(sapply(treatmentTable$files,function(files){length(grep(files,names(TreeMetacl$fSOMTree$metaData),fixed=T))>0}))])
     print("Treatments:")
     print(Treatments)
 
