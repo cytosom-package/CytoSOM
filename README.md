@@ -27,7 +27,7 @@ Some dependent packages may not be available directly. They can be installed wit
 ```R
 setwd("full_name_before_myData/MyData")
 ```
-Alternatively, it can be done directly in `RStudio`: Session --> Set Working Directory --> Choose directory
+Alternatively, it can be done directly in `RStudio`: Session -> Set Working Directory -> Choose directory
 
 3. Create an R object that collects your data (eg `CytoData`), indicating the gate (i.e. cell population) of interest drawn in FlowJo (eg `CD45`):
 ```R
