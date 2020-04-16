@@ -123,7 +123,7 @@ CytoData <- CytoSOM::PolygonGatingGatedData(CytoData,Polygons = list(Poly3),gati
 
 Then the analysis can be continued at point 4 above ("Using gated data from FlowJo").
 
-## Exctracting data from meta-clusters
+### Extracting data from meta-clusters
 
 Suppose that data has been downloaded (eg `CytoData`), and a cluster tree has been constructed (eg `CytoTree`). A sub-dataset can be extracted from a liste of metaclusters (eg `c(1,3)`):
 ```R
