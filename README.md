@@ -17,6 +17,8 @@ Some dependent packages may not be available directly. They can be installed wit
 
 ## HowTo
 
+### Using gated data from FlowJo
+
 `CytoSOM` is applied when data has been gated within FlowJo software. A gating can be constructed manually, see below. The data can also be extracted from previously contructed meta-clusters, see below. 
 
 `CytoSOM` needs to be installed. In a folder (eg `MyData`), put your FlowJo sesssion file (eg `file.wsp`) and a sub-folder (eg `FCSdata`) that contains the `.fcs` files (eg `Tube`...`.fcs`)
@@ -80,7 +82,7 @@ BottomMargin=3,"PD1",Robust = TRUE,ClustHeat=TRUE)
 ```
 A file `MyTitle_BoxPlotPD1MetaClust.pdf` is produced. Two files containing p-values are also generated: `MyTitle_LmPvalPD1Metacl.csv` and `MyTitle_PairwisePvalPD1Metacl.csv`
 
-### Gating witout FlowJo
+### Gating without FlowJo
 
 `CytoSOM` needs to be installed. In a folder (eg `MyData`), put a sub-folder (eg `FCSdata`) that contains the `.fcs` files (eg `Tube`...`.fcs`)
 
@@ -90,6 +92,7 @@ A file `MyTitle_BoxPlotPD1MetaClust.pdf` is produced. Two files containing p-val
 ```R
 setwd("full_name_before_myData/MyData")
 ```
+Alternatively, it can be done directly in `RStudio`: Session -> Set Working Directory -> Choose directory
 
 3. Download the data:
 
@@ -118,7 +121,7 @@ Poly3 <- CytoSOM::InteractivePolyGate(CytoData$fSOMData,marker1 = "SSC-H",marker
 CytoData <- CytoSOM::PolygonGatingGatedData(CytoData,Polygons = list(Poly3),gatingName = "CD45”)
 ```
 
-Then the analysis can be continued at point 4 above.
+Then the analysis can be continued at point 4 above ("Using gated data from FlowJo").
 
 ## Exctracting data from meta-clusters
 
@@ -126,4 +129,4 @@ Suppose that data has been downloaded (eg `CytoData`), and a cluster tree has be
 ```R
 SubCytoData <- CytoSOM::DataFromMetaClust(CytoData$fSOMData,CytoTree,c(1,3))
 ```
-Then a new tree can be constructed, continuing at point 4 of HowTo above.
+Then a new tree can be constructed, continuing at point 4 of HowTo above ("Using gated data from FlowJo").
