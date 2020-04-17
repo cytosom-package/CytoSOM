@@ -39,8 +39,9 @@ Note in this case, data have already been compensated during acquisition on the 
 
 4. Build a clustering tree (eg `CytoTree`), indicating the list of makers used for clustering (eg `c("CD3","CD4","CD8","CD11b","FOXP3","CD19")`), the size of the cluster grid (eg `7`), the number of meta-clusters (eg `25`), and the seed of the random generator (eg `0`):
 ```R
-CytoTree <- CytoSOM::buildFSOMTree(CytoData,c("CD3","CD4","CD8","CD11b","FOXP3", "CD19"),7,25,0)
+CytoTree <- CytoSOM::buildFSOMTree(CytoData,c("CD3","CD4","CD8","CD11b","FOXP3","CD19"),7,25,0)
 ```
+Note that `buildFSOMTree` need to have the compensated names of the markers, that can be extracted from the object `CytoData` by the commande `as.vector(gsub(" <.*>","",CytoData$fSOMData$prettyColnames))`
 
 5. Plot the tree
 ```R
