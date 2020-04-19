@@ -126,8 +126,18 @@ Then the analysis can be continued at point 4 above ("Using gated data from Flow
 
 ### Extracting data from meta-clusters
 
-Suppose that data has been downloaded (eg `CytoData`), and a cluster tree has been constructed (eg `CytoTree`). A sub-dataset can be extracted from a liste of metaclusters (eg `c(1,3)`):
+Suppose that data has been downloaded (eg `CytoData`), and a cluster tree has been constructed (eg `CytoTree`). A sub-dataset can be extracted from a list of metaclusters (eg `c(1,3)`):
 ```R
 SubCytoData <- CytoSOM::DataFromMetaClust(CytoData$fSOMData,CytoTree,c(1,3))
 ```
 Then a new tree can be constructed, continuing at point 4 of HowTo above ("Using gated data from FlowJo").
+
+If meta-clusters have been renamed, the list of exact names should be provided. For that, the function `FindMetaClustNames` can be useful. For instance, 
+```R
+clusterNames <- FindMetaClustNames(subName = "CD4+",TreeMetaClust = CytoTree)
+``` 
+finds all meta-clusters having "CD4+" in their name. In a similar way, if meta-clusters have been renamed by `TreeMetaRenaming`, 
+```R
+clusterNames <- FindMetaClustNames(subName = "^4_",TreeMetaClust = CytoTree)
+```
+finds the name of the meta-cluster number 4.
