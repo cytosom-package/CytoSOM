@@ -9,6 +9,6 @@ FindMetaClustNames <- function(subNames,TreeMetaCl)
   unique(TreeMetaCl$metaCl)[grep(gsub("+","\\+",subNames,fixed=T),unique(TreeMetaCl$metaCl),T)]}
   else
   {
-  Reduce(intersect,lapply(subNames,function(nm){unique(TreeMetaCl$metaCl)[grep(gsub("+","\\+",nm),unique(TreeMetaCl$metaCl),T)]}))
+  Reduce(intersect,lapply(subNames,function(nm){unique(TreeMetaCl$metaCl)[grep(gsub("+","\\+",nm,fixed=T),unique(TreeMetaCl$metaCl),T)]}))
   }
 }
