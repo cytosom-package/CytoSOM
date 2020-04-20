@@ -17,6 +17,8 @@ Some dependent packages may not be available directly. They can be installed wit
 
 ## HowTo
 
+### Using gated data from FlowJo
+
 `CytoSOM` is applied when data has been gated within FlowJo software. A gating can be constructed manually, see below. The data can also be extracted from previously contructed meta-clusters, see below. 
 
 `CytoSOM` needs to be installed. In a folder (eg `MyData`), put your FlowJo sesssion file (eg `file.wsp`) and a sub-folder (eg `FCSdata`) that contains the `.fcs` files (eg `Tube`...`.fcs`)
@@ -27,6 +29,7 @@ Some dependent packages may not be available directly. They can be installed wit
 ```R
 setwd("full_name_before_myData/MyData")
 ```
+Alternatively, it can be done directly in `RStudio`: Session -> Set Working Directory -> Choose directory
 
 3. Create an R object that collects your data (eg `CytoData`), indicating the gate (i.e. cell population) of interest drawn in FlowJo (eg `CD45`):
 ```R
@@ -36,8 +39,9 @@ Note in this case, data have already been compensated during acquisition on the 
 
 4. Build a clustering tree (eg `CytoTree`), indicating the list of makers used for clustering (eg `c("CD3","CD4","CD8","CD11b","FOXP3","CD19")`), the size of the cluster grid (eg `7`), the number of meta-clusters (eg `25`), and the seed of the random generator (eg `0`):
 ```R
-CytoTree <- CytoSOM::buildFSOMTree(CytoData,c("CD3","CD4","CD8","CD11b","FOXP3", "CD19"),7,25,0)
+CytoTree <- CytoSOM::buildFSOMTree(CytoData,c("CD3","CD4","CD8","CD11b","FOXP3","CD19"),7,25,0)
 ```
+Note that `buildFSOMTree` need to have the compensated names of the markers, that can be extracted from the object `CytoData` by the commande `as.vector(gsub(" <.*>","",CytoData$fSOMData$prettyColnames))`
 
 5. Plot the tree
 ```R
@@ -79,7 +83,7 @@ BottomMargin=3,"PD1",Robust = TRUE,ClustHeat=TRUE)
 ```
 A file `MyTitle_BoxPlotPD1MetaClust.pdf` is produced. Two files containing p-values are also generated: `MyTitle_LmPvalPD1Metacl.csv` and `MyTitle_PairwisePvalPD1Metacl.csv`
 
-### Gating witout FlowJo
+### Gating without FlowJo
 
 `CytoSOM` needs to be installed. In a folder (eg `MyData`), put a sub-folder (eg `FCSdata`) that contains the `.fcs` files (eg `Tube`...`.fcs`)
 
@@ -89,6 +93,7 @@ A file `MyTitle_BoxPlotPD1MetaClust.pdf` is produced. Two files containing p-val
 ```R
 setwd("full_name_before_myData/MyData")
 ```
+Alternatively, it can be done directly in `RStudio`: Session -> Set Working Directory -> Choose directory
 
 3. Download the data:
 
@@ -117,12 +122,22 @@ Poly3 <- CytoSOM::InteractivePolyGate(CytoData$fSOMData,marker1 = "SSC-H",marker
 CytoData <- CytoSOM::PolygonGatingGatedData(CytoData,Polygons = list(Poly3),gatingName = "CD45”)
 ```
 
-Then the analysis can be continued at point 4 above.
+Then the analysis can be continued at point 4 above ("Using gated data from FlowJo").
 
-## Exctracting data from meta-clusters
+### Extracting data from meta-clusters
 
-Suppose that data has been downloaded (eg `CytoData`), and a cluster tree has been constructed (eg `CytoTree`). A sub-dataset can be extracted from a liste of metaclusters (eg `c(1,3)`):
+Suppose that data has been downloaded (eg `CytoData`), and a cluster tree has been constructed (eg `CytoTree`). A sub-dataset can be extracted from a list of metaclusters (eg `c(1,3)`):
 ```R
 SubCytoData <- CytoSOM::DataFromMetaClust(CytoData$fSOMData,CytoTree,c(1,3))
 ```
-Then a new tree can be constructed, continuing at point 4 of HowTo above.
+Then a new tree can be constructed, continuing at point 4 of HowTo above ("Using gated data from FlowJo").
+
+If meta-clusters have been renamed, the list of exact names should be provided. For that, the function `FindMetaClustNames` can be useful. For instance, 
+```R
+clusterNames <- FindMetaClustNames(subName = "CD4+",TreeMetaClust = CytoTree)
+``` 
+finds all meta-clusters having "CD4+" in their name. In a similar way, if meta-clusters have been renamed by `TreeMetaRenaming`, 
+```R
+clusterNames <- FindMetaClustNames(subName = "^4_",TreeMetaClust = CytoTree)
+```
+finds the name of the meta-cluster number 4.
