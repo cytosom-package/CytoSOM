@@ -134,10 +134,10 @@ Then a new tree can be constructed, continuing at point 4 of HowTo above ("Using
 
 If meta-clusters have been renamed, the list of exact names should be provided. For that, the function `FindMetaClustNames` can be useful. For instance, 
 ```R
-clusterNames <- FindMetaClustNames(subName = "CD4+",TreeMetaClust = CytoTree)
+clusterNames <- FindMetaClustNames(subNames = c("CD4+","FOXP3-"),TreeMetaClust = CytoTree)
 ``` 
-finds all meta-clusters having "CD4+" in their name. In a similar way, if meta-clusters have been renamed by `TreeMetaRenaming`, 
+finds all meta-clusters having "CD4+" and "FOXP3-" in their name. In a similar way, if meta-clusters have been renamed by `TreeMetaRenaming`, 
 ```R
-clusterNames <- FindMetaClustNames(subName = "^4_",TreeMetaClust = CytoTree)
+clusterNames <- FindMetaClustNames(subNames = "^4_",TreeMetaClust = CytoTree)
 ```
 finds the name of the meta-cluster number 4.
