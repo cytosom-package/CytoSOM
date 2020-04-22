@@ -1,7 +1,7 @@
 Package: CytoSOM
 Title: Easy use of FlowSOM
-Version: 0.1.1
-Date: 2020-3-23
+Version: 0.1.2
+Date: 2020-4-21
 Authors@R: c(
   person("Gautier", "Stoll", email = "gautier.stoll@upmc.fr", role = "cre"),
   person("Sarah","Lévesque",role="aut"),
