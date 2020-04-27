@@ -9,7 +9,7 @@ cytosom.package@gmail.com
 
 ## Installation
 
-Some dependent packages may not be available directly. They have to be installed first, within bioconductor: [flowCore](https://www.bioconductor.org/packages/release/bioc/html/flowCore.html), [CytoML](https://www.bioconductor.org/packages/release/bioc/html/CytoML.html), [flowWorkspace](https://www.bioconductor.org/packages/release/bioc/html/flowWorkspace.html), [flowSOM](https://bioconductor.org/packages/release/bioc/html/FlowSOM.html).
+Some dependent packages may not be available directly. They have to be installed first, within bioconductor: [flowCore](https://www.bioconductor.org/packages/release/bioc/html/flowCore.html), [CytoML](https://www.bioconductor.org/packages/release/bioc/html/CytoML.html), [flowWorkspace](https://www.bioconductor.org/packages/release/bioc/html/flowWorkspace.html), [FlowSOM](https://bioconductor.org/packages/release/bioc/html/FlowSOM.html).
 
 Then, you can install CytoSOM:
 ```R
