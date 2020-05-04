@@ -2,18 +2,24 @@
 % Please edit documentation in R/MetaClusterNaming.R
 \name{MetaClusterNaming}
 \alias{MetaClusterNaming}
-\title{Naming of meta-cluster from median and quartiles}
+\title{Naming of meta-cluster, based on quartile if CutOff is not provided}
 \usage{
-MetaClusterNaming(TreeMetaCl, Markers)
+MetaClusterNaming(TreeMetaCl, Markers, Levels, CutOff = NULL, Short = FALSE)
 }
 \arguments{
 \item{TreeMetaCl}{FlowSOM tree with meta-clusters, contructed for buildFSOMTree}
 
 \item{Markers}{vector of markers used for naming}
+
+\item{Levels}{number of level for naming: 2 -> -/+ (1/2-4 quartiles), 3-> -/low/high (1/2-3/4 quartiles), 4-> -/low/int/high (1/2/3/4 quartiles)}
+
+\item{CutOff}{matrix for optional cut off values for naming: one line for each markers (in the same order), each column for separating levels. If NULL, quartiles are used}
+
+\item{Short}{is true, low is not represented with level=3, int is not represented if level=4}
 }
 \value{
-data frame with cluster number, non-robust name, robust name and short robust names
+data frame with meta-cluster cluster oldName and newName.
 }
 \description{
-Naming of meta-cluster from median and quartiles
+Naming of meta-cluster, based on quartile if CutOff is not provided
 }

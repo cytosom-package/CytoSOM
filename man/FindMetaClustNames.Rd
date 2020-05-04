@@ -4,12 +4,14 @@
 \alias{FindMetaClustNames}
 \title{Find the names of metaclusters from a sub-name}
 \usage{
-FindMetaClustNames(subNames, TreeMetaCl)
+FindMetaClustNames(subNames, TreeMetaCl, start = F)
 }
 \arguments{
-\item{subNames}{list of sub-part of a meta-cluster name, for meta-cluster number preceeding its name, use "^number_"}
+\item{subNames}{list of sub-part of a meta-cluster name, for meta-cluster number preceeding its name}
 
 \item{TreeMetaCl}{FlowSOM tree with meta-clusters, constructed within buildFSOMTree (from the data of FSOMData)}
+
+\item{start}{If TRUE, match subnames with the start of meta-cluster names}
 }
 \value{
 a vector of names
