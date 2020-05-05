@@ -794,20 +794,20 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
     if (Robust) {
         if (ClustHeat) {
             gplots::heatmap.2(matrixPval4Heat,Rowv=T,Colv=T,dendrogram = "both",scale="none",col = gray(1-((0:100)/100*maxLogPval/(-log10(0.0001)))),
-                      trace="none",main=" log10(Dunn p-values)",cexRow = rowCex4Plot,cexCol=colCex4Plot,margins=c(colMarginSize,rowMarginSize),density.info="none",
+                      trace="none",main="-log10(Dunn p-values)",cexRow = rowCex4Plot,cexCol=colCex4Plot,margins=c(colMarginSize,rowMarginSize),density.info="none",
                       cellnote = matrixAnnot4Heat,notecol = "blue",notecex = .5,key.xlab = "",key.title="")
         }
             gplots::heatmap.2(matrixPval4Heat,Rowv=F,Colv=F,dendrogram = "none",scale="none",col = gray(1-((0:100)/100*maxLogPval/(-log10(0.0001)))),
-                      trace="none",cexRow = rowCex4Plot,cexCol=colCex4Plot,main=" log10(Dunn p-values)",margins=c(colMarginSize,rowMarginSize),density.info="none",
+                      trace="none",cexRow = rowCex4Plot,cexCol=colCex4Plot,main="-log10(Dunn p-values)",margins=c(colMarginSize,rowMarginSize),density.info="none",
                       cellnote = matrixAnnot4Heat,notecol = "blue",notecex = .5,key.xlab = "",key.title="")
     } else {
              if (ClustHeat) {
                  gplots::heatmap.2(matrixPval4Heat,Rowv=T,Colv=T,dendrogram = "both",scale="none",col = gray(1-((0:100)/100*maxLogPval/(-log10(0.0001)))),
-                           trace="none",cexRow = rowCex4Plot,cexCol=colCex4Plot,main=" log10(Tukey p-values)",margins=c(colMarginSize,rowMarginSize),density.info="none",
+                           trace="none",cexRow = rowCex4Plot,cexCol=colCex4Plot,main="-log10(Tukey p-values)",margins=c(colMarginSize,rowMarginSize),density.info="none",
                            cellnote = matrixAnnot4Heat,notecol = "blue",notecex = .5,key.xlab = "",key.title="")
              }
              gplots::heatmap.2(matrixPval4Heat,Rowv=F,Colv=F,dendrogram = "none",scale="none",col = gray(1-((0:100)/100*maxLogPval/(-log10(0.0001)))),
-                       trace="none",cexRow = rowCex4Plot,cexCol=colCex4Plot,main=" log10(Tukey p-values)",margins=c(colMarginSize,rowMarginSize),density.info="none",
+                       trace="none",cexRow = rowCex4Plot,cexCol=colCex4Plot,main="-log10(Tukey p-values)",margins=c(colMarginSize,rowMarginSize),density.info="none",
                        cellnote = matrixAnnot4Heat,notecol = "blue",notecex = .5,key.xlab = "",key.title="") }
     dev.off()
 

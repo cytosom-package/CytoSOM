@@ -2,7 +2,7 @@
 #' @param TreeMetaCl FlowSOM tree with meta-clusters, contructed for buildFSOMTree
 #' @param Markers vector of markers used for naming
 #' @param Levels number of level for naming: 2 -> -/+ (1/2-4 quartiles), 3-> -/low/high (1/2-3/4 quartiles), 4-> -/low/int/high (1/2/3/4 quartiles)
-#' @param CutOff matrix for optional cut off values for naming: one line for each markers (in the same order), each column for separating levels. If NULL, quartiles are used
+#' @param CutOff matrix for optional cut off values for naming, with markers in row.names, each column for separating levels. If a marker is not in row.names, quartiles are used
 #' @param Short is true, low is not represented with level=3, int is not represented if level=4
 #' @return data frame with meta-cluster cluster oldName and newName.
 #' @export
@@ -13,16 +13,17 @@ MetaClusterNaming <- function(TreeMetaCl,Markers,Levels,CutOff=NULL,Short=FALSE)
     if ((Levels < 2) | (Levels > 4)) {stop("Not the right amount of levels")}
     MarkerIn = Markers[which(sapply(Markers,function(Marker){length(which(TreeMetaCl$fSOMTree$prettyColnames == Marker))})>0)]
     if (length(setdiff(Markers,MarkerIn))>0) {stop(paste("Don't find markers ",paste(setdiff(Markers,MarkerIn),collapse = " "),sep=""))}
-    if (!is.null(CutOff)) {
-        if (length(CutOff[,1] != length(Markers))) {stop("not the number of CutOff lines compares to Markers")}
-        if (length(CutOff[1,]) != Levels) {steop("number of CutOffs no equal to Levels")}}
+    MarkersCutOff = intersect(Markers,row.names(CutOff))
+    if (length(MarkersCutOff) > 1) {
+        print(paste("Use cut-off for Markers ",paste(MarkersCutOff,collapse = " "),sep=""))
+    }
     metaClustNewNames=lapply(unique(TreeMetaCl$metaCl),function(metaClust){
         clusterList=which(TreeMetaCl$metaCl == metaClust)
         metaClustIndices=unlist(sapply(clusterList,function(cluster){which(TreeMetaCl$fSOMTree$map$mapping[,1] == cluster)}))
         nameList = sapply(Markers,function(Marker){
             MarkerIndex=which(TreeMetaCl$fSOMTree$prettyColnames == Marker)
             metaClustMedian=median(TreeMetaCl$fSOMTree$data[metaClustIndices,MarkerIndex],na.rm=T)
-            if(is.null(CutOff)) {
+            if(!(Marker %in% row.names(CutOff))) {
                 vectQuantiles=quantile(TreeMetaCl$fSOMTree$data[,MarkerIndex],na.rm=T)
                 if (Levels == 2) {namingMarker = paste(Marker,c("-","+"),sep="")[as.numeric(metaClustMedian > vectQuantiles[2])+1]}
                 else if (Levels == 3) {
@@ -37,7 +38,7 @@ MetaClusterNaming <- function(TreeMetaCl,Markers,Levels,CutOff=NULL,Short=FALSE)
                         as.numeric(metaClustMedian > vectQuantiles[2]) +
                             as.numeric(metaClustMedian > vectQuantiles[3]) + as.numeric(metaClustMedian > vectQuantiles[4]) +1]}}}
             else {
-                cutOffLine = CutOff[which(Markers == Marker),]
+                cutOffLine = CutOff[Marker,]
                 if (Levels == 2) {namingMarker = paste(Marker,c("-","+"),sep="")[as.numeric(metaClustMedian > cutOffLine)+1]}
                 else if (Levels == 3) {
                     if (Short) {namingMarker = c(paste(Marker,"-",sep=""),"",paste(Marker,"high",sep=""))[

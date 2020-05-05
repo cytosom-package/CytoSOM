@@ -2,7 +2,7 @@
 % Please edit documentation in R/HistMarkerMetaCl.R
 \name{HistMarkerMetaCl}
 \alias{HistMarkerMetaCl}
-\title{Hitogram representation of a marker in a given meta-cluster, compared to the full data}
+\title{Histogram representation of a marker in a given meta-cluster, compared to the full data}
 \usage{
 HistMarkerMetaCl(
   TreeMetaCl,
@@ -10,7 +10,7 @@ HistMarkerMetaCl(
   MetaCl,
   breaks = 100,
   xlim = NULL,
-  freq = TRUE
+  freq = F
 )
 }
 \arguments{
@@ -30,5 +30,5 @@ HistMarkerMetaCl(
 a double histogram figure, with meta-cluster in red
 }
 \description{
-Hitogram representation of a marker in a given meta-cluster, compared to the full data
+Histogram representation of a marker in a given meta-cluster, compared to the full data
 }

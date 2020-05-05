@@ -13,7 +13,7 @@ MetaClusterNaming(TreeMetaCl, Markers, Levels, CutOff = NULL, Short = FALSE)
 
 \item{Levels}{number of level for naming: 2 -> -/+ (1/2-4 quartiles), 3-> -/low/high (1/2-3/4 quartiles), 4-> -/low/int/high (1/2/3/4 quartiles)}
 
-\item{CutOff}{matrix for optional cut off values for naming: one line for each markers (in the same order), each column for separating levels. If NULL, quartiles are used}
+\item{CutOff}{matrix for optional cut off values for naming, with markers in row.names, each column for separating levels. If a marker is not in row.names, quartiles are used}
 
 \item{Short}{is true, low is not represented with level=3, int is not represented if level=4}
 }

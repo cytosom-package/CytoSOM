@@ -15,8 +15,8 @@ TreeMetaRenaming<-function(TreeMetaCl,Markers,Levels,CutOff=NULL,Short=FALSE){
   if (is.null(TreeMetaCl$gatingName)) {gName = ""} else
   {gName=TreeMetaCl$gatingName}
   Namings=MetaClusterNaming(TreeMetaCl,Markers,Levels,CutOff,Short)
-  if (is.number(TreeMetaCl$metaCl)) {TreeMetaCl$metaClNumber = TreeMetaCl$metaCl}
+  if (is.numeric(TreeMetaCl$metaCl)) {TreeMetaCl$metaClNumber = TreeMetaCl$metaCl}
   TreeMetaCl$metaCl = sapply(TreeMetaCl$metaCl,function(x){paste(Namings$oldName[which(Namings$oldName == x)],
-                                                                 Namings$oldName[which(Namings$oldName == x)],sep="_")})
+                                                                 Namings$newName[which(Namings$oldName == x)],sep="_")})
   return(TreeMetaCl)
   }
