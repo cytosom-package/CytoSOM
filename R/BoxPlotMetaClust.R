@@ -1,5 +1,5 @@
 #' Statistical comparison of metacluster population between experimental condition
-#' 
+#'
 #' BoxPlotMetaClust is a function that allow the statistical analysis, either in percentage or with a normalization, of the impact of experimental condition on each metacluster population.
 ## TreatmentTable should be a dataframe with two column: "Treatment", "files" (a third one with column "NormalizationFactor" if Norm=T).
 ## Robust specifies either Tukey/lm or Dunn (non adjusted p-values).
@@ -18,5 +18,6 @@
 #' @examples BoxplotMetaClust(TreeMetaCl=CytoTree, Title="Experiment1",treatmentTable="ExperimentTable1.csv",ControlTreatment="control",BottomMargin=3,yLab="CD45+",Norm=FALSE,Robust=TRUE,ClustHeat=TRUE)
 #' @export
 BoxPlotMetaClust = function(TreeMetaCl,Title,treatmentTable,ControlTreatment,BottomMargin,yLab,Norm=FALSE,Robust = TRUE,ClustHeat=TRUE) {
+  if (Norm & (!is.numeric(treatmentTable$NormalizationFactor))) {stop("non-numeric normalization factor in table")}
    BoxPlotMetaClustFull(TreeMetaCl,Title,treatmentTable,ControlTreatment,BottomMargin,yLab,Norm,Marker="",Robust,ClustHeat)
 }

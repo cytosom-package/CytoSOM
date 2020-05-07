@@ -5,7 +5,7 @@
 #' @param MetaCl a meta-cluster name or number
 #' @param breaks parameter to pass to R hist function
 #' @param xlim parameter to pass to R hist function
-#' @param freq paramter to pass to R hist function
+#' @param freq parameter to pass to R hist function
 #' @return a double histogram figure, with meta-cluster in red
 #' @export
 

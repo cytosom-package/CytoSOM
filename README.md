@@ -52,11 +52,27 @@ If the smallest clusters make the image diffcult to interpret, you can plot the 
 ```R
 CytoSOM::PlotStarsMSTRm(CytoTree$fSOMTree,CytoTree$metaCl,"Title Name",3)
 ```
+It is possible to represent the clustering in term of a heatmap, meta-cluster vs median of marker, eg:
+```R
+CytoSOM::HeatMapTree(CytoTree,c("CD3","CD4","CD8","CD11b","FOXP3","CD19"))
+```
+It is also possible to examine the histogram of a given meta-cluster for a given marker (meta-cluster in red compared the whole data in black), eg (marker CD3 for meta-cluster 8):
+```R
+CytoSOM::HistMarkerMetaCl(CytoTree,"CD3","8")
+```
+
 If the tree looks satisfactory, you can move on to the next step. Otherwise, try to rebuild the tree with different parameters (ie size of the cluster grid and/or number of meta-clusters)
 
-6. Rename the meta-clusters, switching from a meta-cluster number to an explicit phenotype, by defining the set of markers to consider (eg `c("CD4","CD8","CD11b","FOXP3","CD19")`):
+6. Rename the meta-clusters, switching from a meta-cluster number to an explicit phenotype. This can be done manually by providing 
+a data frame with a column "oldName" and a column "newName" (names in column "newName" must be all different); this renaming is partial in not all meta-cluster names in "oldName" column. For instance, for renaming meta-cluster 2 and 3:
 ```R
-CytoTree <- CytoSOM::TreeMetaRenaming(CytoTree,c("CD4","CD8","CD11b","FOXP3", "CD19"),"shortRobustName")
+renameDF <- data.frame(oldName = c(2,3),newName = c("Type_two","Type_three"))
+CytoTreeMRn <- CytoSOM::TreeMetaManuelRenaming(CytoTree,renameDF)
+```
+
+This can be done automatically, by providing the set of markers and the number of level used for each markers (from 2 to 4), eg:
+```R
+CytoTreeRn <- CytoSOM::TreeMetaRenaming(CytoTree,c("CD4","CD8","CD11b","FOXP3", "CD19"),4)
 ```
 
 7. Download an annotation table in `.csv` format (eg `AnnotationTable.csv`), that contains a column 'files', a column 'Treatment' and an optional column 'NormalizationFactor', indicating the separator (eg `;`):
@@ -66,20 +82,20 @@ tableTreatmentFCS <- read.csv("AnnotationTable.csv",sep=";")
 
 8. Plot trees in `.pdf` files, for different population sizes and different markers (eg `c("MHCII","PD1","PDL1","PDL2")`):
 ```R
-CytoSOM::plotTreeSet(CytoTree ,c("MHCII","PD1","PDL1","PDL2"),"TitleTrees",rmClNb=0,tableTreatmentFCS,globalScale=T)
+CytoSOM::plotTreeSet(CytoTreeRn ,c("MHCII","PD1","PDL1","PDL2"),"TitleTrees",rmClNb=0,tableTreatmentFCS,globalScale=T)
 ```
 This command generates two `.pdf` files for visual comparison of the clusters (i.e. cell subsets) based on their size and on the expression profile of markers to define (eg `c("MHCII","PD1","PDL1","PDL2")`): `TitleTrees_ClusterTree.pdf` and `TitleTrees_MarkerTree.pdf`.
 
 9. Perform statistical analysis of meta-cluster sizes:
 ```R
-StatAnalysisSizes <- CytoSOM::BoxPlotMetaClust(CytoTree,Title="MyTitle",tableTreatmentFCS,ControlTreatmen="PBS",
+StatAnalysisSizes <- CytoSOM::BoxPlotMetaClust(CytoTreeRn,Title="MyTitle",tableTreatmentFCS,ControlTreatmen="PBS",
 BottomMargin=3,yLab="CD45",Norm=FALSE,Robust = TRUE,ClustHeat=TRUE)
 ```
-If `Norm` is set to `TRUE`, the column 'NormalizationFactor' of the `.csv` table is used to normalize the meta-cluster sizes. Otherwise, the analysis is perfomed on relative size (percentage). The control treatment is used for statistical annotation of population size heatmap. A file `MyTitle_BoxPlotPercentMetaClust.pdf` is produced. Two files containing p-values are also generated: `MyTitle_LmPvalPercentMetacl.csv` and `MyTitle_PairwisePvalPercentMetacl.csv`
+If `Norm` is set to `TRUE`, the column 'NormalizationFactor' of the `.csv` table is used to normalize the meta-cluster sizes (be sure that this column provide real numbers). Otherwise, the analysis is perfomed on relative size (percentage). The control treatment is used for statistical annotation of population size heatmap. A file `MyTitle_BoxPlotPercentMetaClust.pdf` is produced. Two files containing p-values are also generated: `MyTitle_LmPvalPercentMetacl.csv` and `MyTitle_PairwisePvalPercentMetacl.csv`
 
 10. Perform statistical analysis of a given marker (eg PD1) MFI, across the different meta-clusters:
 ```R
-StatAnalysisPD1 <- CytoSOM::BoxPlotMarkerMetaClust(CytoTree,Title="MyTitle",tableTreatmentFCS,ControlTreatmen="PBS",
+StatAnalysisPD1 <- CytoSOM::BoxPlotMarkerMetaClust(CytoTreeRn,Title="MyTitle",tableTreatmentFCS,ControlTreatmen="PBS",
 BottomMargin=3,"PD1",Robust = TRUE,ClustHeat=TRUE)
 ```
 A file `MyTitle_BoxPlotPD1MetaClust.pdf` is produced. Two files containing p-values are also generated: `MyTitle_LmPvalPD1Metacl.csv` and `MyTitle_PairwisePvalPD1Metacl.csv`

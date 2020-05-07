@@ -24,7 +24,7 @@ HistMarkerMetaCl(
 
 \item{xlim}{parameter to pass to R hist function}
 
-\item{freq}{paramter to pass to R hist function}
+\item{freq}{parameter to pass to R hist function}
 }
 \value{
 a double histogram figure, with meta-cluster in red

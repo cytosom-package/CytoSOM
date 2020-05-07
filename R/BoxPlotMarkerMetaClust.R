@@ -1,6 +1,6 @@
 #' Box plot of one marker MFI, for the different meta-cluster with statical analysis, output in a PDF file.
-#' 
-#' BoxPlotMarkerMetaClust is a function that compares, inside each metacluster, the median fluorescence intensity of one given marker for each experimental condition. 
+#'
+#' BoxPlotMarkerMetaClust is a function that compares, inside each metacluster, the median fluorescence intensity of one given marker for each experimental condition.
 #' @param TreeMetaCl FlowSOM tree with meta-clusters, constructed by buildFSOMTree
 #' @param Title prefix of the pdf file name
 #' @param treatmentTable  data frame containing a column 'files' and a column 'Treatment' (case sensitive)

@@ -11,7 +11,7 @@ HeatMapTree(TreeMetaCl, Markers, clustering = T)
 
 \item{Markers}{vector of Markers}
 
-\item{clustering}{if true, a hierarichal clustring is applied}
+\item{clustering}{if true, a hierarichal clustring is applied to the heatmap}
 }
 \value{
 a heatmap figure

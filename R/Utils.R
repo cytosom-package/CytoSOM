@@ -535,7 +535,6 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
     }
     else {
     ## constuct fSOMnbrs, according to Norm (false: percentage, true: normalized)
-
     if (Norm) {
         abstgs=get_abstgsMT(TreeMetaCl$fSOMTree,TreeMetaCl$metaCl)
         fSOMnbrs<-abstgs$abstgs_meta
@@ -563,15 +562,21 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
     if (Norm) {pdf(file=NoSpCharForFile(paste(Title,"_BoxPlotNormMetacl.pdf",sep="")))}
     else {pdf(file=NoSpCharForFile(paste(Title,"_BoxPlotPercentMetacl.pdf",sep="")))}}
     metaclNumber=length(fSOMnbrs[1,])
-    par(mfrow=c(6,6),las=2,mar=c(BottomMargin,3,1,.5),mgp=c(1.8,.8,0)) ## page have 6x6 boxplots
+    mClustNames4Plot = sapply(colnames(fSOMnbrs),function(cName){
+      if (nchar(cName) < 27) {return(cName)}
+      else {return(paste(substring(
+        cName,(0:((nchar(cName)%/%24))*24),c(1:((nchar(cName)%/%24))*24,nchar(cName))),
+        collapse = "\n"))}
+    })
+    par(mfrow=c(6,6),las=2,mar=c(BottomMargin,3,1+max(sapply(colnames(fSOMnbrs),nchar))%/%24,.5),mgp=c(1.8,.8,0)) ## page have 6x6 boxplots
     fSOMnbrs=fSOMnbrs[,unique(unique(TreeMetaCl$metaCl))]
-    cex4Title=exp(-max(sapply(colnames(fSOMnbrs),nchar))/50)
+    cex4Title=exp(-min(27,max(sapply(colnames(fSOMnbrs),nchar)))/20)
     for (metaCl in (1:metaclNumber)){ ## boxplots with no annotations
         plotDf=data.frame(PP=fSOMnbrs[,metaCl],TreatmentFSOM=treatmentsFSOM) ## dataframe for box plot
-        boxplot(PP ~ TreatmentFSOM,data=plotDf,main=paste("mtcl",colnames(fSOMnbrs)[metaCl],sep="_"),xlab="",ylab=PlotLab,cex.axis=.5,cex.main=cex4Title,cex.lab=.5)
+        boxplot(PP ~ TreatmentFSOM,data=plotDf,main=mClustNames4Plot[metaCl],xlab="",ylab=PlotLab,cex.axis=.5,cex.main=cex4Title,cex.lab=.5)
         beeswarm::beeswarm(PP ~ TreatmentFSOM,data=plotDf,main=paste("mtcl",colnames(fSOMnbrs)[metaCl],sep="_"),add=T,cex=.5,col="red")
     }
-    par(mfrow=c(6,6),las=2,mar=c(BottomMargin,3,1,.5),mgp=c(1.8,.8,0))
+    par(mfrow=c(6,6),las=2,mar=c(BottomMargin,3,1+max(sapply(colnames(fSOMnbrs),nchar))%/%24,.5),mgp=c(1.8,.8,0))
     PvalPairwiseTable = sapply((1:metaclNumber),function(metaCl) ## construct pval table of tukey pairwise comparison test, boxplots with p-values annotation
     {
         plotDf=data.frame(PP=fSOMnbrs[,metaCl],TreatmentFSOM=treatmentsFSOM,noData=rep(1,length(treatmentsFSOM)))
@@ -619,7 +624,7 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
         minTr=min(plotDf$PP,na.rm=T)
         maxTr=max(plotDf$PP,na.rm=T)
         boxplot(PP ~ TreatmentFSOM,
-                data=plotDf,main=paste("mtcl",colnames(fSOMnbrs)[metaCl],sep="_"),
+                data=plotDf,main=mClustNames4Plot[metaCl],
                 xlab="",
                 ylab=PlotLab,
                 cex.axis=.5,
