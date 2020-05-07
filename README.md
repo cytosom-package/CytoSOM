@@ -64,13 +64,12 @@ CytoSOM::HistMarkerMetaCl(CytoTree,"CD3","8")
 If the tree looks satisfactory, you can move on to the next step. Otherwise, try to rebuild the tree with different parameters (ie size of the cluster grid and/or number of meta-clusters)
 
 6. Rename the meta-clusters, switching from a meta-cluster number to an explicit phenotype. This can be done manually by providing 
-a data frame with a column "oldName" and a column "newName" (names in column "newName" must be all different); this renaming is partial in not all meta-cluster names in "oldName" column. For instance, for renaming meta-cluster 2 and 3:
+a data frame with a column "oldName" and a column "newName" (names in column "newName" must be all different); this renaming is partial if not all meta-cluster names are in "oldName" column. For instance, for renaming meta-cluster 2 and 3:
 ```R
 renameDF <- data.frame(oldName = c(2,3),newName = c("Type_two","Type_three"))
 CytoTreeMRn <- CytoSOM::TreeMetaManuelRenaming(CytoTree,renameDF)
 ```
-
-This can be done automatically, by providing the set of markers and the number of level used for each markers (from 2 to 4), eg:
+This can be done automatically, by providing the set of markers and the number of levels used for each markers (from 2 to 4), eg:
 ```R
 CytoTreeRn <- CytoSOM::TreeMetaRenaming(CytoTree,c("CD4","CD8","CD11b","FOXP3", "CD19"),4)
 ```
