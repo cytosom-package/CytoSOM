@@ -570,7 +570,7 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
     })
     par(mfrow=c(6,6),las=2,mar=c(BottomMargin,3,1+max(sapply(colnames(fSOMnbrs),nchar))%/%24,.5),mgp=c(1.8,.8,0)) ## page have 6x6 boxplots
     fSOMnbrs=fSOMnbrs[,unique(unique(TreeMetaCl$metaCl))]
-    cex4Title=exp(-min(27,max(sapply(colnames(fSOMnbrs),nchar)))/20)
+    cex4Title=exp(-min(27,max(sapply(colnames(fSOMnbrs),nchar)))/40)
     for (metaCl in (1:metaclNumber)){ ## boxplots with no annotations
         plotDf=data.frame(PP=fSOMnbrs[,metaCl],TreatmentFSOM=treatmentsFSOM) ## dataframe for box plot
         boxplot(PP ~ TreatmentFSOM,data=plotDf,main=mClustNames4Plot[metaCl],xlab="",ylab=PlotLab,cex.axis=.5,cex.main=cex4Title,cex.lab=.5)
