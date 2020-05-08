@@ -76,7 +76,7 @@ CytoTreeRn <- CytoSOM::TreeMetaRenaming(CytoTree,c("CD4","CD8","CD11b","FOXP3", 
 
 7. Download an annotation table in `.csv` format (eg `AnnotationTable.csv`), that contains a column 'files', a column 'Treatment' and an optional column 'NormalizationFactor', indicating the separator (eg `;`):
 ```R
-tableTreatmentFCS <- read.csv("AnnotationTable.csv",sep=";")
+tableTreatmentFCS <- read.csv("AnnotationTable.csv",sep=";",dec=".")
 ```
 
 8. Plot trees in `.pdf` files, for different population sizes and different markers (eg `c("MHCII","PD1","PDL1","PDL2")`):

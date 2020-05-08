@@ -9,7 +9,7 @@
 #' @param equalSize true if clusters are represented with identical sizes
 #' @export
 #'
-PlotStarsMSTCondRm <- function(fSOMObject,metaClustFactors,condIndex,mainTitle,nbRm,smallTree=F,equalSize=F)
+PlotStarsMSTCondRm <- function(fSOMObject,metaClustFactors,condIndex,mainTitle,nbRm=0,smallTree=F,equalSize=F)
 {
     fSOM4Plot=list(
         map=fSOMObject$map,

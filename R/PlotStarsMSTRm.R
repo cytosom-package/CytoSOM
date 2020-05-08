@@ -11,7 +11,7 @@
 #' @examples PlotStarsMSTRm(fSOMObject=CytoTree$fSOMTree, metaClustFactors=CytoTree$metaCl,mainTitle="Experiment 1",nbRm=2)
 #' @export
 #'
-PlotStarsMSTRm <- function(fSOMObject,metaClustFactors,mainTitle,nbRm,smallTree=F,equalSize=F)
+PlotStarsMSTRm <- function(fSOMObject,metaClustFactors,mainTitle,nbRm=0,smallTree=F,equalSize=F)
 {
    fSOM4Plot=list(
         map=fSOMObject$map,
