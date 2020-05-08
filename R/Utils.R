@@ -562,15 +562,18 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
     if (Norm) {pdf(file=NoSpCharForFile(paste(Title,"_BoxPlotNormMetacl.pdf",sep="")))}
     else {pdf(file=NoSpCharForFile(paste(Title,"_BoxPlotPercentMetacl.pdf",sep="")))}}
     metaclNumber=length(fSOMnbrs[1,])
-    mClustNames4Plot = sapply(colnames(fSOMnbrs),function(cName){
-      if (nchar(cName) < 27) {return(cName)}
-      else {return(paste(substring(
-        cName,(0:((nchar(cName)%/%24))*24),c(1:((nchar(cName)%/%24))*24,nchar(cName))),
-        collapse = "\n"))}
-    })
+
     par(mfrow=c(6,6),las=2,mar=c(BottomMargin,3,1+max(sapply(colnames(fSOMnbrs),nchar))%/%24,.5),mgp=c(1.8,.8,0)) ## page have 6x6 boxplots
     fSOMnbrs=fSOMnbrs[,unique(unique(TreeMetaCl$metaCl))]
+    mClustNames4Plot = unlist(lapply(as.character(colnames(fSOMnbrs)),function(cName){
+      if (nchar(cName) < 27) {return(as.character(cName))}
+      else {return(as.character(paste(substring(
+        cName,(0:((nchar(cName)%/%24))*24),c(1:((nchar(cName)%/%24))*24,nchar(cName))),
+        collapse = "\n")))}
+    }))
     cex4Title=exp(-min(27,max(sapply(colnames(fSOMnbrs),nchar)))/40)
+    print(str(colnames(fSOMnbrs)))
+    print(str(mClustNames4Plot))
     for (metaCl in (1:metaclNumber)){ ## boxplots with no annotations
         plotDf=data.frame(PP=fSOMnbrs[,metaCl],TreatmentFSOM=treatmentsFSOM) ## dataframe for box plot
         boxplot(PP ~ TreatmentFSOM,data=plotDf,main=mClustNames4Plot[metaCl],xlab="",ylab=PlotLab,cex.axis=.5,cex.main=cex4Title,cex.lab=.5)
