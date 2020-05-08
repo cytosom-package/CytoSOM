@@ -16,12 +16,17 @@ HistMarkerMetaCl = function(TreeMetaCl,Marker,MetaCl,breaks=100,xlim=NULL,freq=F
                                  function(cluster){which(TreeMetaCl$fSOMTree$map$mapping[,1] == cluster)}))
   MarkerIndex=which(TreeMetaCl$fSOMTree$prettyColnames == Marker)
   if (length(MarkerIndex) < 1) {stop("Marker not found")}
+
+  if (nchar(MetaCl) < 27) {MetaClName = MetaCl} else {MetaClName = paste(substring(
+    MetaCl,(0:((nchar(MetaCl)%/%24))*24),c(1:((nchar(MetaCl)%/%24))*24,nchar(MetaCl))),
+    collapse = "\n")}
+par(mar=c(4,4,4+nchar(MetaCl)%/%24,4))
     if (is.null(xlim)) {
-      hist(TreeMetaCl$fSOMTree$data[,MarkerIndex],breaks=breaks,xlab=Marker,main=paste("Meta-cluster ",MetaCl,sep=""),freq)
+      hist(TreeMetaCl$fSOMTree$data[,MarkerIndex],breaks=breaks,xlab=Marker,main=MetaClName,freq)
       hist(TreeMetaCl$fSOMTree$data[metaClustIndices,MarkerIndex],border="red",breaks=breaks,add=T,xlab=Marker,freq)
     }
     else {
-      hist(TreeMetaCl$fSOMTree$data[,MarkerIndex],xlim=xlim,breaks=breaks,xlab=Marker,main=paste("Meta-cluster ",MetaCl,sep=""),freq)
+      hist(TreeMetaCl$fSOMTree$data[,MarkerIndex],xlim=xlim,breaks=breaks,xlab=Marker,main=MetaClName,freq)
       hist(TreeMetaCl$fSOMTree$data[metaClustIndices,MarkerIndex],border="red",breaks = breaks,add=T,xlab=Marker,freq)
     }
   }
