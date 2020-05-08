@@ -2,12 +2,12 @@
 % Please edit documentation in R/FindMetaClustNames.R
 \name{FindMetaClustNames}
 \alias{FindMetaClustNames}
-\title{Find the names of metaclusters from a sub-name}
+\title{Find each name of metaclusters that contains all sub-names}
 \usage{
 FindMetaClustNames(subNames, TreeMetaCl, start = F)
 }
 \arguments{
-\item{subNames}{list of sub-part of a meta-cluster name, for meta-cluster number preceeding its name}
+\item{subNames}{list of sub-part of a meta-cluster name}
 
 \item{TreeMetaCl}{FlowSOM tree with meta-clusters, constructed within buildFSOMTree (from the data of FSOMData)}
 
@@ -17,5 +17,5 @@ FindMetaClustNames(subNames, TreeMetaCl, start = F)
 a vector of names
 }
 \description{
-Find the names of metaclusters from a sub-name
+Find each name of metaclusters that contains all sub-names
 }
