@@ -9,7 +9,7 @@ PlotStarsMSTCondRm(
   metaClustFactors,
   condIndex,
   mainTitle,
-  nbRm,
+  nbRm = 0,
   smallTree = F,
   equalSize = F
 )

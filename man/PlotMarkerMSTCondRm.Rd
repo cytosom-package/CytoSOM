@@ -9,7 +9,7 @@ PlotMarkerMSTCondRm(
   markerName,
   condIndex,
   mainTitle,
-  nbRm,
+  nbRm = 0,
   globalMinMax = c()
 )
 }

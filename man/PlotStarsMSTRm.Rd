@@ -8,7 +8,7 @@ PlotStarsMSTRm(
   fSOMObject,
   metaClustFactors,
   mainTitle,
-  nbRm,
+  nbRm = 0,
   smallTree = F,
   equalSize = F
 )
