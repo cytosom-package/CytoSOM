@@ -13,7 +13,7 @@ Some dependent packages may not be available directly. They have to be installed
 
 Then, you can install CytoSOM:
 ```R
-devtools::install_github(repo ="gautierstoll/CytoSOM")
+devtools::install_github(repo ="cytosom-package/CytoSOM")
 ```
 
 ## HowTo
