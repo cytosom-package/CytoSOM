@@ -6,32 +6,47 @@
 #' @return a heatmap figure
 #' @export
 
-HeatMapTree = function(TreeMetaCl,Markers,clustering = T) {
+HeatMapTree = function(TreeMetaCl,Markers,clustering = T,Quartile = F) {
   if (length(intersect(Markers,TreeMetaCl$fSOMTree$prettyColnames)) < 1) {stop("Marker not found")}
   print(paste("Use markers ",paste(intersect(Markers,TreeMetaCl$fSOMTree$prettyColnames),collapse=" "),sep=""))
-  MedianList = unlist(sapply(intersect(Markers,TreeMetaCl$fSOMTree$prettyColnames),function(Marker){
+  MarkerList = unlist(sapply(intersect(Markers,TreeMetaCl$fSOMTree$prettyColnames),function(Marker){
     MarkerIndex=which(TreeMetaCl$fSOMTree$prettyColnames == Marker)
     unlist(sapply(unique(TreeMetaCl$metaCl),function(MetaCl){
       clusterList=which(TreeMetaCl$metaCl == MetaCl)
       metaClustIndices=unlist(sapply(clusterList,
                                      function(cluster){which(TreeMetaCl$fSOMTree$map$mapping[,1] == cluster)}))
-      return(median(TreeMetaCl$fSOMTree$data[metaClustIndices,MarkerIndex],na.rm=T))
+      if (Quartile) {return(as.vector(quantile(TreeMetaCl$fSOMTree$data[metaClustIndices,MarkerIndex],na.rm=T))[2:4])} else
+      {return(median(TreeMetaCl$fSOMTree$data[metaClustIndices,MarkerIndex],na.rm=T))}
     }))
   }))
 
-  MedianMatrix=matrix(MedianList,nrow=length(unique(TreeMetaCl$metaCl)),
+  if (Quartile) {
+    MarkerMatrix=matrix(MarkerList[-((1:(length(MarkerList)/3))*3-1)],nrow=length(unique(TreeMetaCl$metaCl))*2,
+                        dimnames = list(kronecker(unique(TreeMetaCl$metaCl),c("1Q","3Q"),function(x,y){paste(x,y,sep="_")}),
+                                        intersect(Markers,TreeMetaCl$fSOMTree$prettyColnames)))
+    MedianMatrix = matrix(MarkerList[((1:(length(MarkerList)/3))*3-1)],nrow=length(unique(TreeMetaCl$metaCl)),
+                          dimnames = list(unique(TreeMetaCl$metaCl),intersect(Markers,TreeMetaCl$fSOMTree$prettyColnames)))
+  }
+  else {
+  MarkerMatrix=matrix(MarkerList,nrow=length(unique(TreeMetaCl$metaCl)),
                       dimnames = list(unique(TreeMetaCl$metaCl),intersect(Markers,TreeMetaCl$fSOMTree$prettyColnames)))
-
-  colMarginSize=20-18*exp(-max(sapply(colnames(MedianMatrix),nchar))/10)
-  rowMarginSize=20-18*exp(-max(sapply(row.names(MedianMatrix),nchar))/10)
-  colCex4Plot=exp(-max(sapply(colnames(MedianMatrix),nchar))/70)*exp(-length(colnames(MedianMatrix))/50)
-  rowCex4Plot=exp(-max(sapply(row.names(MedianMatrix),nchar))/70)*exp(-length(row.names(MedianMatrix))/50)
+}
+  colMarginSize=20-18*exp(-max(sapply(colnames(MarkerMatrix),nchar))/10)
+  rowMarginSize=20-18*exp(-max(sapply(row.names(MarkerMatrix),nchar))/10)
+  colCex4Plot=exp(-max(sapply(colnames(MarkerMatrix),nchar))/70)*exp(-length(colnames(MarkerMatrix))/50)
+  rowCex4Plot=exp(-max(sapply(row.names(MarkerMatrix),nchar))/70)*exp(-length(row.names(MarkerMatrix))/50)
 
 
 
   if (clustering) {
-  gplots::heatmap.2(MedianMatrix,scale = "column",col = gplots::bluered(100),trace = "none",density.info = "none",
-                    margins=c(colMarginSize,rowMarginSize),cexRow = rowCex4Plot,cexCol=colCex4Plot)}
-  else {gplots::heatmap.2(MedianMatrix,scale = "column",col = gplots::bluered(100),trace = "none",density.info = "none",
+    if (Quartile) {
+    matrix4Dist = apply(MedianMatrix,2,function(l){rbind(l,l)})
+    heatmap.2ClustMat(MarkerMatrix,clustMat = matrix4Dist,scale = "column",col = gplots::bluered(100),trace = "none",density.info = "none",
+              margins=c(colMarginSize,rowMarginSize),cexRow = rowCex4Plot,cexCol=colCex4Plot)}
+
+    else
+  {gplots::heatmap.2(MarkerMatrix,scale = "column",col = gplots::bluered(100),trace = "none",density.info = "none",
+                    margins=c(colMarginSize,rowMarginSize),cexRow = rowCex4Plot,cexCol=colCex4Plot)}}
+  else {gplots::heatmap.2(MarkerMatrix,scale = "column",col = gplots::bluered(100),trace = "none",density.info = "none",
     Rowv=F,Colv=F,dendrogram = "none",margins=c(colMarginSize,rowMarginSize),cexRow = rowCex4Plot,cexCol=colCex4Plot)}
 }
