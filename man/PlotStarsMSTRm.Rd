@@ -10,7 +10,8 @@ PlotStarsMSTRm(
   mainTitle,
   nbRm = 0,
   smallTree = F,
-  equalSize = F
+  equalSize = F,
+  interQuartile = F
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ PlotStarsMSTRm(
 \item{smallTree}{true if tree is small and meta-cluster legend is big}
 
 \item{equalSize}{true if clusters are represented with identical sizes}
+
+\item{interQuartile}{if true, use interquartile (q3-q1) instead of MFI}
 }
 \description{
 PlotStarsMSTRm is a modified version of the FlowSOM function PlotStars, that plot the tree build through buildFSOMTree function and allows the removal of a given number of the smallest clusters that could prevent the spatial visualization of the tree.

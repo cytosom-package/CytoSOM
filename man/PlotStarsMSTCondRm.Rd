@@ -11,7 +11,8 @@ PlotStarsMSTCondRm(
   mainTitle,
   nbRm = 0,
   smallTree = F,
-  equalSize = F
+  equalSize = F,
+  interQuartile = F
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ PlotStarsMSTCondRm(
 \item{smallTree}{true if tree is small and meta-cluster legend is big}
 
 \item{equalSize}{true if clusters are represented with identical sizes}
+
+\item{interQuartile}{if true, use interquartile (q3-q1) instead of MFI}
 }
 \description{
 Modified PlotStarsMST function of FlowSOM, with removal of smallest clusters, over a subset of data

@@ -7,9 +7,10 @@
 #' @param nbRm  number of smallest cluster to remove
 #' @param smallTree true if tree is small and meta-cluster legend is big
 #' @param equalSize true if clusters are represented with identical sizes
+#' @param interQuartile if true, use interquartile (q3-q1) instead of MFI
 #' @export
 #'
-PlotStarsMSTCondRm <- function(fSOMObject,metaClustFactors,condIndex,mainTitle,nbRm=0,smallTree=F,equalSize=F)
+PlotStarsMSTCondRm <- function(fSOMObject,metaClustFactors,condIndex,mainTitle,nbRm=0,smallTree=F,equalSize=F,interQuartile=F)
 {
     fSOM4Plot=list(
         map=fSOMObject$map,
@@ -22,7 +23,17 @@ PlotStarsMSTCondRm <- function(fSOMObject,metaClustFactors,condIndex,mainTitle,n
         indexKeep =  which(fSOMObject$MST$size > sort(fSOMObject$MST$size)[nbRm])
         indexRemove  = setdiff((1:length(fSOMObject$MST$size)),indexKeep)
         fSOM4Plot$MST$size = (sqrt(clSizes)/max(sqrt(clSizes))*15)[indexKeep]
-        fSOM4Plot$map$medianValues = t(sapply(1:length(fSOMObject$map$medianValues[,1]),function(i){apply(fSOMObject$data[intersect(dataIndex,which(fSOMObject$map$mapping[,1] == i)),,drop=F],2,function(x){median(x)})}))[indexKeep,]
+        if(interQuartile) {
+            fSOM4Plot$map$medianValues = t(sapply(1:length(fSOMObject$map$medianValues[,1]),
+                                                  function(i){apply(fSOMObject$data[intersect(dataIndex,which(fSOMObject$map$mapping[,1] == i)),,drop=F],2,
+                                                                    function(x){quart = quantile(x);return(quart[4]-quart[2])})}))[indexKeep,]
+
+        }
+        else {
+        fSOM4Plot$map$medianValues = t(sapply(1:length(fSOMObject$map$medianValues[,1]),
+                                              function(i){apply(fSOMObject$data[intersect(dataIndex,which(fSOMObject$map$mapping[,1] == i)),,drop=F],2,
+                                                                function(x){median(x)})}))[indexKeep,]
+    }
         fSOM4Plot$MST$graph=igraph::induced_subgraph(fSOMObject$MST$graph,indexKeep)
         fSOM4Plot$MST$l = fSOMObject$MST$l[indexKeep,]
         if (equalSize) {fSOM4Plot$MST$size = rep(8,length(fSOM4Plot$MST$size))}
@@ -30,7 +41,16 @@ PlotStarsMSTCondRm <- function(fSOMObject,metaClustFactors,condIndex,mainTitle,n
     }
     else {
         fSOM4Plot$MST$size = sqrt(clSizes)/max(sqrt(clSizes))*15
-        fSOM4Plot$map$medianValues = t(sapply(1:length(fSOMObject$map$medianValues[,1]),function(i){apply(fSOMObject$data[intersect(dataIndex,which(fSOMObject$map$mapping[,1] == i)),,drop=F],2,function(x){median(x)})}))
+        if(interQuartile) {
+            SOM4Plot$map$medianValues = t(sapply(1:length(fSOMObject$map$medianValues[,1]),
+                                                 function(i){apply(fSOMObject$data[intersect(dataIndex,which(fSOMObject$map$mapping[,1] == i)),,drop=F],2,
+                                                                   function(x){quart = quantile(x);return(quart[4]-quart[2])})}))
+        }
+        else {
+        fSOM4Plot$map$medianValues = t(sapply(1:length(fSOMObject$map$medianValues[,1]),
+                                              function(i){apply(fSOMObject$data[intersect(dataIndex,which(fSOMObject$map$mapping[,1] == i)),,drop=F],2,
+                                                                function(x){median(x)})}))
+        }
         if (equalSize) {fSOM4Plot$MST$size = rep(8,length(fSOM4Plot$MST$size))}
         PlotStarsBigLeg(fSOM4Plot,backgroundValues = as.factor(metaClustFactors), main=mainTitle,smallTree=smallTree)
         }
