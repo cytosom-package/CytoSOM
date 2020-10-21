@@ -88,16 +88,16 @@ This command generates two `.pdf` files for visual comparison of the clusters (i
 9. Perform statistical analysis of meta-cluster sizes:
 ```R
 StatAnalysisSizes <- CytoSOM::BoxPlotMetaClust(CytoTreeRn,Title="MyTitle",tableTreatmentFCS,ControlTreatmen="PBS",
-BottomMargin=3,yLab="CD45",Norm=FALSE,Robust = TRUE,ClustHeat=TRUE)
+BottomMargin=3,yLab="CD45",Norm=FALSE,Robust = TRUE,ClustHeat=TRUE,ExportData=FALSE)
 ```
-If `Norm` is set to `TRUE`, the column 'NormalizationFactor' of the `.csv` table is used to normalize the meta-cluster sizes (be sure that this column provide real numbers). Otherwise, the analysis is perfomed on relative size (percentage). The control treatment is used for statistical annotation of population size heatmap. A file `MyTitle_BoxPlotPercentMetaClust.pdf` is produced. Two files containing p-values are also generated: `MyTitle_LmPvalPercentMetacl.csv` and `MyTitle_PairwisePvalPercentMetacl.csv`
+If `Norm` is set to `TRUE`, the column 'NormalizationFactor' of the `.csv` table is used to normalize the meta-cluster sizes (be sure that this column provide real numbers). Otherwise, the analysis is perfomed on relative size (percentage). The control treatment is used for statistical annotation of population size heatmap. A file `MyTitle_BoxPlotPercentMetaClust.pdf` is produced. If `ExportData` is set to `TRUE`, four files containing data used for the figures are also generated: `MyTitle_PercentMetacl.csv`, `MyTitle_MedianPercentMetacl.csv`, `MyTitle_LmPvalPercentMetacl.csv` and `MyTitle_PairwisePvalPercentMetacl.csv`
 
 10. Perform statistical analysis of a given marker (eg PD1) MFI, across the different meta-clusters:
 ```R
 StatAnalysisPD1 <- CytoSOM::BoxPlotMarkerMetaClust(CytoTreeRn,Title="MyTitle",tableTreatmentFCS,ControlTreatmen="PBS",
-BottomMargin=3,"PD1",Robust = TRUE,ClustHeat=TRUE)
+BottomMargin=3,"PD1",Robust = TRUE,ClustHeat=TRUE,ExportData=FALSE)
 ```
-A file `MyTitle_BoxPlotPD1MetaClust.pdf` is produced. Two files containing p-values are also generated: `MyTitle_LmPvalPD1Metacl.csv` and `MyTitle_PairwisePvalPD1Metacl.csv`
+A file `MyTitle_BoxPlotPD1MetaClust.pdf` is produced. If `ExportData` is set to `TRUE`, four files containing data used for the figures are also generated: `MyTitle_MFIPD1Metacl.csv`, `MyTitle_MedianMFIPD1Metacl.csv`, `MyTitle_LmPvalPD1Metacl.csv` and `MyTitle_PairwisePvalPD1Metacl.csv`
 
 ### Gating without FlowJo
 

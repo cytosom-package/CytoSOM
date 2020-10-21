@@ -13,7 +13,8 @@ BoxPlotMetaClust(
   yLab,
   Norm = FALSE,
   Robust = TRUE,
-  ClustHeat = TRUE
+  ClustHeat = TRUE,
+  ExportData = FALSE
 )
 }
 \arguments{
@@ -21,7 +22,7 @@ BoxPlotMetaClust(
 
 \item{Title}{prefix of the pdf file name}
 
-\item{treatmentTable}{data frame containing a column 'files',a column 'Treatment' (case sensitive) and a column "NormalizationFactor" for the optional normalization of the data}
+\item{treatmentTable}{data frame containing a column 'files',a column 'Treatment' (case sensitive, avoid special character, especially "-") and a column "NormalizationFactor" for the optional normalization of the data}
 
 \item{BottomMargin}{size of the boxplots bottom margins, in order to be readable}
 
@@ -31,12 +32,14 @@ BoxPlotMetaClust(
 
 \item{ClustHeat}{if TRUE, heatmaps are clustered}
 
+\item{ExportData}{if TRUE, export sizes,median of sizes, pairwise comparison p-values, controle vs treatment p-values to csv files}
+
 \item{Controltreatment}{name of the control treatment used for statistics}
 
 \item{ylab}{name of y-axis of boxplots (eg 'population size')}
 }
 \value{
-list containing sizes, pairwise comparison p-values, controle vs treatment p-values
+list containing sizes,median of sizes, pairwise comparison p-values, controle vs treatment p-values
 }
 \description{
 BoxPlotMetaClust is a function that allow the statistical analysis, either in percentage or with a normalization, of the impact of experimental condition on each metacluster population.

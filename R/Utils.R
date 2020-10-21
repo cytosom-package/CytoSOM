@@ -1040,7 +1040,7 @@ get_abstgsMT <- function(fSOM,metacl, meta_names = NULL){
 TukeyTestSarah = function(fSOMTable, metaClust){TukeyHSD(aov(as.formula(paste(metaClust,"~ Treatment")),data=fSOMTable))$Treatment[,4]}
 
 ##Internal tool every kind of boxplots-heatmaps
-BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatment,BottomMargin,yLab,Norm=FALSE,Marker="",Robust,ClustHeat)
+BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatment,BottomMargin,yLab,Norm=FALSE,Marker="",Robust,ClustHeat,ExportData)
 {
     ## Search for the marker
     treatmentTable$Treatment=gsub(" ","_",treatmentTable$Treatment,fixed=T)
@@ -1100,8 +1100,6 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
         collapse = "\n")))}
     }))
     cex4Title=exp(-min(27,max(sapply(colnames(fSOMnbrs),nchar)))/40)
-    print(str(colnames(fSOMnbrs)))
-    print(str(mClustNames4Plot))
     for (metaCl in (1:metaclNumber)){ ## boxplots with no annotations
         plotDf=data.frame(PP=fSOMnbrs[,metaCl],TreatmentFSOM=treatmentsFSOM) ## dataframe for box plot
         boxplot(PP ~ TreatmentFSOM,data=plotDf,main=mClustNames4Plot[metaCl],xlab="",ylab=PlotLab,cex.axis=.5,cex.main=cex4Title,cex.lab=.5)
@@ -1194,19 +1192,23 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
     names(PvalPairwiseTable)=paste("mtcl",colnames(fSOMnbrs)[1:metaclNumber],sep="_")
     par(mfrow=c(1,1),mar=c(3,2,3,1),cex=.5)
 
-    if(length(MarkerIndex) == 1) {write.table(PvalPairwiseTable,NoSpCharForFile(gsub("/","_",paste(Title,"_PairwisePval",Marker,"Metacl.csv",sep=""),fixed=T)),sep=";",col.names = NA)} else {
-    if (Norm) {write.table(PvalPairwiseTable,NoSpCharForFile(paste(Title,"_PairwisePvalNormMetacl.csv",sep="")),sep=";",col.names = NA)}
-    else {write.table(PvalPairwiseTable,NoSpCharForFile(paste(Title,"_PairwisePvalPercentMetacl.csv",sep="")),sep=";",col.names = NA)}}
-
+    if (ExportData) {
+         if(length(MarkerIndex) == 1) {
+           write.table(PvalPairwiseTable,NoSpCharForFile(gsub("/","_",paste(Title,"_PairwisePval",Marker,"Metacl.csv",sep=""),fixed=T)),sep=";",col.names = NA)} else {
+          if (Norm) {write.table(PvalPairwiseTable,NoSpCharForFile(paste(Title,"_PairwisePvalNormMetacl.csv",sep="")),sep=";",col.names = NA)}
+        else {write.table(PvalPairwiseTable,NoSpCharForFile(paste(Title,"_PairwisePvalPercentMetacl.csv",sep="")),sep=";",col.names = NA)}}
+    }
+    
     DF4lm = data.frame(y=c(fSOMnbrs),metaCl = c(sapply(colnames(fSOMnbrs),function(name){rep(name,length(fSOMnbrs[,1]))})),treat = rep(c(sapply(row.names(fSOMnbrs),function(name){as.character(treatmentTable$Treatment[which(treatmentTable$files == name)])})),length(fSOMnbrs[1,])))
     DF4lm$treat = factor(DF4lm$treat,levels=c(ControlTreatment,setdiff(unique(DF4lm$treat),ControlTreatment)))
     if (Robust) {
         if (length(PvalPairwiseTable[,1]) == 1) {pvalLmMatrix=PvalPairwiseTable}
         else {
-          pvalLmMatrix=as.matrix(PvalPairwiseTable)[which(sapply(row.names(PvalPairwiseTable),function(name){spName = strsplit(name,split = "-")[[1]];((spName[1] == ControlTreatment) |(spName[2] == ControlTreatment) )})),]
+          pvalLmMatrix=as.matrix(PvalPairwiseTable)[which(sapply(row.names(PvalPairwiseTable),function(name){
+            spName = strsplit(name,split = "-")[[1]];((spName[1] == ControlTreatment) |(spName[2] == ControlTreatment) )})),]
         }
-        row.names(pvalLmMatrix)=gsub(ControlTreatment,"",row.names(pvalLmMatrix),fixed=T)
-        row.names(pvalLmMatrix)=gsub("-","",row.names(pvalLmMatrix),fixed=T)
+        row.names(pvalLmMatrix)=gsub(paste("^",ControlTreatment,"-",sep=""),"",row.names(pvalLmMatrix))
+        row.names(pvalLmMatrix)=gsub(paste("-",ControlTreatment,"$",sep=""),"",row.names(pvalLmMatrix))
     } else {
         pvalLmMatrix = t(do.call(rbind,lapply(colnames(fSOMnbrs),function(metaCl){
           SubDF4Lm = DF4lm[which(DF4lm$metaCl == metaCl),]
@@ -1353,13 +1355,24 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
       colnames(DFSizes) = colnames(fSOMnbrs)
     } else {DFSizes = as.data.frame(fSOMnbrs)}
 
-    retData=list(DFSizes,as.data.frame(PvalPairwiseTable),as.data.frame(pvalLmMatrix))
+    retData=list(DFSizes,as.data.frame(meanMatrix),as.data.frame(PvalPairwiseTable),as.data.frame(pvalLmMatrix))
 
-    if(length(MarkerIndex) == 1) {write.table(pvalLmMatrix,NoSpCharForFile(gsub("/","_",paste(Title,"_LmPval",Marker,"Metacl.csv",sep=""),fixed=T)),sep=";",col.names = NA)} else {
-    if (Norm) {write.table(pvalLmMatrix,NoSpCharForFile(paste(Title,"_LmPvalNormMetacl.csv",sep="")),sep=";",col.names = NA)}
-    else {write.table(pvalLmMatrix,NoSpCharForFile(paste(Title,"_LmPvalPercentMetacl.csv",sep="")),sep=";",col.names = NA)}}
-
-    names(retData)=c("Sizes","PvalPairwise","PvalLm")
+    if (ExportData) {
+      if(length(MarkerIndex) == 1) {
+        write.table(DFSizes,NoSpCharForFile(gsub("/","_",paste(Title,"_MFI",Marker,"Metacl.csv",sep=""),fixed=T)),sep=";",col.names = NA)
+        write.table(as.data.frame(meanMatrix),NoSpCharForFile(gsub("/","_",paste(Title,"_MedianMFI",Marker,"Metacl.csv",sep=""),fixed=T)),sep=";",col.names = NA)
+        write.table(pvalLmMatrix,NoSpCharForFile(gsub("/","_",paste(Title,"_LmPval",Marker,"Metacl.csv",sep=""),fixed=T)),sep=";",col.names = NA)} 
+      else {
+      if (Norm) {
+        write.table(DFSizes,NoSpCharForFile(paste(Title,"_NormSizesMetacl.csv",sep="")),sep=";",col.names = NA)
+        write.table(as.data.frame(meanMatrix),NoSpCharForFile(paste(Title,"_MedianNormSizesMetacl.csv",sep="")),sep=";",col.names = NA)
+        write.table(pvalLmMatrix,NoSpCharForFile(paste(Title,"_LmPvalNormMetacl.csv",sep="")),sep=";",col.names = NA)}
+     else {
+       write.table(DFSizes,NoSpCharForFile(paste(Title,"_PercentMetacl.csv",sep="")),sep=";",col.names = NA)
+       write.table(as.data.frame(meanMatrix),NoSpCharForFile(paste(Title,"_MedianPercentMetacl.csv",sep="")),sep=";",col.names = NA)
+       write.table(pvalLmMatrix,NoSpCharForFile(paste(Title,"_LmPvalPercentMetacl.csv",sep="")),sep=";",col.names = NA)}}
+}
+    names(retData)=c("Sizes","Median","PvalPairwise","PvalLm")
     return(retData)
 }
 ## Internal tool: replace special characters by "_"

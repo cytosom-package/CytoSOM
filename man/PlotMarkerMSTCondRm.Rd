@@ -16,7 +16,7 @@ PlotMarkerMSTCondRm(
 \arguments{
 \item{fSOMObject}{FlowSOM tree}
 
-\item{markerName}{name of marker}
+\item{markerName}{name of marker (exact name, not the pretty one)}
 
 \item{condIndex}{index of data events}
 

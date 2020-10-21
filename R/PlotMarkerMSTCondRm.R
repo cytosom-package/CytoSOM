@@ -1,7 +1,7 @@
 ## User tool: marker level represented on metacluster tree, on a subset of samples given by an list of index, removing a given number of smallest metacluster
 #' Modified PlotMarkerMST function of FlowSOM, with removal of smallest clusters, over a subset of data
 #' @param fSOMObject FlowSOM tree
-#' @param markerName name of marker
+#' @param markerName name of marker (exact name, not the pretty one)
 #' @param condIndex index of data events
 #' @param mainTitle title
 #' @param nbRm  number of smallest cluster to remove

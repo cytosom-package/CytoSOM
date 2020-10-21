@@ -12,7 +12,8 @@ BoxPlotMarkerMetaClust(
   BottomMargin,
   Marker,
   Robust = TRUE,
-  ClustHeat = TRUE
+  ClustHeat = TRUE,
+  ExportData = FALSE
 )
 }
 \arguments{
@@ -20,7 +21,7 @@ BoxPlotMarkerMetaClust(
 
 \item{Title}{prefix of the pdf file name}
 
-\item{treatmentTable}{data frame containing a column 'files' and a column 'Treatment' (case sensitive)}
+\item{treatmentTable}{data frame containing a column 'files' and a column 'Treatment' (case sensitive, avoid special character, especially "-")}
 
 \item{BottomMargin}{size of the boxplots bottom margins, in order to be readable}
 
@@ -30,10 +31,12 @@ BoxPlotMarkerMetaClust(
 
 \item{ClustHeat}{if TRUE, heatmaps are clustered}
 
+\item{ExportData}{if TRUE, export MFI,Median of MFI, pairwise comparison p-values, controle vs treatment p-values to csv files}
+
 \item{Controltreatment}{name of the experimental condition that you consider as your control treatment used for statistics}
 }
 \value{
-list containing MFI, pairwise comparison p-values, controle vs treatment p-values
+list containing MFI,Median of MFI, pairwise comparison p-values, controle vs treatment p-values
 }
 \description{
 BoxPlotMarkerMetaClust is a function that compares, inside each metacluster, the median fluorescence intensity of one given marker for each experimental condition.

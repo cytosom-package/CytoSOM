@@ -1,7 +1,7 @@
 ## User tool: marker level represented on metacluster tree, removing a given number of smallest metacluster
 #' Modified PlotMarkerMST function of FlowSOM, with removal of smallest clusters
 #' @param fSOMObject FlowSOM tree
-#' @param markerName name of marker
+#' @param markerName name of marker (exact name, not the pretty one)
 #' @param mainTitle title
 #' @param nbRm  number of smallest cluster to remove
 #' @param globalMinMax min and max value of markers, used for color scale
