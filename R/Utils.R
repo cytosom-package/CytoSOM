@@ -832,12 +832,12 @@ parse_flowjo_CytoML_v12 <- function (files, wsp_file, group = "All Samples")
   wsp <- CytoML::open_flowjo_xml(wsp_file)
   o <- capture.output(gates <- suppressMessages(CytoML::flowjo_to_gatingset(wsp,
                                                                        group)))
-  files_in_wsp <- gates@data@origSampleVector
+  files_in_wsp <- gates@data@origSampleVector 
   counts <- as.numeric(gsub(".*_([0-9]*)$", "\\1", files_in_wsp))
   result <- list()
   for (file in files) {
     print(paste0("Processing ", file))
-    file_id <- grep(gsub(".*/", "", file), files_in_wsp)
+    file_id <- grep(gsub(".*/", "", file), files_in_wsp,fixed=T)
     if (length(file_id) == 0) {
       stop("File not found. Files available: ", gsub("_[0-9]*$",
                                                    "\n", files_in_wsp))
@@ -874,12 +874,12 @@ if ((unlist(packageVersion("flowWorkspace"))[1] == 3) && (unlist(packageVersion(
       wsp <- CytoML::openWorkspace(wsp_file)
         o <- capture.output(gates <- suppressMessages(CytoML::parseWorkspace(wsp,
                                                                              group)))
-        files_in_wsp <- gates@data@origSampleVector
+        files_in_wsp <- gates@data@origSampleVector 
         counts <- as.numeric(gsub(".*_([0-9]*)$", "\\1", files_in_wsp))
         result <- list()
         for (file in files) {
             print(paste0("Processing ", file))
-            file_id <- grep(gsub(".*/", "", file), files_in_wsp)
+            file_id <- grep(gsub(".*/", "", file), files_in_wsp,fixed=T)
             if (length(file_id) == 0) {
                 stop("File not found. Files available: ", gsub("_[0-9]*$",
                     "\n", files_in_wsp))
@@ -894,7 +894,11 @@ if ((unlist(packageVersion("flowWorkspace"))[1] == 3) && (unlist(packageVersion(
                     gate)
             }
             ff <- flowWorkspace::getData(gates[[file_id]], "root")
-            ff@exprs[, "Time"] <- ff@exprs[, "Time"] * 100
+            if (match("Time",colnames(ff@exprs),nomatch = F)) {
+                print("rescale time")
+               ff@exprs[, "Time"] <- ff@exprs[, "Time"] * 100
+            }
+            else {print("Time not found for rescaling")}
             result[[file]] <- list(flowFrame = ff, gates = gatingMatrix)
             if (plot) {
                 flowWorkspace::plot(gates[[file_id]])
