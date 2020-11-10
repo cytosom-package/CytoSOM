@@ -853,7 +853,12 @@ if ((unlist(packageVersion("flowWorkspace"))[1] == 3) && (unlist(packageVersion(
 {ff <- flowWorkspace::getData(gates[[file_id]], "root")}
     else {ff <- flowWorkspace::gh_pop_get_data(gates[[file_id]], "root")}
 
-    ff@exprs[, "Time"] <- ff@exprs[, "Time"] * 100
+    if (match("Time",colnames(ff@exprs),nomatch = F)) {
+      print("rescale time")
+      ff@exprs[, "Time"] <- ff@exprs[, "Time"] * 100
+    }
+    else {print("Time not found for rescaling")}
+    
     result[[file]] <- list(flowFrame = ff, gates = gatingMatrix)
   }
   if (length(files) == 1) {
