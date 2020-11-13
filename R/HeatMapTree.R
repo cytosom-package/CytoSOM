@@ -20,6 +20,7 @@ HeatMapTree = function(TreeMetaCl,Markers,clustering = T,Quartile = F) {
       {return(median(TreeMetaCl$fSOMTree$data[metaClustIndices,MarkerIndex],na.rm=T))}
     }))
   }))
+  print(MarkerList)
 
   if (Quartile) {
     MarkerMatrix=matrix(MarkerList[-((1:(length(MarkerList)/3))*3-1)],nrow=length(unique(TreeMetaCl$metaCl))*2,
