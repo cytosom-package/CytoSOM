@@ -1111,7 +1111,10 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
     cex4Title=exp(-min(27,max(sapply(colnames(fSOMnbrs),nchar)))/40)
     for (metaCl in (1:metaclNumber)){ ## boxplots with no annotations
         plotDf=data.frame(PP=fSOMnbrs[,metaCl],TreatmentFSOM=treatmentsFSOM) ## dataframe for box plot
-        boxplot(PP ~ TreatmentFSOM,data=plotDf,main=mClustNames4Plot[metaCl],xlab="",ylab=PlotLab,cex.axis=.5,cex.main=cex4Title,cex.lab=.5)
+        tryCatch(
+      expr = {boxplot(PP ~ TreatmentFSOM,data=plotDf,main=mClustNames4Plot[metaCl],xlab="",ylab=PlotLab,cex.axis=.5,cex.main=cex4Title,cex.lab=.5)},
+      error = function(e){stop(paste(e,"Meta-cluster names may be too large"))}  
+      )
         beeswarm::beeswarm(PP ~ TreatmentFSOM,data=plotDf,main=paste("mtcl",colnames(fSOMnbrs)[metaCl],sep="_"),add=T,cex=.5,col="red")
     }
     par(mfrow=c(6,6),las=2,mar=c(BottomMargin,3,1+max(sapply(colnames(fSOMnbrs),nchar))%/%24,.5),mgp=c(1.8,.8,0))
@@ -1161,6 +1164,7 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
             return(c(which(levels(plotDf$TreatmentFSOM) == hit[2]),which(levels(plotDf$TreatmentFSOM) == hit[3])))})
         minTr=min(plotDf$PP,na.rm=T)
         maxTr=max(plotDf$PP,na.rm=T)
+        tryCatch( expr = {
         boxplot(PP ~ TreatmentFSOM,
                 data=plotDf,main=mClustNames4Plot[metaCl],
                 xlab="",
@@ -1169,7 +1173,7 @@ BoxPlotMetaClustFull <- function(TreeMetaCl,Title,treatmentTable,ControlTreatmen
                 cex.main=cex4Title,
                 cex.lab=.5,
                 ylim=c(minTr,length(ListSignif)*abs(maxTr-minTr)*.2+maxTr)
-                )
+                ) }, error = function(e){stop(paste(e,"Meta-cluster names may be too large"))})
         if (length(ListSignif) > 0) {
             if (length(pairwisePval) > 1) ## more than one pair of comparison
                 {
