@@ -634,9 +634,17 @@ PlotStarsBigLeg <- function(fsom,
         }
 
         if(!is.null(backgroundValues)){
-            if (smallTree){PlotBackgroundLegendBL(backgroundValues,background,cexLegend=2)}
+          tmpMtClNb = length(levels(backgroundValues))
+          tmpMaxChar= max(nchar(as.character(backgroundValues)))
+            #if (smallTree){PlotBackgroundLegendBL(backgroundValues,background,cexLegend=6/235*(tmpMaxChar-2)+2)}
+          if (smallTree){
+            PlotBackgroundLegendBL(backgroundValues,background,
+                                                cexLegend=max(.4,.02*tmpMaxChar+.02*tmpMtClNb+1.2))}
+      
           else
-            {PlotBackgroundLegendBL(backgroundValues,background)}
+            #{PlotBackgroundLegendBL(backgroundValues,background,cexLegend = 3/235*(tmpMaxChar-2)+1)}
+          {PlotBackgroundLegendBL(backgroundValues,background,
+                                  cexLegend = .6*max(.4,.02*tmpMaxChar+.02*tmpMtClNb+1.2))}
         }
     }
 
