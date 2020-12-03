@@ -639,12 +639,12 @@ PlotStarsBigLeg <- function(fsom,
             #if (smallTree){PlotBackgroundLegendBL(backgroundValues,background,cexLegend=6/235*(tmpMaxChar-2)+2)}
           if (smallTree){
             PlotBackgroundLegendBL(backgroundValues,background,
-                                                cexLegend=max(.4,.02*tmpMaxChar+.02*tmpMtClNb+1.2))}
+                                                cexLegend=.7*max(.4,.02*tmpMaxChar+.02*tmpMtClNb+1.2))}
       
           else
             #{PlotBackgroundLegendBL(backgroundValues,background,cexLegend = 3/235*(tmpMaxChar-2)+1)}
           {PlotBackgroundLegendBL(backgroundValues,background,
-                                  cexLegend = .6*max(.4,.02*tmpMaxChar+.02*tmpMtClNb+1.2))}
+                                  cexLegend = .8*.6*max(.4,.02*tmpMaxChar+.02*tmpMtClNb+1.2))}
         }
     }
 
